@@ -1,0 +1,1440 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <!-- META VIEWPORT OPTIMISÉE -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="theme-color" content="#1e40af">
+    
+    <!-- APPLE TOUCH ICON -->
+    <link rel="apple-touch-icon" href="/images/avatars/apu.jpg">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <title>APROFEEC | Inscription - Plateforme Professionnelle</title>
+    
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/auth.css">
+    
+    <style>
+        /* REGISTER - MOBILE FIRST DESIGN */
+        
+        :root {
+            --primary-blue: #1e40af;
+            --secondary-blue: #3b82f6;
+            --accent-blue: #60a5fa;
+            --light-blue: #dbeafe;
+            --dark-blue: #1e3a8a;
+            --gradient-blue: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            --success-green: #10b981;
+            --warning-orange: #f59e0b;
+            --error-red: #ef4444;
+        }
+        
+        /* 1. MOBILE RESET */
+        * {
+            -webkit-tap-highlight-color: transparent;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        html {
+            font-size: 16px;
+            -webkit-text-size-adjust: 100%;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8fafc;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+            overflow-x: hidden;
+        }
+        
+        /* 2. REGISTER CONTAINER MOBILE */
+        .register-wrapper {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            min-height: 100vh;
+            background: linear-gradient(rgba(30, 58, 138, 0.92), rgba(30, 64, 175, 0.92)),
+                        url('/images/backgrounds/aprb.JPG') center/cover no-repeat;
+            background-attachment: scroll;
+        }
+        
+        /* 3. REGISTER CARD MOBILE */
+        .register-container {
+            width: 100%;
+            max-width: 480px;
+            animation: slideUp 0.5s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.98);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        .register-card {
+            background: rgba(255, 255, 255, 0.97);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 30px 25px;
+            box-shadow: 
+                0 10px 40px rgba(0, 0, 0, 0.15),
+                0 1px 3px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* 4. HEADER MOBILE */
+        .register-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        }
+        
+        .register-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .register-logo img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary-blue);
+            box-shadow: 0 5px 15px rgba(30, 64, 175, 0.3);
+        }
+        
+        .register-title {
+            font-weight: 800;
+            font-size: 2rem;
+            color: var(--dark-blue);
+            margin-bottom: 5px;
+            line-height: 1.2;
+        }
+        
+        .register-subtitle {
+            color: #666;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        
+        .invitation-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--gradient-blue);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 15px;
+            box-shadow: 0 5px 15px rgba(30, 64, 175, 0.2);
+        }
+        
+        /* 5. STEP INDICATOR MOBILE */
+        .step-indicator {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            position: relative;
+            padding: 0 10px;
+        }
+        
+        .step-indicator::before {
+            content: '';
+            position: absolute;
+            top: 25px;
+            left: 20px;
+            right: 20px;
+            height: 3px;
+            background: #e5e7eb;
+            z-index: 1;
+        }
+        
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+            flex: 1;
+        }
+        
+        .step-number {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #9ca3af;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .step.active .step-number {
+            background: var(--primary-blue);
+            border-color: var(--primary-blue);
+            color: white;
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(30, 64, 175, 0.3);
+        }
+        
+        .step.completed .step-number {
+            background: var(--success-green);
+            border-color: var(--success-green);
+            color: white;
+        }
+        
+        .step-label {
+            font-size: 0.8rem;
+            color: #9ca3af;
+            font-weight: 600;
+            text-align: center;
+            max-width: 80px;
+            line-height: 1.2;
+        }
+        
+        .step.active .step-label {
+            color: var(--primary-blue);
+        }
+        
+        /* 6. FORM STEPS MOBILE */
+        .form-step {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .form-step.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .form-step h5 {
+            color: var(--dark-blue);
+            margin-bottom: 25px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        /* 7. FORM GROUPS MOBILE */
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-label {
+            font-weight: 600;
+            color: var(--dark-blue);
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .form-control {
+            padding: 18px 20px;
+            border: 2px solid #e5e7eb;
+            border-radius: 14px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            width: 100%;
+            background: #f9fafb;
+            min-height: 56px;
+        }
+        
+        .form-control:focus {
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.1);
+            background: white;
+            outline: none;
+        }
+        
+        /* 8. PASSWORD SECTION MOBILE */
+        .password-wrapper {
+            position: relative;
+        }
+        
+        .toggle-password {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            padding: 12px;
+            min-width: 48px;
+            min-height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            transition: all 0.2s ease;
+        }
+        
+        .toggle-password:active {
+            background: rgba(0, 0, 0, 0.05);
+            transform: translateY(-50%) scale(0.95);
+        }
+        
+        .password-strength {
+            height: 6px;
+            background: #e5e7eb;
+            border-radius: 3px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+        
+        .password-strength-bar {
+            height: 100%;
+            width: 0%;
+            transition: all 0.3s ease;
+        }
+        
+        .password-strength-bar.weak { width: 25%; background: var(--error-red); }
+        .password-strength-bar.fair { width: 50%; background: var(--warning-orange); }
+        .password-strength-bar.good { width: 75%; background: var(--accent-blue); }
+        .password-strength-bar.strong { width: 100%; background: var(--success-green); }
+        
+        .password-requirements {
+            margin-top: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .requirement {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.85rem;
+        }
+        
+        .requirement i {
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+        
+        .requirement.met {
+            color: var(--success-green);
+        }
+        
+        .requirement.met i {
+            color: var(--success-green);
+        }
+        
+        .requirement.unmet {
+            color: #9ca3af;
+        }
+        
+        /* 9. BUTTONS MOBILE */
+        .step-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            gap: 15px;
+        }
+        
+        .btn-outline-primary, 
+        .btn-primary {
+            flex: 1;
+            padding: 18px;
+            border-radius: 14px;
+            font-weight: 600;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            min-height: 56px;
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary-blue);
+        }
+        
+        .btn-outline-primary {
+            background: white;
+            color: var(--primary-blue);
+        }
+        
+        .btn-primary {
+            background: var(--gradient-blue);
+            color: white;
+            border: none;
+            box-shadow: 0 10px 25px rgba(30, 64, 175, 0.2);
+        }
+        
+        .btn-outline-primary:active,
+        .btn-primary:active {
+            transform: scale(0.98);
+        }
+        
+        /* 10. TERMS CHECK MOBILE */
+        .terms-check {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin: 25px 0;
+            padding: 15px;
+            background: #f9fafb;
+            border-radius: 12px;
+        }
+        
+        .terms-check input {
+            margin-top: 3px;
+            min-width: 22px;
+            min-height: 22px;
+        }
+        
+        .terms-check label {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.5;
+        }
+        
+        .terms-check a {
+            color: var(--primary-blue);
+            font-weight: 500;
+            text-decoration: none;
+        }
+        
+        .terms-check a:active {
+            text-decoration: underline;
+        }
+        
+        /* 11. REVIEW CARD MOBILE */
+        .review-card {
+            background: #f9fafb;
+            border-radius: 16px;
+            padding: 20px;
+            margin: 25px 0;
+            border: 2px solid #e5e7eb;
+        }
+        
+        .review-card h6 {
+            color: var(--dark-blue);
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .review-item {
+            margin-bottom: 15px;
+        }
+        
+        .review-label {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        
+        .review-value {
+            font-weight: 600;
+            color: var(--dark-blue);
+            font-size: 1rem;
+        }
+        
+        /* 12. LOADING STATE */
+        #loadingState {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+            padding: 20px;
+            background: #f9fafb;
+            border-radius: 16px;
+        }
+        
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(30, 64, 175, 0.1);
+            border-top-color: var(--primary-blue);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* 13. ERROR STATES */
+        .error-message {
+            display: none;
+            color: var(--error-red);
+            font-size: 0.85rem;
+            margin-top: 8px;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 15px;
+            background: rgba(239, 68, 68, 0.05);
+            border-radius: 10px;
+            border-left: 3px solid var(--error-red);
+        }
+        
+        .form-control.error {
+            border-color: var(--error-red);
+            background: rgba(239, 68, 68, 0.02);
+        }
+        
+        /* 14. INPUT GROUP MOBILE */
+        .input-group {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .input-group .form-control {
+            flex: 1;
+            border-radius: 14px 0 0 14px;
+        }
+        
+        .input-group .btn {
+            border-radius: 0 14px 14px 0;
+            min-width: 60px;
+        }
+        
+        /* 15. MOBILE BREAKPOINTS */
+        
+        /* Très petits écrans (iPhone SE) */
+        @media (max-width: 375px) {
+            .register-card {
+                padding: 25px 20px;
+                border-radius: 20px;
+            }
+            
+            .register-title {
+                font-size: 1.7rem;
+            }
+            
+            .step-number {
+                width: 45px;
+                height: 45px;
+                font-size: 1.1rem;
+            }
+            
+            .step-label {
+                font-size: 0.75rem;
+                max-width: 70px;
+            }
+            
+            .form-control {
+                padding: 16px;
+                min-height: 52px;
+            }
+            
+            .btn-outline-primary,
+            .btn-primary {
+                padding: 16px;
+                min-height: 52px;
+                font-size: 0.95rem;
+            }
+            
+            .invitation-badge {
+                padding: 10px 16px;
+                font-size: 0.8rem;
+            }
+        }
+        
+        /* Orientation paysage */
+        @media (max-width: 768px) and (orientation: landscape) {
+            .register-wrapper {
+                padding: 10px;
+            }
+            
+            .register-card {
+                max-width: 90%;
+                padding: 20px;
+            }
+            
+            .step-indicator::before {
+                top: 20px;
+            }
+            
+            .step-number {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+        }
+        
+        /* Dark Mode Support */
+        @media (prefers-color-scheme: dark) {
+            .register-card {
+                background: rgba(30, 30, 46, 0.95);
+                color: #e0e0e0;
+                border-color: rgba(255, 255, 255, 0.1);
+            }
+            
+            .register-title {
+                color: #ffffff;
+            }
+            
+            .register-subtitle {
+                color: #a0a0a0;
+            }
+            
+            .form-control {
+                background: #2d2d3d;
+                border-color: #444;
+                color: #e0e0e0;
+            }
+            
+            .form-control:focus {
+                background: #36364a;
+                border-color: var(--accent-blue);
+            }
+            
+            .form-label {
+                color: #d0d0d0;
+            }
+            
+            .terms-check {
+                background: #2d2d3d;
+            }
+            
+            .review-card {
+                background: #2d2d3d;
+                border-color: #444;
+            }
+            
+            .review-value {
+                color: #ffffff;
+            }
+            
+            .password-strength {
+                background: #444;
+            }
+            
+            .step-number {
+                background: #2d2d3d;
+                border-color: #444;
+                color: #a0a0a0;
+            }
+            
+            .step-indicator::before {
+                background: #444;
+            }
+        }
+        
+        /* 16. TOUCH OPTIMIZATIONS */
+        @media (hover: none) and (pointer: coarse) {
+            button, 
+            .toggle-password, 
+            .step-number {
+                min-height: 44px;
+                min-width: 44px;
+            }
+            
+            .form-control {
+                font-size: 16px;
+            }
+            
+            .btn-outline-primary:active,
+            .btn-primary:active,
+            .toggle-password:active {
+                opacity: 0.7;
+            }
+        }
+        
+        /* 17. ACCESSIBILITY */
+        .form-control:focus-visible {
+            outline: 2px solid var(--accent-blue);
+            outline-offset: 2px;
+        }
+        
+        button:focus-visible,
+        .toggle-password:focus-visible {
+            outline: 2px solid var(--accent-blue);
+            outline-offset: 2px;
+        }
+        
+        /* 18. PERFORMANCE */
+        @media (max-width: 768px) {
+            .register-wrapper {
+                background-attachment: scroll;
+            }
+            
+            * {
+                animation-duration: 0.3s !important;
+                transition-duration: 0.2s !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading overlay - CORRECTED -->
+    <div id="mobile-loading" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(30, 58, 138, 0.95); z-index: 9999; align-items: center; justify-content: center; color: white; font-size: 1.2rem; flex-direction: column; gap: 20px;">
+        <div class="loading-spinner" style="width: 60px; height: 60px; border-width: 4px;"></div>
+        <div>Création du compte...</div>
+    </div>
+
+    <div class="register-wrapper">
+        <div class="register-container">
+            <div class="register-card">
+                <div class="register-header">
+                    <div class="register-logo">
+                        <img src="/images/avatars/apu.jpg" alt="APROFEEC" loading="lazy">
+                        <div>
+                            <div class="register-title">APROFEEC</div>
+                            <div class="register-subtitle">AMANI KWETU II</div>
+                        </div>
+                    </div>
+                    <div class="invitation-badge">
+                        <i class="fas fa-envelope"></i>
+                        <span>Inscription par invitation</span>
+                    </div>
+                </div>
+                
+                <!-- Step Indicator -->
+                <div class="step-indicator">
+                    <div class="step active" id="step1">
+                        <div class="step-number">1</div>
+                        <div class="step-label">Information</div>
+                    </div>
+                    <div class="step" id="step2">
+                        <div class="step-number">2</div>
+                        <div class="step-label">Compte</div>
+                    </div>
+                    <div class="step" id="step3">
+                        <div class="step-number">3</div>
+                        <div class="step-label">Validation</div>
+                    </div>
+                </div>
+                
+                <!-- Registration Form -->
+                <form id="registerForm" autocomplete="on">
+                    <!-- Step 1: Personal Information -->
+                    <div class="form-step active" id="step1Form">
+                        <h5>
+                            <i class="fas fa-user-circle"></i>
+                            Informations personnelles
+                        </h5>
+                        
+                        <!-- First Name -->
+                        <div class="form-group">
+                            <label for="firstName" class="form-label">
+                                <i class="fas fa-user"></i>
+                                Prénom
+                            </label>
+                            <input type="text" 
+                                   id="firstName" 
+                                   class="form-control" 
+                                   placeholder="Votre prénom" 
+                                   required
+                                   autocomplete="given-name"
+                                   autocapitalize="words">
+                        </div>
+                        
+                        <!-- Last Name -->
+                        <div class="form-group">
+                            <label for="lastName" class="form-label">
+                                <i class="fas fa-user"></i>
+                                Nom
+                            </label>
+                            <input type="text" 
+                                   id="lastName" 
+                                   class="form-control" 
+                                   placeholder="Votre nom" 
+                                   required
+                                   autocomplete="family-name"
+                                   autocapitalize="words">
+                        </div>
+                        
+                        <!-- Email -->
+                        <div class="form-group">
+                            <label for="email" class="form-label">
+                                <i class="fas fa-envelope"></i>
+                                Adresse Email
+                            </label>
+                            <input type="email" 
+                                   id="email" 
+                                   class="form-control" 
+                                   placeholder="votre.email@exemple.com" 
+                                   required
+                                   autocomplete="email"
+                                   autocapitalize="none"
+                                   inputmode="email">
+                            <small style="color: #666; font-size: 0.85rem; display: block; margin-top: 8px;">
+                                Cette adresse sera utilisée pour la connexion
+                            </small>
+                        </div>
+                        
+                        <!-- Phone -->
+                        <div class="form-group">
+                            <label for="phone" class="form-label">
+                                <i class="fas fa-phone"></i>
+                                Téléphone
+                            </label>
+                            <input type="tel" 
+                                   id="phone" 
+                                   class="form-control" 
+                                   placeholder="+243 XX XXX XXXX" 
+                                   required
+                                   autocomplete="tel"
+                                   inputmode="tel">
+                        </div>
+                        
+                        <!-- Invitation Code -->
+                        <div class="form-group">
+                            <label for="invitationCode" class="form-label">
+                                <i class="fas fa-key"></i>
+                                Code d'invitation
+                            </label>
+                            <div class="input-group">
+                                <input type="text" 
+                                       id="invitationCode" 
+                                       class="form-control" 
+                                       placeholder="Code à 8 caractères" 
+                                       required
+                                       maxlength="8"
+                                       autocapitalize="characters">
+                                <button type="button" class="btn btn-outline-primary" id="verifyCode">
+                                    <i class="fas fa-check"></i>
+                                </button>
+                            </div>
+                            <small style="color: #666; font-size: 0.85rem; display: block; margin-top: 8px;">
+                                Code d'invitation fourni par l'administration
+                            </small>
+                        </div>
+                        
+                        <!-- Navigation -->
+                        <div class="step-navigation">
+                            <button type="button" class="btn btn-outline-primary" id="nextStep1">
+                                <i class="fas fa-arrow-right"></i>
+                                <span>Suivant</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 2: Account Setup -->
+                    <div class="form-step" id="step2Form">
+                        <h5>
+                            <i class="fas fa-lock"></i>
+                            Création du compte
+                        </h5>
+                        
+                        <!-- Password -->
+                        <div class="form-group">
+                            <label for="password" class="form-label">
+                                <i class="fas fa-lock"></i>
+                                Mot de passe
+                            </label>
+                            <div class="password-wrapper">
+                                <input type="password" 
+                                       id="password" 
+                                       class="form-control" 
+                                       placeholder="Créez un mot de passe sécurisé" 
+                                       required
+                                       autocomplete="new-password"
+                                       minlength="8">
+                                <button type="button" class="toggle-password" id="togglePassword">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <div class="password-strength">
+                                <div class="password-strength-bar" id="passwordStrength"></div>
+                            </div>
+                            <div class="password-requirements" id="passwordRequirements">
+                                <div class="requirement unmet" id="reqLength">
+                                    <i class="fas fa-circle"></i>
+                                    <span>Au moins 8 caractères</span>
+                                </div>
+                                <div class="requirement unmet" id="reqUppercase">
+                                    <i class="fas fa-circle"></i>
+                                    <span>Une majuscule</span>
+                                </div>
+                                <div class="requirement unmet" id="reqNumber">
+                                    <i class="fas fa-circle"></i>
+                                    <span>Un chiffre</span>
+                                </div>
+                                <div class="requirement unmet" id="reqSpecial">
+                                    <i class="fas fa-circle"></i>
+                                    <span>Un caractère spécial</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Confirm Password -->
+                        <div class="form-group">
+                            <label for="confirmPassword" class="form-label">
+                                <i class="fas fa-lock"></i>
+                                Confirmer le mot de passe
+                            </label>
+                            <input type="password" 
+                                   id="confirmPassword" 
+                                   class="form-control" 
+                                   placeholder="Retapez votre mot de passe" 
+                                   required
+                                   autocomplete="new-password">
+                            <div class="error-message" id="passwordMatchError">
+                                <i class="fas fa-exclamation-circle"></i>
+                                Les mots de passe ne correspondent pas
+                            </div>
+                        </div>
+                        
+                        <!-- Terms -->
+                        <div class="terms-check">
+                            <input type="checkbox" 
+                                   id="terms" 
+                                   class="form-check-input" 
+                                   required>
+                            <label for="terms">
+                                J'accepte les <a href="#">conditions d'utilisation</a> et la 
+                                <a href="#">politique de confidentialité</a> de APROFEEC
+                            </label>
+                        </div>
+                        
+                        <!-- Navigation -->
+                        <div class="step-navigation">
+                            <button type="button" class="btn btn-outline-primary" id="prevStep2">
+                                <i class="fas fa-arrow-left"></i>
+                                <span>Précédent</span>
+                            </button>
+                            <button type="button" class="btn btn-primary" id="nextStep2">
+                                <i class="fas fa-arrow-right"></i>
+                                <span>Suivant</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Step 3: Verification -->
+                    <div class="form-step" id="step3Form">
+                        <h5>
+                            <i class="fas fa-check-circle"></i>
+                            Vérification finale
+                        </h5>
+                        
+                        <!-- Success Icon -->
+                        <div style="text-align: center; margin-bottom: 25px;">
+                            <div style="font-size: 3rem; color: var(--primary-blue); margin-bottom: 15px;">
+                                <i class="fas fa-user-check"></i>
+                            </div>
+                            <h6 style="color: var(--dark-blue); margin-bottom: 10px;">
+                                Vérification des informations
+                            </h6>
+                            <p style="color: #666; font-size: 0.95rem;">
+                                Vérifiez que vos informations sont correctes avant de créer votre compte
+                            </p>
+                        </div>
+                        
+                        <!-- Review Card -->
+                        <div class="review-card">
+                            <h6>Récapitulatif</h6>
+                            <div class="review-item">
+                                <div class="review-label">Prénom:</div>
+                                <div class="review-value" id="reviewFirstName">-</div>
+                            </div>
+                            <div class="review-item">
+                                <div class="review-label">Nom:</div>
+                                <div class="review-value" id="reviewLastName">-</div>
+                            </div>
+                            <div class="review-item">
+                                <div class="review-label">Email:</div>
+                                <div class="review-value" id="reviewEmail">-</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Navigation -->
+                        <div class="step-navigation">
+                            <button type="button" class="btn btn-outline-primary" id="prevStep3">
+                                <i class="fas fa-arrow-left"></i>
+                                <span>Précédent</span>
+                            </button>
+                            <button type="submit" class="btn btn-primary" id="submitRegistration">
+                                <i class="fas fa-check"></i>
+                                <span>Créer mon compte</span>
+                            </button>
+                        </div>
+                        
+                        <!-- Loading State -->
+                        <div id="loadingState">
+                            <div class="loading-spinner"></div>
+                            <span style="color: var(--primary-blue); font-weight: 500;">
+                                Création de votre compte en cours...
+                            </span>
+                        </div>
+                    </div>
+                </form>
+                
+                <!-- Footer -->
+                <div class="register-footer" style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #e5e7eb;">
+                    <p style="margin-bottom: 0; font-size: 0.95rem;">
+                        Vous avez déjà un compte ? 
+                        <a href="login.html" style="color: var(--primary-blue); font-weight: 600;">
+                            Se connecter
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Mobile optimized registration
+        document.addEventListener('DOMContentLoaded', function() {
+            // CORRECTION IMMÉDIATE : CACHER LE LOADER
+            const mobileLoading = document.getElementById('mobile-loading');
+            if (mobileLoading) {
+                mobileLoading.style.display = 'none';
+            }
+            
+            // Détection mobile
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+            
+            if (isMobile) {
+                // Fix iOS 100vh
+                function setVH() {
+                    let vh = window.innerHeight * 0.01;
+                    document.documentElement.style.setProperty('--vh', `${vh}px`);
+                }
+                setVH();
+                window.addEventListener('resize', setVH);
+                window.addEventListener('orientationchange', setVH);
+            }
+            
+            // Multi-step form
+            let currentStep = 1;
+            const steps = document.querySelectorAll('.step');
+            const stepForms = document.querySelectorAll('.form-step');
+            
+            function goToStep(step) {
+                // Hide all steps
+                stepForms.forEach(form => {
+                    form.style.display = 'none';
+                    form.classList.remove('active');
+                });
+                
+                steps.forEach(s => {
+                    s.classList.remove('active', 'completed');
+                });
+                
+                // Show current step
+                const currentForm = document.getElementById(`step${step}Form`);
+                currentForm.style.display = 'block';
+                setTimeout(() => {
+                    currentForm.classList.add('active');
+                }, 10);
+                
+                // Update step indicator
+                for (let i = 1; i <= step; i++) {
+                    const stepElement = document.getElementById(`step${i}`);
+                    if (i === step) {
+                        stepElement.classList.add('active');
+                    } else {
+                        stepElement.classList.add('completed');
+                    }
+                }
+                
+                currentStep = step;
+                
+                // Scroll to top of form on mobile
+                if (isMobile && step > 1) {
+                    document.querySelector('.register-card').scrollIntoView({ 
+                        behavior: 'smooth', 
+                        block: 'start' 
+                    });
+                }
+            }
+            
+            // Toggle password visibility
+            const togglePassword = document.getElementById('togglePassword');
+            const passwordInput = document.getElementById('password');
+            
+            if (togglePassword && passwordInput) {
+                togglePassword.addEventListener('touchstart', function(e) {
+                    e.preventDefault();
+                    this.style.transform = 'translateY(-50%) scale(0.9)';
+                }, { passive: false });
+                
+                togglePassword.addEventListener('touchend', function(e) {
+                    e.preventDefault();
+                    this.style.transform = 'translateY(-50%)';
+                    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                    passwordInput.setAttribute('type', type);
+                    this.innerHTML = type === 'password' ? 
+                        '<i class="fas fa-eye"></i>' : 
+                        '<i class="fas fa-eye-slash"></i>';
+                });
+                
+                togglePassword.addEventListener('click', function() {
+                    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                    passwordInput.setAttribute('type', type);
+                    this.innerHTML = type === 'password' ? 
+                        '<i class="fas fa-eye"></i>' : 
+                        '<i class="fas fa-eye-slash"></i>';
+                });
+            }
+            
+            // Password strength checker
+            function checkPasswordStrength(password) {
+                let strength = 0;
+                
+                // Length
+                if (password.length >= 8) {
+                    document.getElementById('reqLength').classList.remove('unmet');
+                    document.getElementById('reqLength').classList.add('met');
+                    strength++;
+                } else {
+                    document.getElementById('reqLength').classList.remove('met');
+                    document.getElementById('reqLength').classList.add('unmet');
+                }
+                
+                // Uppercase
+                if (/[A-Z]/.test(password)) {
+                    document.getElementById('reqUppercase').classList.remove('unmet');
+                    document.getElementById('reqUppercase').classList.add('met');
+                    strength++;
+                } else {
+                    document.getElementById('reqUppercase').classList.remove('met');
+                    document.getElementById('reqUppercase').classList.add('unmet');
+                }
+                
+                // Number
+                if (/[0-9]/.test(password)) {
+                    document.getElementById('reqNumber').classList.remove('unmet');
+                    document.getElementById('reqNumber').classList.add('met');
+                    strength++;
+                } else {
+                    document.getElementById('reqNumber').classList.remove('met');
+                    document.getElementById('reqNumber').classList.add('unmet');
+                }
+                
+                // Special character
+                if (/[^A-Za-z0-9]/.test(password)) {
+                    document.getElementById('reqSpecial').classList.remove('unmet');
+                    document.getElementById('reqSpecial').classList.add('met');
+                    strength++;
+                } else {
+                    document.getElementById('reqSpecial').classList.remove('met');
+                    document.getElementById('reqSpecial').classList.add('unmet');
+                }
+                
+                // Update strength bar
+                const strengthBar = document.getElementById('passwordStrength');
+                strengthBar.className = 'password-strength-bar';
+                
+                if (strength === 0) {
+                    strengthBar.style.width = '0%';
+                } else if (strength === 1) {
+                    strengthBar.classList.add('weak');
+                } else if (strength === 2) {
+                    strengthBar.classList.add('fair');
+                } else if (strength === 3) {
+                    strengthBar.classList.add('good');
+                } else if (strength === 4) {
+                    strengthBar.classList.add('strong');
+                }
+                
+                return strength;
+            }
+            
+            // Real-time password validation
+            if (passwordInput) {
+                passwordInput.addEventListener('input', function() {
+                    const password = this.value;
+                    checkPasswordStrength(password);
+                    
+                    // Check password match
+                    const confirmPassword = document.getElementById('confirmPassword').value;
+                    const matchError = document.getElementById('passwordMatchError');
+                    
+                    if (confirmPassword && password !== confirmPassword) {
+                        matchError.style.display = 'flex';
+                    } else {
+                        matchError.style.display = 'none';
+                    }
+                });
+                
+                // Prevent paste for better UX on mobile
+                passwordInput.addEventListener('paste', function(e) {
+                    if (isMobile) {
+                        setTimeout(() => {
+                            checkPasswordStrength(this.value);
+                        }, 100);
+                    }
+                });
+            }
+            
+            // Confirm password validation
+            const confirmPasswordInput = document.getElementById('confirmPassword');
+            if (confirmPasswordInput) {
+                confirmPasswordInput.addEventListener('input', function() {
+                    const password = document.getElementById('password').value;
+                    const matchError = document.getElementById('passwordMatchError');
+                    
+                    if (this.value && password !== this.value) {
+                        matchError.style.display = 'flex';
+                    } else {
+                        matchError.style.display = 'none';
+                    }
+                });
+            }
+            
+            // Verify invitation code
+            const verifyCodeBtn = document.getElementById('verifyCode');
+            const invitationCodeInput = document.getElementById('invitationCode');
+            
+            if (verifyCodeBtn && invitationCodeInput) {
+                verifyCodeBtn.addEventListener('click', function() {
+                    const code = invitationCodeInput.value.trim().toUpperCase();
+                    
+                    if (code.length === 8 && /^[A-Z0-9]+$/.test(code)) {
+                        this.innerHTML = '<i class="fas fa-check"></i>';
+                        this.classList.remove('btn-outline-primary');
+                        this.classList.add('btn-success');
+                        
+                        // Vibration on success (mobile)
+                        if (navigator.vibrate) {
+                            navigator.vibrate(100);
+                        }
+                    } else {
+                        this.innerHTML = '<i class="fas fa-times"></i>';
+                        this.classList.remove('btn-outline-primary');
+                        this.classList.add('btn-danger');
+                        
+                        // Vibration on error (mobile)
+                        if (navigator.vibrate) {
+                            navigator.vibrate(200);
+                        }
+                    }
+                    
+                    // Reset after 2 seconds
+                    setTimeout(() => {
+                        this.innerHTML = '<i class="fas fa-check"></i>';
+                        this.classList.remove('btn-success', 'btn-danger');
+                        this.classList.add('btn-outline-primary');
+                    }, 2000);
+                });
+                
+                // Auto-verify on complete entry
+                invitationCodeInput.addEventListener('input', function() {
+                    if (this.value.length === 8) {
+                        verifyCodeBtn.click();
+                    }
+                });
+            }
+            
+            // Step 1 validation and navigation
+            document.getElementById('nextStep1').addEventListener('click', function() {
+                const requiredFields = ['firstName', 'lastName', 'email', 'phone', 'invitationCode'];
+                let isValid = true;
+                
+                requiredFields.forEach(fieldId => {
+                    const field = document.getElementById(fieldId);
+                    if (!field.value.trim()) {
+                        field.classList.add('error');
+                        isValid = false;
+                    } else {
+                        field.classList.remove('error');
+                    }
+                });
+                
+                // Email validation
+                const email = document.getElementById('email').value;
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email)) {
+                    document.getElementById('email').classList.add('error');
+                    isValid = false;
+                }
+                
+                if (isValid) {
+                    goToStep(2);
+                } else {
+                    // Vibration on error
+                    if (navigator.vibrate) {
+                        navigator.vibrate(200);
+                    }
+                    alert('Veuillez remplir tous les champs correctement.');
+                }
+            });
+            
+            // Step 2 navigation
+            document.getElementById('prevStep2').addEventListener('click', () => goToStep(1));
+            document.getElementById('nextStep2').addEventListener('click', function() {
+                const password = document.getElementById('password').value;
+                const confirmPassword = document.getElementById('confirmPassword').value;
+                const terms = document.getElementById('terms').checked;
+                const strength = checkPasswordStrength(password);
+                
+                if (password.length >= 8 && password === confirmPassword && terms && strength >= 3) {
+                    // Update review
+                    document.getElementById('reviewFirstName').textContent = 
+                        document.getElementById('firstName').value;
+                    document.getElementById('reviewLastName').textContent = 
+                        document.getElementById('lastName').value;
+                    document.getElementById('reviewEmail').textContent = 
+                        document.getElementById('email').value;
+                    
+                    goToStep(3);
+                } else {
+                    // Vibration on error
+                    if (navigator.vibrate) {
+                        navigator.vibrate(200);
+                    }
+                    
+                    if (!terms) {
+                        alert('Vous devez accepter les conditions d\'utilisation.');
+                    } else if (strength < 3) {
+                        alert('Veuillez choisir un mot de passe plus fort.');
+                    } else {
+                        alert('Veuillez vérifier vos informations.');
+                    }
+                }
+            });
+            
+            // Step 3 navigation
+            document.getElementById('prevStep3').addEventListener('click', () => goToStep(2));
+            
+            // Form submission
+            document.getElementById('registerForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Show loading
+                document.getElementById('submitRegistration').style.display = 'none';
+                document.getElementById('loadingState').style.display = 'flex';
+                
+                // Simulate API call with different timing on mobile
+                const delay = isMobile ? 1500 : 2000;
+                
+                setTimeout(() => {
+                    // Create user data
+                    const userData = {
+                        firstName: document.getElementById('firstName').value,
+                        lastName: document.getElementById('lastName').value,
+                        email: document.getElementById('email').value,
+                        phone: document.getElementById('phone').value,
+                        password: document.getElementById('password').value,
+                        invitationCode: document.getElementById('invitationCode').value.toUpperCase()
+                    };
+                    
+                    // Store in localStorage (simulated registration)
+                    localStorage.setItem('aprofeec_token', 'token_' + Date.now());
+                    localStorage.setItem('aprofeec_user', JSON.stringify({
+                        id: Date.now(),
+                        firstName: userData.firstName,
+                        lastName: userData.lastName,
+                        email: userData.email,
+                        role: 'learner',
+                        phone: userData.phone
+                    }));
+                    
+                    // Show success and redirect
+                    alert('✅ Compte créé avec succès ! Vous allez être redirigé vers la connexion.');
+                    window.location.href = '/dashboard.html';
+                }, delay);
+            });
+            
+            // Auto-focus first field on mobile
+            if (isMobile) {
+                setTimeout(() => {
+                    document.getElementById('firstName').focus();
+                }, 500);
+            }
+            
+            // Network detection
+            window.addEventListener('offline', function() {
+                const banner = document.createElement('div');
+                banner.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    background: #ef4444;
+                    color: white;
+                    text-align: center;
+                    padding: 12px;
+                    z-index: 9999;
+                    font-weight: 500;
+                `;
+                banner.textContent = '⚠️ Hors ligne - Enregistrement local activé';
+                document.body.appendChild(banner);
+                
+                setTimeout(() => {
+                    banner.remove();
+                }, 5000);
+            });
+            
+            // Keyboard shortcuts for better UX
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    
+                    if (currentStep === 1) {
+                        document.getElementById('nextStep1').click();
+                    } else if (currentStep === 2) {
+                        document.getElementById('nextStep2').click();
+                    } else if (currentStep === 3) {
+                        document.getElementById('submitRegistration').click();
+                    }
+                }
+            });
+        });
+
+        // SCRIPT DE SÉCURITÉ FINAL - CACHE TOUS LES LOADERS
+        window.addEventListener('load', function() {
+            // Cacher le loader mobile
+            const mobileLoader = document.getElementById('mobile-loading');
+            if (mobileLoader) {
+                mobileLoader.style.display = 'none';
+            }
+            
+            // Cacher tous les autres loaders potentiels
+            document.querySelectorAll('.loading-overlay, .overlay, [class*="loading"], [id*="loading"]').forEach(el => {
+                if (el.id !== 'loadingState' && el.id !== 'mobile-loading') {
+                    el.style.display = 'none';
+                }
+            });
+            
+            // Protection contre la réapparition
+            setInterval(() => {
+                document.querySelectorAll('[style*="skyblue"], [style*="#87CEEB"], .modal-backdrop').forEach(el => {
+                    el.style.display = 'none';
+                    el.style.opacity = '0';
+                    el.style.visibility = 'hidden';
+                });
+            }, 100);
+        });
+    </script>
+</body>
+</html>
