@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <!-- META VIEWPORT OPTIMISÉE -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="theme-color" content="#7c3aed">
+    
+    <!-- APPLE TOUCH ICON -->
+    <link rel="apple-touch-icon" href="/images/avatars/mentor.jpg">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <title>APROFEEC | Espace Mentor - Plateforme Professionnelle</title>
+    
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- FullCalendar (version mobile optimisée) -->
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+    
+    <style>
+        /* ============================================
+           MENTOR DASHBOARD - MOBILE FIRST
+        ============================================ */
+        
+        :root {
+            --primary-blue: #1e40af;
+            --secondary-blue: #3b82f6;
+            --accent-blue: #60a5fa;
+            --light-blue: #dbeafe;
+            --dark-blue: #1e3a8a;
+            --gradient-blue: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            --mentor-color: #7c3aed;
+            --mentor-light: #ede9fe;
+            --mentor-dark: #5b21b6;
+            --success: #10b981;
+            --warning: #f59e0b;
+        }
+        
+        /* 1. MOBILE RESET */
+        * {
+            -webkit-tap-highlight-color: transparent;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        html {
+            font-size: 16px;
+            -webkit-text-size-adjust: 100%;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Poppins', sans-serif;
+            background: #f8fafc;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* 2. DASHBOARD LAYOUT MOBILE */
+        .dashboard-container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        /* 3. SIDEBAR MOBILE (Bottom Navigation) */
+        .sidebar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-top: 3px solid var(--mentor-color);
+            z-index: 1000;
+            padding: 10px 5px;
+            display: flex;
+            justify-content: space-around;
+            height: 70px;
+            box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        .sidebar-header,
+        .user-info,
+        .sidebar-footer {
+            display: none; /* Caché sur mobile */
+        }
+        
+        .nav {
+            display: flex;
+            width: 100%;
+            justify-content: space-around;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+        
+        .nav-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 12px;
+            color: #666;
+            text-decoration: none;
+            border-radius: 12px;
+            min-width: 60px;
+            min-height: 60px;
+            transition: all 0.3s ease;
+            font-size: 0.75rem;
+            font-weight: 500;
+            gap: 5px;
+        }
+        
+        .nav-link i {
+            font-size: 1.2rem;
+        }
+        
+        .nav-link:hover,
+        .nav-link.active {
+            background: var(--mentor-light);
+            color: var(--mentor-color);
+            transform: translateY(-5px);
+        }
+        
+        .nav-link .badge {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            font-size: 0.6rem;
+            padding: 3px 6px;
+        }
+        
+        /* 4. MAIN CONTENT MOBILE */
+        .main-content {
+            flex: 1;
+            padding: 0;
+            padding-bottom: 90px; /* Espace pour bottom nav */
+        }
+        
+        /* 5. TOPBAR MOBILE */
+        .topbar {
+            background: white;
+            padding: 15px 20px;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 900;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .menu-toggle {
+            background: none;
+            border: none;
+            color: #666;
+            font-size: 1.5rem;
+            padding: 10px;
+            min-width: 44px;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+        }
+        
+        .menu-toggle:active {
+            background: rgba(0, 0, 0, 0.05);
+        }
+        
+        .topbar-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .notification-btn {
+            position: relative;
+            background: none;
+            border: none;
+            color: #666;
+            font-size: 1.3rem;
+            padding: 10px;
+            min-width: 44px;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+        }
+        
+        .notification-btn:active {
+            background: rgba(0, 0, 0, 0.05);
+        }
+        
+        .notification-badge {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: #ef4444;
+            color: white;
+            font-size: 0.7rem;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+        
+        /* 6. SEARCH BOX MOBILE */
+        .search-box {
+            flex: 1;
+            margin: 0 15px;
+            position: relative;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 14px 20px 14px 45px;
+            border: 1px solid #e5e7eb;
+            border-radius: 50px;
+            font-size: 1rem;
+            background: #f8fafc;
+            min-height: 48px;
+        }
+        
+        .search-box i {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9ca3af;
+            font-size: 1.1rem;
+        }
+        
+        /* 7. CONTENT WRAPPER MOBILE */
+        .content-wrapper {
+            padding: 20px;
+        }
+        
+        /* 8. WELCOME BANNER MOBILE */
+        .welcome-banner {
+            background: linear-gradient(135deg, var(--mentor-color) 0%, #a78bfa 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 25px 20px;
+            margin-bottom: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            box-shadow: 0 10px 30px rgba(124, 58, 237, 0.2);
+        }
+        
+        .welcome-content h2 {
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+        
+        .welcome-content p {
+            opacity: 0.9;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        .welcome-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .btn-mentor {
+            background: white;
+            color: var(--mentor-color);
+            border: none;
+            padding: 18px;
+            border-radius: 14px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            min-height: 56px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-mentor:active {
+            transform: scale(0.98);
+            opacity: 0.9;
+        }
+        
+        .btn-mentor:nth-child(2) {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+        
+        /* 9. STATS GRID MOBILE */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 2 colonnes sur mobile */
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid #f1f5f9;
+            transition: all 0.3s ease;
+        }
+        
+        .stat-card:active {
+            transform: scale(0.98);
+        }
+        
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+        }
+        
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark-blue);
+            margin-bottom: 5px;
+            line-height: 1;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        /* 10. CALENDAR MOBILE OPTIMIZED */
+        .calendar-section {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid #f1f5f9;
+            margin-bottom: 25px;
+            overflow: hidden;
+        }
+        
+        .calendar-header {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .calendar-title {
+            font-weight: 600;
+            color: var(--dark-blue);
+            margin: 0;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        #calendar {
+            height: 300px; /* Réduit pour mobile */
+        }
+        
+        /* 11. STUDENTS LIST MOBILE */
+        .students-section {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid #f1f5f9;
+        }
+        
+        .students-header {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .students-title {
+            font-weight: 600;
+            color: var(--dark-blue);
+            margin: 0;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .students-table {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .student-row {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #e5e7eb;
+            min-width: 600px; /* Minimum width for scroll */
+        }
+        
+        .student-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+            border: 3px solid var(--mentor-light);
+        }
+        
+        .student-info {
+            flex: 1;
+            min-width: 150px;
+        }
+        
+        .student-name {
+            font-weight: 600;
+            color: var(--dark-blue);
+            margin-bottom: 5px;
+            font-size: 1rem;
+        }
+        
+        .student-course {
+            font-size: 0.85rem;
+            color: #666;
+        }
+        
+        .student-progress {
+            min-width: 120px;
+            margin: 0 15px;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--primary-blue);
+            border-radius: 4px;
+        }
+        
+        .progress-text {
+            font-size: 0.85rem;
+            color: #666;
+            text-align: center;
+        }
+        
+        .student-actions {
+            display: flex;
+            gap: 10px;
+            min-width: 100px;
+        }
+        
+        .btn-sm {
+            padding: 10px 15px;
+            font-size: 0.9rem;
+            border-radius: 10px;
+            min-height: 44px;
+            min-width: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* 12. DROPDOWN MOBILE */
+        .dropdown-toggle {
+            padding: 12px 20px;
+            border-radius: 12px;
+            min-height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        /* 13. BREAKPOINTS */
+        
+        /* Tablettes (≥ 768px) */
+        @media (min-width: 768px) {
+            .dashboard-container {
+                flex-direction: row;
+            }
+            
+            .sidebar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                width: 80px;
+                height: 100vh;
+                flex-direction: column;
+                justify-content: flex-start;
+                padding-top: 20px;
+                border-top: none;
+                border-right: 3px solid var(--mentor-color);
+            }
+            
+            .nav {
+                flex-direction: column;
+                gap: 10px;
+                padding: 20px 10px;
+            }
+            
+            .nav-link span {
+                font-size: 0.7rem;
+            }
+            
+            .main-content {
+                margin-left: 80px;
+                padding-bottom: 30px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .welcome-banner {
+                flex-direction: row;
+                align-items: center;
+            }
+            
+            .welcome-actions {
+                flex-direction: row;
+            }
+            
+            .calendar-header,
+            .students-header {
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+            }
+            
+            .student-row {
+                min-width: auto;
+            }
+        }
+        
+        /* Desktop (≥ 1024px) */
+        @media (min-width: 1024px) {
+            .sidebar {
+                width: 260px;
+            }
+            
+            .sidebar-header,
+            .user-info,
+            .sidebar-footer {
+                display: block;
+            }
+            
+            .nav-link {
+                flex-direction: row;
+                justify-content: flex-start;
+                padding: 12px 20px;
+                min-height: auto;
+                font-size: 0.95rem;
+                gap: 15px;
+            }
+            
+            .nav-link span {
+                font-size: 0.95rem;
+            }
+            
+            .main-content {
+                margin-left: 260px;
+            }
+            
+            #calendar {
+                height: 400px;
+            }
+        }
+        
+        /* Très petits écrans (≤ 375px) */
+        @media (max-width: 375px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .welcome-content h2 {
+                font-size: 1.3rem;
+            }
+            
+            .stat-value {
+                font-size: 1.6rem;
+            }
+            
+            .btn-sm {
+                padding: 8px 12px;
+            }
+            
+            .student-actions {
+                flex-direction: column;
+                gap: 8px;
+            }
+        }
+        
+        /* Orientation paysage */
+        @media (max-width: 768px) and (orientation: landscape) {
+            .sidebar {
+                height: 60px;
+            }
+            
+            .main-content {
+                padding-bottom: 70px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            #calendar {
+                height: 250px;
+            }
+        }
+        
+        /* 14. DARK MODE SUPPORT */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: #121212;
+                color: #e0e0e0;
+            }
+            
+            .sidebar,
+            .topbar,
+            .stat-card,
+            .calendar-section,
+            .students-section {
+                background: #1e1e1e;
+                border-color: #333;
+            }
+            
+            .welcome-banner {
+                background: linear-gradient(135deg, #5b21b6 0%, #7c3aed 100%);
+            }
+            
+            .stat-card,
+            .calendar-section,
+            .students-section {
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            }
+            
+            .search-box input {
+                background: #2d2d2d;
+                border-color: #444;
+                color: #e0e0e0;
+            }
+            
+            .student-row {
+                border-color: #333;
+            }
+            
+            .stat-value {
+                color: #ffffff;
+            }
+            
+            .stat-label,
+            .student-course,
+            .progress-text {
+                color: #a0a0a0;
+            }
+        }
+        
+        /* 15. TOUCH OPTIMIZATIONS */
+        @media (hover: none) and (pointer: coarse) {
+            button,
+            .nav-link,
+            .dropdown-toggle,
+            .btn-sm,
+            .notification-btn,
+            .menu-toggle {
+                min-height: 44px;
+                min-width: 44px;
+            }
+            
+            .stat-card:active,
+            .student-row:active,
+            .btn-mentor:active {
+                opacity: 0.7;
+            }
+            
+            .students-table {
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+            }
+            
+            .students-table::-webkit-scrollbar {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading overlay pour mobile -->
+    <div id="mobile-loading" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(30, 41, 59, 0.95); z-index: 9999; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem; flex-direction: column; gap: 20px;">
+        <div style="width: 50px; height: 50px; border: 4px solid rgba(255,255,255,0.3); border-top-color: white; border-radius: 50%; animation: spin 1s linear infinite;"></div>
+        <div>Chargement de l'espace mentor...</div>
+    </div>
+
+    <div class="dashboard-container">
+        <!-- Sidebar Mobile (Bottom Navigation) -->
+        <aside class="sidebar">
+            <nav class="nav">
+                <a href="dashboard.html" class="nav-link" aria-label="Tableau de bord">
+                    <i class="fas fa-home"></i>
+                    <span>Accueil</span>
+                </a>
+                <a href="mentor-space.html" class="nav-link active" aria-label="Espace Mentor">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    <span>Mentor</span>
+                </a>
+                <a href="apprenant-space.html" class="nav-link" aria-label="Mes Apprenants">
+                    <i class="fas fa-user-graduate"></i>
+                    <span>Apprenants</span>
+                </a>
+                <a href="chat.html" class="nav-link" aria-label="Messagerie">
+                    <i class="fas fa-comments"></i>
+                    <span>Messages</span>
+                    <span class="badge bg-danger">5</span>
+                </a>
+                <a href="#" class="nav-link" aria-label="Paramètres">
+                    <i class="fas fa-cog"></i>
+                    <span>Réglages</span>
+                </a>
+            </nav>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Topbar -->
+            <header class="topbar">
+                <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Rechercher un apprenant..." 
+                           aria-label="Rechercher un apprenant"
+                           autocomplete="off">
+                </div>
+                
+                <div class="topbar-actions">
+                    <button class="notification-btn" aria-label="Notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">5</span>
+                    </button>
+                </div>
+            </header>
+            
+            <!-- Content -->
+            <div class="content-wrapper">
+                <!-- Welcome Banner -->
+                <div class="welcome-banner">
+                    <div class="welcome-content">
+                        <h2>Bonjour, Dr. Jean Kabasele 👋</h2>
+                        <p>3 sessions aujourd'hui • 5 apprenants en attente de feedback</p>
+                    </div>
+                    <div class="welcome-actions">
+                        <button class="btn-mentor">
+                            <i class="fas fa-plus"></i>
+                            Nouvelle Session
+                        </button>
+                        <button class="btn-mentor">
+                            <i class="fas fa-video"></i>
+                            Démarrer Zoom
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Stats -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div>
+                                <div class="stat-value" id="statStudents">12</div>
+                                <div class="stat-label">Apprenants Actifs</div>
+                            </div>
+                            <div class="stat-icon students" style="background: #dbeafe; color: var(--primary-blue);">
+                                <i class="fas fa-user-graduate"></i>
+                            </div>
+                        </div>
+                        <div style="color: var(--success); font-size: 0.85rem;">
+                            <i class="fas fa-arrow-up me-1"></i> +2 ce mois
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div>
+                                <div class="stat-value" id="statSessions">45</div>
+                                <div class="stat-label">Sessions/mois</div>
+                            </div>
+                            <div class="stat-icon sessions" style="background: #f0f9ff; color: #0ea5e9;">
+                                <i class="fas fa-calendar-check"></i>
+                            </div>
+                        </div>
+                        <div style="color: var(--success); font-size: 0.85rem;">
+                            <i class="fas fa-arrow-up me-1"></i> +10%
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div>
+                                <div class="stat-value" id="statHours">128</div>
+                                <div class="stat-label">Heures Mentorat</div>
+                            </div>
+                            <div class="stat-icon hours" style="background: #fef3c7; color: #f59e0b;">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                        </div>
+                        <div style="color: var(--warning); font-size: 0.85rem;">
+                            <i class="fas fa-chart-line me-1"></i> En progression
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div>
+                                <div class="stat-value" id="statRating">4.8</div>
+                                <div class="stat-label">Note moyenne</div>
+                            </div>
+                            <div class="stat-icon rating" style="background: #dcfce7; color: #16a34a;">
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        <div style="color: var(--success); font-size: 0.85rem;">
+                            <i class="fas fa-thumbs-up me-1"></i> Excellent
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Calendar -->
+                <div class="calendar-section">
+                    <div class="calendar-header">
+                        <h3 class="calendar-title">
+                            <i class="fas fa-calendar-alt"></i>
+                            Calendrier des Sessions
+                        </h3>
+                        <button class="btn btn-primary btn-sm" style="padding: 10px 20px; min-height: 44px;">
+                            <i class="fas fa-plus me-2"></i>Ajouter
+                        </button>
+                    </div>
+                    <div id="calendar"></div>
+                </div>
+                
+                <!-- Students List -->
+                <div class="students-section">
+                    <div class="students-header">
+                        <h3 class="students-title">
+                            <i class="fas fa-users"></i>
+                            Mes Apprenants
+                        </h3>
+                        <div class="dropdown">
+                            <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" style="padding: 10px 20px; min-height: 44px;">
+                                Tous les apprenants
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Actifs</a></li>
+                                <li><a class="dropdown-item" href="#">En attente</a></li>
+                                <li><a class="dropdown-item" href="#">Terminés</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="students-table">
+                        <!-- Student 1 -->
+                        <div class="student-row">
+                            <img src="/images/avatars/student1.jpg" alt="Marie Dubois" class="student-avatar" loading="lazy">
+                            <div class="student-info">
+                                <div class="student-name">Marie Dubois</div>
+                                <div class="student-course">Développement Web Fullstack</div>
+                            </div>
+                            <div class="student-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 75%;"></div>
+                                </div>
+                                <div class="progress-text">75% complété</div>
+                            </div>
+                            <div class="student-actions">
+                                <button class="btn btn-primary btn-sm" aria-label="Message à Marie">
+                                    <i class="fas fa-comment"></i>
+                                </button>
+                                <button class="btn btn-outline-primary btn-sm" aria-label="Voir profil de Marie">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Student 2 -->
+                        <div class="student-row">
+                            <img src="/images/avatars/student2.jpg" alt="Paul Lumumba" class="student-avatar" loading="lazy">
+                            <div class="student-info">
+                                <div class="student-name">Paul Lumumba</div>
+                                <div class="student-course">Data Science</div>
+                            </div>
+                            <div class="student-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 45%;"></div>
+                                </div>
+                                <div class="progress-text">45% complété</div>
+                            </div>
+                            <div class="student-actions">
+                                <button class="btn btn-primary btn-sm" aria-label="Message à Paul">
+                                    <i class="fas fa-comment"></i>
+                                </button>
+                                <button class="btn btn-outline-primary btn-sm" aria-label="Voir profil de Paul">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Student 3 -->
+                        <div class="student-row">
+                            <img src="/images/avatars/student3.jpg" alt="Sophie Kanku" class="student-avatar" loading="lazy">
+                            <div class="student-info">
+                                <div class="student-name">Sophie Kanku</div>
+                                <div class="student-course">Marketing Digital</div>
+                            </div>
+                            <div class="student-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 90%;"></div>
+                                </div>
+                                <div class="progress-text">90% complété</div>
+                            </div>
+                            <div class="student-actions">
+                                <button class="btn btn-primary btn-sm" aria-label="Message à Sophie">
+                                    <i class="fas fa-comment"></i>
+                                </button>
+                                <button class="btn btn-outline-primary btn-sm" aria-label="Voir profil de Sophie">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/locales/fr.js"></script>
+    
+    <script>
+        // Mobile optimized script
+        document.addEventListener('DOMContentLoaded', function() {
+            // Détection mobile
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+            
+            // Menu toggle pour desktop (sur mobile, on utilise bottom nav)
+            const menuToggle = document.getElementById('menuToggle');
+            if (menuToggle) {
+                menuToggle.addEventListener('click', function() {
+                    // Sur mobile, ce bouton pourrait ouvrir un menu latéral
+                    if (!isMobile) {
+                        document.querySelector('.sidebar').classList.toggle('active');
+                    }
+                });
+            }
+            
+            // Initialize Calendar with mobile optimizations
+            const calendarEl = document.getElementById('calendar');
+            if (calendarEl) {
+                const calendar = new FullCalendar.Calendar(calendarEl, {
+                    initialView: isMobile ? 'listWeek' : 'dayGridMonth',
+                    locale: 'fr',
+                    headerToolbar: {
+                        left: isMobile ? 'prev' : 'prev,next today',
+                        center: 'title',
+                        right: isMobile ? 'next' : 'dayGridMonth,timeGridWeek,timeGridDay'
+                    },
+                    buttonText: {
+                        today: 'Aujourd\'hui',
+                        month: 'Mois',
+                        week: 'Semaine',
+                        day: 'Jour',
+                        list: 'Liste'
+                    },
+                    events: [
+                        {
+                            title: 'Session avec Marie',
+                            start: new Date().toISOString().split('T')[0] + 'T10:00:00',
+                            end: new Date().toISOString().split('T')[0] + 'T11:30:00',
+                            color: '#3b82f6'
+                        },
+                        {
+                            title: 'Révision Projet Paul',
+                            start: new Date().toISOString().split('T')[0] + 'T14:00:00',
+                            end: new Date().toISOString().split('T')[0] + 'T15:00:00',
+                            color: '#10b981'
+                        },
+                        {
+                            title: 'Atelier Groupe',
+                            start: new Date(Date.now() + 86400000).toISOString().split('T')[0] + 'T09:00:00',
+                            end: new Date(Date.now() + 86400000).toISOString().split('T')[0] + 'T12:00:00',
+                            color: '#f59e0b'
+                        }
+                    ],
+                    eventClick: function(info) {
+                        alert('Session: ' + info.event.title + '\nDébut: ' + info.event.start.toLocaleString());
+                    },
+                    eventTimeFormat: {
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        hour12: false
+                    },
+                    height: isMobile ? 350 : 400,
+                    contentHeight: isMobile ? 300 : 350,
+                    dayMaxEventRows: isMobile ? 2 : 3
+                });
+                calendar.render();
+            }
+            
+            // Search functionality with debounce
+            const searchInput = document.querySelector('.search-box input');
+            let searchTimeout;
+            searchInput.addEventListener('input', function(e) {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(() => {
+                    if (this.value.length > 2) {
+                        console.log('Recherche:', this.value);
+                        // Implémenter la recherche ici
+                    }
+                }, 500);
+            });
+            
+            // Notification button
+            const notificationBtn = document.querySelector('.notification-btn');
+            if (notificationBtn) {
+                notificationBtn.addEventListener('click', function() {
+                    alert('📢 Notifications:\n\n• 2 nouveaux messages\n• 1 demande de session\n• 2 rappels de réunion');
+                });
+            }
+            
+            // Animate stats counters
+            const stats = [
+                { element: 'statStudents', target: 12 },
+                { element: 'statSessions', target: 45 },
+                { element: 'statHours', target: 128 },
+                { element: 'statRating', target: 4.8, increment: 0.1 }
+            ];
+            
+            stats.forEach(stat => {
+                const element = document.getElementById(stat.element);
+                if (element) {
+                    let current = 0;
+                    const increment = stat.increment || stat.target / 30;
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= stat.target) {
+                            element.textContent = stat.element === 'statRating' ? stat.target.toFixed(1) : stat.target;
+                            clearInterval(timer);
+                        } else {
+                            element.textContent = stat.element === 'statRating' ? current.toFixed(1) : Math.floor(current);
+                        }
+                    }, 50);
+                }
+            });
+            
+            // Touch optimizations
+            if (isMobile) {
+                // Add touch feedback
+                document.querySelectorAll('.stat-card, .btn-mentor, .student-row').forEach(el => {
+                    el.addEventListener('touchstart', function() {
+                        this.style.opacity = '0.7';
+                    });
+                    
+                    el.addEventListener('touchend', function() {
+                        this.style.opacity = '';
+                    });
+                });
+                
+                // Fix iOS 100vh issue
+                function setVH() {
+                    let vh = window.innerHeight * 0.01;
+                    document.documentElement.style.setProperty('--vh', `${vh}px`);
+                }
+                setVH();
+                window.addEventListener('resize', setVH);
+                window.addEventListener('orientationchange', setVH);
+                
+                // Prevent zoom on input focus
+                document.querySelectorAll('input, select, textarea').forEach(el => {
+                    el.addEventListener('focus', function() {
+                        this.style.fontSize = '16px';
+                    });
+                });
+            }
+            
+            // Network detection
+            window.addEventListener('offline', function() {
+                const banner = document.createElement('div');
+                banner.style.cssText = 'position: fixed; top: 0; left: 0; right: 0; background: #ef4444; color: white; text-align: center; padding: 10px; z-index: 9999;';
+                banner.textContent = '⚠️ Vous êtes hors ligne. Certaines fonctionnalités peuvent être limitées.';
+                document.body.appendChild(banner);
+                
+                setTimeout(() => {
+                    banner.remove();
+                }, 5000);
+            });
+        });
+    </script>
+</body>
+</html>

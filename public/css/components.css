@@ -1,0 +1,283 @@
+/* ============================================
+   APROFEEC - COMPOSANTS RÉUTILISABLES
+   Design System & UI Components
+============================================= */
+
+/* 1. ALERTS & NOTIFICATIONS */
+.alert {
+  padding: 15px 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.alert-success {
+  background: rgba(40, 167, 69, 0.1);
+  border-color: rgba(40, 167, 69, 0.3);
+  color: #155724;
+}
+
+.alert-warning {
+  background: rgba(253, 126, 20, 0.1);
+  border-color: rgba(253, 126, 20, 0.3);
+  color: #856404;
+}
+
+.alert-danger {
+  background: rgba(220, 53, 69, 0.1);
+  border-color: rgba(220, 53, 69, 0.3);
+  color: #721c24;
+}
+
+.alert-info {
+  background: rgba(30, 144, 255, 0.1);
+  border-color: rgba(30, 144, 255, 0.3);
+  color: #0c5460;
+}
+
+/* 2. BADGES & TAGS */
+.badge {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.badge-primary { background: var(--bleu-ciel); color: white; }
+.badge-success { background: var(--vert-success); color: white; }
+.badge-warning { background: var(--orange-warning); color: white; }
+.badge-danger { background: var(--rouge-danger); color: white; }
+
+.badge-outline-primary {
+  background: transparent;
+  border: 1px solid var(--bleu-ciel);
+  color: var(--bleu-ciel);
+}
+
+/* 3. MODALS & DIALOGS */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal {
+  background: white;
+  border-radius: 16px;
+  max-width: 500px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.modal-header {
+  padding: 20px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-body {
+  padding: 20px;
+}
+
+.modal-footer {
+  padding: 20px;
+  border-top: 1px solid #eee;
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+/* 4. LOADERS & SPINNERS */
+.loader {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid var(--bleu-ciel);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 20px auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loader-small {
+  width: 20px;
+  height: 20px;
+  border-width: 2px;
+}
+
+/* 5. TOOLTIPS & POPOVERS */
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltip-text {
+  visibility: hidden;
+  background: var(--gris-fonce);
+  color: white;
+  text-align: center;
+  padding: 5px 10px;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 100;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 0.85rem;
+}
+
+.tooltip:hover .tooltip-text {
+  visibility: visible;
+}
+
+/* 6. PROGRESS BARS */
+.progress {
+  height: 8px;
+  background: #e9ecef;
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 10px 0;
+}
+
+.progress-bar {
+  height: 100%;
+  background: var(--bleu-ciel);
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.progress-success .progress-bar { background: var(--vert-success); }
+.progress-warning .progress-bar { background: var(--orange-warning); }
+.progress-danger .progress-bar { background: var(--rouge-danger); }
+
+/* 7. AVATARS & USER IMAGES */
+.avatar {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.avatar-sm { width: 32px; height: 32px; }
+.avatar-md { width: 48px; height: 48px; }
+.avatar-lg { width: 64px; height: 64px; }
+.avatar-xl { width: 96px; height: 96px; }
+
+/* 8. TABS & NAVIGATION */
+.tabs {
+  display: flex;
+  border-bottom: 2px solid #eee;
+  margin-bottom: 20px;
+  overflow-x: auto;
+}
+
+.tab {
+  padding: 12px 20px;
+  border: none;
+  background: transparent;
+  color: var(--gris-moyen);
+  font-weight: 500;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  cursor: pointer;
+}
+
+.tab.active {
+  color: var(--bleu-ciel);
+  border-bottom-color: var(--bleu-ciel);
+}
+
+/* 9. BREADCRUMBS */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.breadcrumb-item {
+  color: var(--gris-moyen);
+  font-size: 0.9rem;
+}
+
+.breadcrumb-item:not(:last-child)::after {
+  content: "›";
+  margin-left: 8px;
+}
+
+.breadcrumb-item.active {
+  color: var(--bleu-ciel);
+  font-weight: 500;
+}
+
+/* 10. PAGINATION */
+.pagination {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  margin: 20px 0;
+}
+
+.page-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  height: 40px;
+  padding: 0 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  color: var(--gris-fonce);
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.page-link:hover,
+.page-link.active {
+  background: var(--bleu-ciel);
+  color: white;
+  border-color: var(--bleu-ciel);
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+  .modal {
+    margin: 10px;
+    max-height: 80vh;
+  }
+  
+  .tabs {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .page-link {
+    min-width: 36px;
+    height: 36px;
+    padding: 0 10px;
+  }
+}

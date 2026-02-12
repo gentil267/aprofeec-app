@@ -1,0 +1,1512 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <!-- META VIEWPORT OPTIMISÉE POUR MOBILE -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="theme-color" content="#1e40af">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <title>APROFEEC | Tableau de Bord Mobile</title>
+    
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/style.css">
+    
+    <style>
+        /* ============================================
+           DASHBOARD - MOBILE FIRST DESIGN
+        ============================================ */
+        
+        :root {
+            --primary-blue: #1e40af;
+            --secondary-blue: #3b82f6;
+            --accent-blue: #60a5fa;
+            --light-blue: #dbeafe;
+            --dark-blue: #1e3a8a;
+            --gradient-blue: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --info: #3b82f6;
+            --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        
+        /* 1. MOBILE RESET */
+        * {
+            -webkit-tap-highlight-color: transparent;
+            box-sizing: border-box;
+        }
+        
+        html {
+            font-size: 16px;
+            -webkit-text-size-adjust: 100%;
+            height: 100%;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8fafc;
+            color: #333;
+            min-height: 100vh;
+            overflow-x: hidden;
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+        
+        /* 2. MOBILE HEADER */
+        .mobile-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 15px;
+            border-bottom: 1px solid #e5e7eb;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .menu-toggle {
+            background: var(--light-blue);
+            border: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-blue);
+            font-size: 1.2rem;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-img {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            object-fit: cover;
+            border: 2px solid var(--primary-blue);
+        }
+        
+        .logo-text {
+            font-weight: 700;
+            color: var(--dark-blue);
+            font-size: 1.1rem;
+        }
+        
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .notification-btn {
+            position: relative;
+            background: var(--light-blue);
+            border: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            color: var(--primary-blue);
+            font-size: 1.2rem;
+        }
+        
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--danger);
+            color: white;
+            font-size: 0.7rem;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            border: 2px solid white;
+        }
+        
+        /* 3. MOBILE SIDEBAR */
+        .mobile-sidebar {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .sidebar-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 280px;
+            background: white;
+            overflow-y: auto;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            padding-top: 20px;
+        }
+        
+        .mobile-sidebar.active .sidebar-content {
+            transform: translateX(0);
+        }
+        
+        .mobile-sidebar.active {
+            display: block;
+        }
+        
+        .user-info-mobile {
+            padding: 20px;
+            border-bottom: 1px solid #e5e7eb;
+            text-align: center;
+        }
+        
+        .user-avatar-mobile {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--light-blue);
+            margin: 0 auto 15px;
+        }
+        
+        .user-name-mobile {
+            font-weight: 600;
+            color: var(--dark-blue);
+            margin-bottom: 5px;
+        }
+        
+        .user-role-mobile {
+            display: inline-block;
+            padding: 5px 15px;
+            background: var(--light-blue);
+            color: var(--primary-blue);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        .nav-mobile {
+            padding: 20px;
+        }
+        
+        .nav-item-mobile {
+            margin-bottom: 10px;
+        }
+        
+        .nav-link-mobile {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            border-radius: 12px;
+            color: #666;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link-mobile.active,
+        .nav-link-mobile:hover {
+            background: var(--light-blue);
+            color: var(--primary-blue);
+        }
+        
+        .nav-link-mobile i {
+            font-size: 1.2rem;
+            width: 24px;
+        }
+        
+        .nav-badge {
+            margin-left: auto;
+            background: var(--danger);
+            color: white;
+            font-size: 0.7rem;
+            min-width: 22px;
+            height: 22px;
+            border-radius: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .sidebar-footer-mobile {
+            padding: 20px;
+            border-top: 1px solid #e5e7eb;
+            margin-top: auto;
+        }
+        
+        /* 4. MAIN CONTENT */
+        .dashboard-content {
+            padding: 100px 15px 90px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* 5. WELCOME BANNER MOBILE */
+        .welcome-banner {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            color: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .welcome-icon {
+            font-size: 1.5rem;
+            background: rgba(255, 255, 255, 0.2);
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        .welcome-text strong {
+            font-weight: 600;
+        }
+        
+        /* 6. STATS CARDS MOBILE */
+        .stats-slider {
+            overflow-x: auto;
+            display: flex;
+            gap: 15px;
+            padding: 5px 0 20px;
+            margin-bottom: 10px;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        
+        .stats-slider::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .stat-card {
+            min-width: 200px;
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid #e5e7eb;
+            flex-shrink: 0;
+        }
+        
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        
+        .stat-icon.users { background: #dbeafe; color: var(--primary-blue); }
+        .stat-icon.mentors { background: #f0f9ff; color: #0ea5e9; }
+        .stat-icon.courses { background: #fef3c7; color: #f59e0b; }
+        .stat-icon.projects { background: #fce7f3; color: #db2777; }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--dark-blue);
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        
+        .stat-change {
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-weight: 500;
+        }
+        
+        .stat-change.positive { color: var(--success); }
+        .stat-change.negative { color: var(--danger); }
+        
+        /* 7. CHARTS MOBILE */
+        .charts-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .chart-card {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid #e5e7eb;
+        }
+        
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .chart-title {
+            font-weight: 600;
+            color: var(--dark-blue);
+            font-size: 1.1rem;
+            margin: 0;
+        }
+        
+        .chart-select {
+            padding: 8px 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            background: #f9fafb;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .chart-canvas {
+            width: 100% !important;
+            height: 250px !important;
+        }
+        
+        /* 8. QUICK ACTIONS MOBILE */
+        .quick-actions {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid #e5e7eb;
+            margin-bottom: 20px;
+        }
+        
+        .actions-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .action-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            padding: 20px 15px;
+            background: var(--light-blue);
+            border-radius: 12px;
+            color: var(--primary-blue);
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .action-btn:active {
+            transform: scale(0.98);
+            background: white;
+            border-color: var(--primary-blue);
+        }
+        
+        .action-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--primary-blue);
+        }
+        
+        .action-text {
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .action-subtext {
+            font-size: 0.8rem;
+            color: #666;
+        }
+        
+        /* 9. ACTIVITY LIST MOBILE */
+        .activity-list {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid #e5e7eb;
+        }
+        
+        .activity-item {
+            display: flex;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+        
+        .activity-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            background: var(--light-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-blue);
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        
+        .activity-content {
+            flex: 1;
+        }
+        
+        .activity-title {
+            font-weight: 500;
+            margin-bottom: 5px;
+            font-size: 0.95rem;
+        }
+        
+        .activity-time {
+            font-size: 0.85rem;
+            color: #666;
+        }
+        
+        /* 10. MOBILE BOTTOM NAV */
+        .mobile-bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-top: 3px solid var(--primary-blue);
+            z-index: 1000;
+            padding: 10px 5px;
+            display: flex;
+            justify-content: space-around;
+            height: 80px;
+            box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        .bottom-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 12px;
+            color: #666;
+            text-decoration: none;
+            border-radius: 12px;
+            min-width: 60px;
+            min-height: 60px;
+            transition: all 0.3s ease;
+            font-size: 0.75rem;
+            font-weight: 500;
+            gap: 5px;
+        }
+        
+        .bottom-nav-item i {
+            font-size: 1.2rem;
+        }
+        
+        .bottom-nav-item.active,
+        .bottom-nav-item:active {
+            background: var(--light-blue);
+            color: var(--primary-blue);
+            transform: translateY(-5px);
+        }
+        
+        /* 11. LOADING OVERLAY */
+        .loading-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(30, 41, 59, 0.95);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255,255,255,0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        /* 12. ANIMATIONS */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        /* 13. MEDIA QUERIES */
+        
+        /* Tablettes (≥ 768px) */
+        @media (min-width: 768px) {
+            .dashboard-content {
+                padding: 100px 30px 30px;
+            }
+            
+            .mobile-header {
+                padding: 15px 30px;
+            }
+            
+            .stats-slider {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                overflow-x: visible;
+                padding-bottom: 0;
+            }
+            
+            .stat-card {
+                min-width: auto;
+            }
+            
+            .charts-container {
+                display: grid;
+                grid-template-columns: 2fr 1fr;
+                gap: 20px;
+            }
+            
+            .actions-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .mobile-bottom-nav {
+                display: none;
+            }
+        }
+        
+        /* Desktop (≥ 1024px) */
+        @media (min-width: 1024px) {
+            .mobile-header {
+                display: none;
+            }
+            
+            .mobile-sidebar {
+                display: block;
+                position: fixed;
+                top: 0;
+                width: 260px;
+                background: white;
+                border-right: 1px solid #e5e7eb;
+                padding: 0;
+                z-index: 100;
+                box-shadow: none;
+            }
+            
+            .sidebar-content {
+                position: relative;
+                width: 100%;
+                transform: none;
+                padding-top: 0;
+            }
+            
+            .dashboard-content {
+                margin-left: 260px;
+                padding: 30px;
+                padding-bottom: 30px;
+            }
+            
+            .stats-slider {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .mobile-bottom-nav {
+                display: none;
+            }
+        }
+        
+        /* Très petits écrans (≤ 375px) */
+        @media (max-width: 375px) {
+            .dashboard-content {
+                padding: 100px 12px 90px;
+            }
+            
+            .mobile-header {
+                padding: 15px 12px;
+            }
+            
+            .stat-card {
+                min-width: 180px;
+                padding: 15px;
+            }
+            
+            .stat-value {
+                font-size: 1.8rem;
+            }
+            
+            .actions-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .chart-canvas {
+                height: 200px !important;
+            }
+        }
+        
+        /* Orientation paysage */
+        @media (max-width: 768px) and (orientation: landscape) {
+            .mobile-bottom-nav {
+                height: 70px;
+            }
+            
+            .dashboard-content {
+                padding-bottom: 80px;
+            }
+        }
+        
+        /* 14. DARK MODE */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: #121212;
+                color: #e0e0e0;
+            }
+            
+            .mobile-header,
+            .mobile-sidebar .sidebar-content,
+            .stat-card,
+            .chart-card,
+            .quick-actions,
+            .activity-list,
+            .mobile-bottom-nav {
+                background: #1e1e1e;
+                border-color: #333;
+            }
+            
+            .stat-value,
+            .chart-title,
+            .user-name-mobile,
+            .logo-text {
+                color: #e0e0e0;
+            }
+            
+            .nav-link-mobile,
+            .bottom-nav-item,
+            .stat-label,
+            .activity-time {
+                color: #b0b0b0;
+            }
+            
+            .nav-link-mobile.active,
+            .nav-link-mobile:hover,
+            .bottom-nav-item.active {
+                background: #2d2d2d;
+                color: var(--accent-blue);
+            }
+            
+            .stat-icon {
+                background: #2d2d2d;
+            }
+            
+            .action-btn {
+                background: #2d2d2d;
+                color: #e0e0e0;
+            }
+            
+            .action-icon {
+                background: #363636;
+            }
+            
+            .chart-select {
+                background: #2d2d2d;
+                border-color: #444;
+                color: #e0e0e0;
+            }
+        }
+        
+        /* 15. TOUCH OPTIMIZATIONS */
+        @media (hover: none) and (pointer: coarse) {
+            button,
+            .menu-toggle,
+            .notification-btn,
+            .bottom-nav-item,
+            .action-btn {
+                min-height: 44px;
+                min-width: 44px;
+            }
+            
+            .stat-card,
+            .action-btn {
+                -webkit-user-select: none;
+                user-select: none;
+            }
+            
+            .action-btn:active,
+            .bottom-nav-item:active {
+                opacity: 0.8;
+            }
+            
+            .stats-slider,
+            .dashboard-content {
+                -webkit-overflow-scrolling: touch;
+            }
+        }
+        
+        /* 16. ACCESSIBILITY */
+        .menu-toggle:focus-visible,
+        .notification-btn:focus-visible,
+        .bottom-nav-item:focus-visible,
+        .action-btn:focus-visible {
+            outline: 2px solid var(--accent-blue);
+            outline-offset: 2px;
+        }
+        
+        /* 17. SAFE AREA INSETS */
+        @supports (padding: max(0px)) {
+            .mobile-header {
+                padding-top: max(15px, env(safe-area-inset-top));
+                padding-left: max(15px, env(safe-area-inset-left));
+                padding-right: max(15px, env(safe-area-inset-right));
+            }
+            
+            .dashboard-content {
+                padding-top: max(100px, calc(70px + env(safe-area-inset-top)));
+                padding-bottom: max(90px, calc(80px + env(safe-area-inset-bottom)));
+            }
+            
+            .mobile-bottom-nav {
+                padding-bottom: max(10px, env(safe-area-inset-bottom));
+                height: calc(80px + env(safe-area-inset-bottom));
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+        <div>Chargement du tableau de bord...</div>
+    </div>
+    
+    <!-- Mobile Header -->
+    <header class="mobile-header">
+        <div class="header-left">
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="logo-container">
+                <img src="/images/avatars/apu.jpg" alt="APROFEEC" class="logo-img">
+                <div class="logo-text">APROFEEC</div>
+            </div>
+        </div>
+        
+        <div class="header-actions">
+            <button class="notification-btn" id="notificationBtn">
+                <i class="fas fa-bell"></i>
+                <span class="notification-badge">3</span>
+            </button>
+        </div>
+    </header>
+    
+    <!-- Mobile Sidebar -->
+    <div class="mobile-sidebar" id="mobileSidebar">
+        <div class="sidebar-content">
+            <!-- User Info -->
+            <div class="user-info-mobile">
+                <img src="/images/avatars/default.png" alt="Utilisateur" class="user-avatar-mobile">
+                <div class="user-name-mobile">Marie Dubois</div>
+                <span class="user-role-mobile">Apprenante</span>
+            </div>
+            
+            <!-- Navigation -->
+            <nav class="nav-mobile">
+                <div class="nav-item-mobile">
+                    <a href="dashboard.html" class="nav-link-mobile active">
+                        <i class="fas fa-home"></i>
+                        <span>Tableau de bord</span>
+                    </a>
+                </div>
+                <div class="nav-item-mobile">
+                    <a href="apprenant-space.html" class="nav-link-mobile">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>Mes Cours</span>
+                    </a>
+                </div>
+                <div class="nav-item-mobile">
+                    <a href="mentor-space.html" class="nav-link-mobile">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                        <span>Mes Mentors</span>
+                    </a>
+                </div>
+                <div class="nav-item-mobile">
+                    <a href="chat.html" class="nav-link-mobile">
+                        <i class="fas fa-comments"></i>
+                        <span>Messagerie</span>
+                        <span class="nav-badge">3</span>
+                    </a>
+                </div>
+                <div class="nav-item-mobile">
+                    <a href="#" class="nav-link-mobile">
+                        <i class="fas fa-project-diagram"></i>
+                        <span>Mes Projets</span>
+                    </a>
+                </div>
+                <div class="nav-item-mobile">
+                    <a href="#" class="nav-link-mobile">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Calendrier</span>
+                    </a>
+                </div>
+                <div class="nav-item-mobile">
+                    <a href="setting.html" class="nav-link-mobile">
+                        <i class="fas fa-cog"></i>
+                        <span>Paramètres</span>
+                    </a>
+                </div>
+            </nav>
+            
+            <div class="sidebar-footer-mobile">
+                <button class="btn btn-outline-danger w-100" id="logoutBtn">
+                    <i class="fas fa-sign-out-alt me-2"></i> Déconnexion
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <main class="dashboard-content">
+        <!-- Welcome Banner -->
+        <div class="welcome-banner">
+            <div class="welcome-icon">
+                <i class="fas fa-info-circle"></i>
+            </div>
+            <div class="welcome-text">
+                <strong>Bienvenue sur votre tableau de bord !</strong><br>
+                Vous avez 2 nouvelles notifications et 1 cours en attente.
+            </div>
+        </div>
+        
+        <!-- Stats Cards -->
+        <div class="stats-slider" id="statsSlider">
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div>
+                        <div class="stat-value" id="statUsers">0</div>
+                        <div class="stat-label">Utilisateurs Actifs</div>
+                    </div>
+                    <div class="stat-icon users">
+                        <i class="fas fa-users"></i>
+                    </div>
+                </div>
+                <div class="stat-change positive">
+                    <i class="fas fa-arrow-up"></i> 12% depuis hier
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div>
+                        <div class="stat-value" id="statMentors">0</div>
+                        <div class="stat-label">Mentors Disponibles</div>
+                    </div>
+                    <div class="stat-icon mentors">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                </div>
+                <div class="stat-change positive">
+                    <i class="fas fa-arrow-up"></i> 5% cette semaine
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div>
+                        <div class="stat-value" id="statCourses">0</div>
+                        <div class="stat-label">Cours Terminés</div>
+                    </div>
+                    <div class="stat-icon courses">
+                        <i class="fas fa-book"></i>
+                    </div>
+                </div>
+                <div class="stat-change positive">
+                    <i class="fas fa-arrow-up"></i> 8% ce mois
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div>
+                        <div class="stat-value" id="statProjects">0</div>
+                        <div class="stat-label">Projets Actifs</div>
+                    </div>
+                    <div class="stat-icon projects">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                </div>
+                <div class="stat-change negative">
+                    <i class="fas fa-arrow-down"></i> 3% cette semaine
+                </div>
+            </div>
+        </div>
+        
+        <!-- Charts -->
+        <div class="charts-container">
+            <div class="chart-card">
+                <div class="chart-header">
+                    <h3 class="chart-title">Activité Mensuelle</h3>
+                    <select class="chart-select" id="activityFilter">
+                        <option>Ce mois</option>
+                        <option>Le mois dernier</option>
+                        <option>6 derniers mois</option>
+                    </select>
+                </div>
+                <canvas id="activityChart" class="chart-canvas"></canvas>
+            </div>
+            
+            <div class="chart-card">
+                <div class="chart-header">
+                    <h3 class="chart-title">Répartition</h3>
+                </div>
+                <canvas id="distributionChart" class="chart-canvas"></canvas>
+            </div>
+        </div>
+        
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+            <h3 class="chart-title">Accès Rapide</h3>
+            <div class="actions-grid">
+                <a href="apprenant-space.html" class="action-btn">
+                    <div class="action-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div>
+                        <div class="action-text">Mes Cours</div>
+                        <div class="action-subtext">Continuer votre formation</div>
+                    </div>
+                </a>
+                
+                <a href="chat.html" class="action-btn">
+                    <div class="action-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <div>
+                        <div class="action-text">Messagerie</div>
+                        <div class="action-subtext">3 messages non lus</div>
+                    </div>
+                </a>
+                
+                <a href="mentor-space.html" class="action-btn">
+                    <div class="action-icon">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <div>
+                        <div class="action-text">Mes Mentors</div>
+                        <div class="action-subtext">Prendre rendez-vous</div>
+                    </div>
+                </a>
+                
+                <a href="#" class="action-btn">
+                    <div class="action-icon">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <div>
+                        <div class="action-text">Projets</div>
+                        <div class="action-subtext">2 projets en cours</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        
+        <!-- Recent Activity -->
+        <div class="activity-list">
+            <h3 class="chart-title">Activité Récente</h3>
+            
+            <div class="activity-item">
+                <div class="activity-icon">
+                    <i class="fas fa-user-graduate"></i>
+                </div>
+                <div class="activity-content">
+                    <div class="activity-title">Vous avez terminé le cours "Développement Web"</div>
+                    <div class="activity-time">Il y a 2 heures</div>
+                </div>
+            </div>
+            
+            <div class="activity-item">
+                <div class="activity-icon">
+                    <i class="fas fa-comment"></i>
+                </div>
+                <div class="activity-content">
+                    <div class="activity-title">Nouveau message de votre mentor Jean</div>
+                    <div class="activity-time">Il y a 5 heures</div>
+                </div>
+            </div>
+            
+            <div class="activity-item">
+                <div class="activity-icon">
+                    <i class="fas fa-tasks"></i>
+                </div>
+                <div class="activity-content">
+                    <div class="activity-title">Projet "Site E-commerce" assigné</div>
+                    <div class="activity-time">Hier, 14:30</div>
+                </div>
+            </div>
+            
+            <div class="activity-item">
+                <div class="activity-icon">
+                    <i class="fas fa-calendar-check"></i>
+                </div>
+                <div class="activity-content">
+                    <div class="activity-title">Session mentorat confirmée pour demain</div>
+                    <div class="activity-time">Hier, 10:15</div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav">
+        <a href="dashboard.html" class="bottom-nav-item active">
+            <i class="fas fa-home"></i>
+            <span>Accueil</span>
+        </a>
+        <a href="apprenant-space.html" class="bottom-nav-item">
+            <i class="fas fa-graduation-cap"></i>
+            <span>Cours</span>
+        </a>
+        <a href="chat.html" class="bottom-nav-item">
+            <i class="fas fa-comments"></i>
+            <span>Messages</span>
+        </a>
+        <a href="#" class="bottom-nav-item">
+            <i class="fas fa-project-diagram"></i>
+            <span>Projets</span>
+        </a>
+        <a href="setting.html" class="bottom-nav-item">
+            <i class="fas fa-cog"></i>
+            <span>Paramètres</span>
+        </a>
+    </nav>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Mobile Dashboard Initialization
+        document.addEventListener('DOMContentLoaded', function() {
+            // Détection mobile et initialisation
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            
+            // Afficher le loading
+            loadingOverlay.style.display = 'flex';
+            
+            // Fix iOS 100vh et safe areas
+            function setVH() {
+                let vh = window.innerHeight * 0.01;
+                document.documentElement.style.setProperty('--vh', `${vh}px`);
+            }
+            setVH();
+            window.addEventListener('resize', setVH);
+            window.addEventListener('orientationchange', setVH);
+            
+            // Prévenir le zoom sur input focus (iOS)
+            document.querySelectorAll('input, select').forEach(el => {
+                el.addEventListener('focus', function() {
+                    this.style.fontSize = '16px';
+                });
+            });
+            
+            // Gestion du menu mobile
+            const menuToggle = document.getElementById('menuToggle');
+            const mobileSidebar = document.getElementById('mobileSidebar');
+            
+            menuToggle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                mobileSidebar.classList.toggle('active');
+                
+                // Vibration tactile
+                if (navigator.vibrate) navigator.vibrate(50);
+            });
+            
+            // Fermer le menu en cliquant à l'extérieur
+            document.addEventListener('click', function(e) {
+                if (mobileSidebar.classList.contains('active') && 
+                    !mobileSidebar.contains(e.target) && 
+                    !menuToggle.contains(e.target)) {
+                    mobileSidebar.classList.remove('active');
+                }
+            });
+            
+            // Gestion tactile pour mobile
+            const touchElements = document.querySelectorAll('.action-btn, .bottom-nav-item, .nav-link-mobile');
+            touchElements.forEach(el => {
+                el.addEventListener('touchstart', function() {
+                    this.style.transform = 'scale(0.98)';
+                    this.style.opacity = '0.9';
+                }, { passive: true });
+                
+                el.addEventListener('touchend', function() {
+                    this.style.transform = '';
+                    this.style.opacity = '';
+                }, { passive: true });
+            });
+            
+            // Animation des statistiques
+            const stats = [
+                { element: 'statUsers', target: 245, duration: 1500 },
+                { element: 'statMentors', target: 45, duration: 1800 },
+                { element: 'statCourses', target: 120, duration: 2000 },
+                { element: 'statProjects', target: 18, duration: 1600 }
+            ];
+            
+            stats.forEach(stat => {
+                const element = document.getElementById(stat.element);
+                let start = 0;
+                const increment = stat.target / (stat.duration / 30);
+                
+                const timer = setInterval(() => {
+                    start += increment;
+                    if (start >= stat.target) {
+                        element.textContent = stat.target;
+                        clearInterval(timer);
+                    } else {
+                        element.textContent = Math.floor(start);
+                    }
+                }, 30);
+            });
+            
+            // Initialisation des graphiques
+            setTimeout(() => {
+                // Activity Chart
+                const activityCtx = document.getElementById('activityChart').getContext('2d');
+                const activityChart = new Chart(activityCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jun', 'Jul'],
+                        datasets: [{
+                            label: 'Utilisateurs actifs',
+                            data: [65, 78, 90, 120, 150, 180, 200],
+                            borderColor: '#3b82f6',
+                            backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                            fill: true,
+                            tension: 0.4,
+                            borderWidth: 3
+                        }, {
+                            label: 'Cours terminés',
+                            data: [12, 19, 15, 25, 22, 30, 28],
+                            borderColor: '#10b981',
+                            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                            fill: true,
+                            tension: 0.4,
+                            borderWidth: 3
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'top',
+                                labels: {
+                                    font: {
+                                        size: isMobile ? 12 : 14
+                                    },
+                                    padding: 20
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                grid: {
+                                    color: 'rgba(0, 0, 0, 0.05)'
+                                },
+                                ticks: {
+                                    font: {
+                                        size: isMobile ? 11 : 12
+                                    }
+                                }
+                            },
+                            x: {
+                                grid: {
+                                    color: 'rgba(0, 0, 0, 0.05)'
+                                },
+                                ticks: {
+                                    font: {
+                                        size: isMobile ? 11 : 12
+                                    }
+                                }
+                            }
+                        },
+                        interaction: {
+                            intersect: false,
+                            mode: 'index'
+                        },
+                        animation: {
+                            duration: 2000,
+                            easing: 'easeOutQuart'
+                        }
+                    }
+                });
+                
+                // Distribution Chart
+                const distributionCtx = document.getElementById('distributionChart').getContext('2d');
+                const distributionChart = new Chart(distributionCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Apprenants', 'Mentors', 'Administrateurs'],
+                        datasets: [{
+                            data: [70, 25, 5],
+                            backgroundColor: [
+                                '#3b82f6',
+                                '#10b981',
+                                '#f59e0b'
+                            ],
+                            borderWidth: 3,
+                            borderColor: 'white',
+                            hoverOffset: 15
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    font: {
+                                        size: isMobile ? 12 : 14
+                                    },
+                                    padding: 20,
+                                    usePointStyle: true
+                                }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return `${context.label}: ${context.parsed}%`;
+                                    }
+                                }
+                            }
+                        },
+                        cutout: '60%',
+                        animation: {
+                            animateScale: true,
+                            animateRotate: true,
+                            duration: 2000
+                        }
+                    }
+                });
+                
+                // Cacher le loading
+                setTimeout(() => {
+                    loadingOverlay.style.display = 'none';
+                    
+                    // Notification de bienvenue
+                    if (isMobile && navigator.vibrate) {
+                        navigator.vibrate([100, 50, 100]);
+                    }
+                    
+                    // Montrer une notification
+                    showMobileNotification('Tableau de bord chargé', 'Vos données sont à jour');
+                }, 500);
+            }, 1000);
+            
+            // Gestion des notifications
+            const notificationBtn = document.getElementById('notificationBtn');
+            notificationBtn.addEventListener('click', function() {
+                // Vibration tactile
+                if (navigator.vibrate) navigator.vibrate(100);
+                
+                // Simuler l'ouverture des notifications
+                showMobileNotification('Notifications', 'Vous avez 3 notifications non lues');
+            });
+            
+            // Filtre d'activité
+            const activityFilter = document.getElementById('activityFilter');
+            activityFilter.addEventListener('change', function() {
+                // Vibration tactile
+                if (navigator.vibrate) navigator.vibrate(50);
+                
+                console.log('Filtre d\'activité changé:', this.value);
+                
+                // Feedback visuel
+                this.style.borderColor = '#10b981';
+                setTimeout(() => {
+                    this.style.borderColor = '';
+                }, 1000);
+            });
+            
+            // Déconnexion
+            const logoutBtn = document.getElementById('logoutBtn');
+            logoutBtn.addEventListener('click', function() {
+                if (confirm('Êtes-vous sûr de vouloir vous déconnecter ?')) {
+                    // Vibration
+                    if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
+                    
+                    // Redirection
+                    setTimeout(() => {
+                        window.location.href = 'login.html';
+                    }, 500);
+                }
+            });
+            
+            // Détection réseau
+            window.addEventListener('offline', function() {
+                showMobileNotification('Hors ligne', 'Connexion perdue, données en cache', 'warning');
+            });
+            
+            window.addEventListener('online', function() {
+                showMobileNotification('En ligne', 'Connexion rétablie', 'success');
+            });
+            
+            // Rafraîchissement automatique (toutes les 30 secondes)
+            setInterval(() => {
+                if (navigator.onLine) {
+                    console.log('Actualisation des données...');
+                    // Ici vous ajouteriez un appel API
+                }
+            }, 30000);
+            
+            // Swipe pour les cartes de statistiques
+            let startX = 0;
+            const statsSlider = document.getElementById('statsSlider');
+            
+            statsSlider.addEventListener('touchstart', function(e) {
+                startX = e.touches[0].clientX;
+            }, { passive: true });
+            
+            statsSlider.addEventListener('touchmove', function(e) {
+                if (!startX) return;
+                
+                const currentX = e.touches[0].clientX;
+                const diff = startX - currentX;
+                
+                if (Math.abs(diff) > 50) {
+                    this.scrollLeft += diff * 2;
+                    startX = currentX;
+                }
+            }, { passive: true });
+            
+            // Fonction pour afficher les notifications mobiles
+            function showMobileNotification(title, message, type = 'info') {
+                const notification = document.createElement('div');
+                const colors = {
+                    info: { bg: '#3b82f6', icon: 'info-circle' },
+                    success: { bg: '#10b981', icon: 'check-circle' },
+                    warning: { bg: '#f59e0b', icon: 'exclamation-triangle' },
+                    error: { bg: '#ef4444', icon: 'exclamation-circle' }
+                };
+                
+                const color = colors[type] || colors.info;
+                
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 80px;
+                    right: 15px;
+                    left: 15px;
+                    background: ${color.bg};
+                    color: white;
+                    padding: 15px;
+                    border-radius: 12px;
+                    z-index: 9999;
+                    display: flex;
+                    align-items: center;
+                    gap: 12px;
+                    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+                    animation: slideUp 0.3s ease;
+                `;
+                
+                notification.innerHTML = `
+                    <i class="fas fa-${color.icon}" style="font-size: 1.2rem;"></i>
+                    <div>
+                        <div style="font-weight: 600; font-size: 0.95rem;">${title}</div>
+                        <div style="font-size: 0.85rem; opacity: 0.9;">${message}</div>
+                    </div>
+                `;
+                
+                document.body.appendChild(notification);
+                
+                // Retirer la notification après 3 secondes
+                setTimeout(() => {
+                    notification.style.animation = 'fadeOut 0.3s ease';
+                    setTimeout(() => notification.remove(), 300);
+                }, 3000);
+            }
+            
+            // Préchargement des pages courantes
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', function() {
+                    navigator.serviceWorker.register('/sw.js').catch(err => {
+                        console.log('ServiceWorker registration failed:', err);
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>

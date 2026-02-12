@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APROFEEC | Espace Mentor - Plateforme Professionnelle</title>
+    
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- FullCalendar -->
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/style.css">
+    
+    <style>
+        :root {
+            --primary-blue: #1e40af;
+            --secondary-blue: #3b82f6;
+            --accent-blue: #60a5fa;
+            --light-blue: #dbeafe;
+            --dark-blue: #1e3a8a;
+            --gradient-blue: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            --mentor-color: #7c3aed;
+            --mentor-light: #ede9fe;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f8fafc;
+        }
+        
+        /* Dashboard Layout */
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            width: 260px;
+            background: white;
+            border-right: 1px solid #e5e7eb;
+            padding: 1.5rem 0;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            z-index: 100;
+        }
+        
+        .sidebar-header {
+            padding: 0 1.5rem 1.5rem;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .sidebar-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 1rem;
+        }
+        
+        .sidebar-logo img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary-blue);
+        }
+        
+        .mentor-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--mentor-color), #a78bfa);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        
+        .user-info {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid #e5e7eb;
+            margin-bottom: 1rem;
+        }
+        
+        .user-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 0.75rem;
+            border: 3px solid var(--mentor-light);
+        }
+        
+        .user-name {
+            font-weight: 600;
+            color: var(--dark-blue);
+            margin-bottom: 0.25rem;
+        }
+        
+        .user-role {
+            font-size: 0.875rem;
+            color: #666;
+        }
+        
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0.75rem 1.5rem;
+            color: #666;
+            text-decoration: none;
+            border-left: 3px solid transparent;
+            transition: all 0.2s ease;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            background: var(--light-blue);
+            color: var(--primary-blue);
+            border-left-color: var(--primary-blue);
+        }
+        
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: 260px;
+            padding: 0;
+        }
+        
+        .topbar {
+            background: white;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        
+        .search-box {
+            width: 300px;
+            position: relative;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 0.5rem 1rem 0.5rem 2.5rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 50px;
+            font-size: 0.9rem;
+        }
+        
+        .search-box i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9ca3af;
+        }
+        
+        .topbar-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .notification-btn {
+            position: relative;
+            background: none;
+            border: none;
+            color: #666;
+            font-size: 1.25rem;
+        }
+        
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #ef4444;
+            color: white;
+            font-size: 0.7rem;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Content */
+        .content-wrapper {
+            padding: 2rem;
+        }
+        
+        /* Welcome Banner */
+        .welcome-banner {
+            background: linear-gradient(135deg, var(--mentor-color) 0%, #a78bfa 100%);
+            color: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .welcome-content h2 {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .welcome-content p {
+            opacity: 0.9;
+            margin-bottom: 0;
+        }
+        
+        .welcome-actions {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .btn-mentor {
+            background: white;
+            color: var(--mentor-color);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-mentor:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e5e7eb;
+            transition: all 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
+        
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        
+        .stat-icon.students { background: #dbeafe; color: var(--primary-blue); }
+        .stat-icon.sessions { background: #f0f9ff; color: #0ea5e9; }
+        .stat-icon.hours { background: #fef3c7; color: #f59e0b; }
+        .stat-icon.rating { background: #dcfce7; color: #16a34a; }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--dark-blue);
+            margin-bottom: 0.25rem;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        /* Calendar Section */
+        .calendar-section {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e5e7eb;
+            margin-bottom: 2rem;
+        }
+        
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .calendar-title {
+            font-weight: 600;
+            color: var(--dark-blue);
+            margin: 0;
+        }
+        
+        #calendar {
+            height: 400px;
+        }
+        
+        /* Students List */
+        .students-section {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e5e7eb;
+        }
+        
+        .students-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .students-title {
+            font-weight: 600;
+            color: var(--dark-blue);
+            margin: 0;
+        }
+        
+        .students-table {
+            width: 100%;
+        }
+        
+        .student-row {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+            transition: background 0.2s ease;
+        }
+        
+        .student-row:hover {
+            background: #f9fafb;
+        }
+        
+        .student-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 1rem;
+        }
+        
+        .student-info {
+            flex: 1;
+        }
+        
+        .student-name {
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+        
+        .student-course {
+            font-size: 0.875rem;
+            color: #666;
+        }
+        
+        .student-progress {
+            width: 150px;
+        }
+        
+        .progress-bar {
+            height: 6px;
+            background: #e5e7eb;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 0.25rem;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--primary-blue);
+            border-radius: 3px;
+        }
+        
+        .progress-text {
+            font-size: 0.875rem;
+            color: #666;
+        }
+        
+        .student-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .btn-sm {
+            padding: 0.25rem 0.75rem;
+            font-size: 0.875rem;
+            border-radius: 6px;
+        }
+        
+        /* Mobile Menu */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #666;
+        }
+        
+        @media (max-width: 992px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+            
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .content-wrapper {
+                padding: 1rem;
+            }
+            
+            .search-box {
+                width: 200px;
+            }
+            
+            .welcome-banner {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+            
+            .welcome-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .btn-mentor {
+                width: 100%;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <img src="images/avatars/apu.jpg" alt="APROFEEC">
+                    <div>
+                        <div style="font-weight: 700; color: var(--primary-blue);">APROFEEC</div>
+                        <small style="color: #666;">Espace Mentor</small>
+                    </div>
+                </div>
+                <div class="mentor-badge">
+                    <i class="fas fa-crown me-2"></i>Mentor Certifié
+                </div>
+            </div>
+            
+            <!-- User Info -->
+            <div class="user-info">
+                <img src="images/avatars/mentor.jpg" alt="Mentor" class="user-avatar">
+                <div class="user-name">Dr. Jean Kabasele</div>
+                <div class="user-role">Expert en Développement Web</div>
+                <div class="mt-2">
+                    <small class="text-muted">Membre depuis: Jan 2023</small>
+                </div>
+            </div>
+            
+            <!-- Navigation -->
+            <nav class="nav flex-column">
+                <a href="dashboard.html" class="nav-link">
+                    <i class="fas fa-home"></i>
+                    Tableau de bord
+                </a>
+                <a href="mentor-space.html" class="nav-link active">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    Espace Mentor
+                </a>
+                <a href="apprenant-space.html" class="nav-link">
+                    <i class="fas fa-user-graduate"></i>
+                    Mes Apprenants
+                </a>
+                <a href="chat.html" class="nav-link">
+                    <i class="fas fa-comments"></i>
+                    Messagerie
+                    <span class="ms-auto badge bg-danger">5</span>
+                </a>
+                <a href="#" class="nav-link">
+                    <i class="fas fa-calendar-alt"></i>
+                    Calendrier
+                </a>
+                <a href="#" class="nav-link">
+                    <i class="fas fa-book"></i>
+                    Ressources
+                </a>
+                <a href="setting.html" class="nav-link">
+                    <i class="fas fa-cog"></i>
+                    Paramètres
+                </a>
+            </nav>
+            
+            <div class="sidebar-footer" style="padding: 1.5rem;">
+                <a href="login.html" class="btn btn-outline-danger w-100">
+                    <i class="fas fa-sign-out-alt me-2"></i> Déconnexion
+                </a>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Topbar -->
+            <header class="topbar">
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Rechercher un apprenant...">
+                </div>
+                
+                <div class="topbar-actions">
+                    <button class="notification-btn">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">5</span>
+                    </button>
+                    
+                    <div class="dropdown">
+                        <button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-user me-2"></i>
+                            Dr. Jean K.
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="setting.html"><i class="fas fa-user me-2"></i> Mon Profil</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-wallet me-2"></i> Mes Honoraires</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="login.html"><i class="fas fa-sign-out-alt me-2"></i> Déconnexion</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </header>
+            
+            <!-- Content -->
+            <div class="content-wrapper">
+                <!-- Welcome Banner -->
+                <div class="welcome-banner">
+                    <div class="welcome-content">
+                        <h2>Bienvenue, Dr. Jean Kabasele</h2>
+                        <p>Vous avez 3 sessions de mentorat aujourd'hui et 5 apprenants en attente de feedback.</p>
+                    </div>
+                    <div class="welcome-actions">
+                        <button class="btn-mentor">
+                            <i class="fas fa-plus me-2"></i>Nouvelle Session
+                        </button>
+                        <button class="btn-mentor" style="background: rgba(255,255,255,0.2); color: white;">
+                            <i class="fas fa-video me-2"></i>Démarrer Zoom
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Stats -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div>
+                                <div class="stat-value" id="statStudents">12</div>
+                                <div class="stat-label">Apprenants Actifs</div>
+                            </div>
+                            <div class="stat-icon students">
+                                <i class="fas fa-user-graduate"></i>
+                            </div>
+                        </div>
+                        <div style="color: var(--success); font-size: 0.875rem;">
+                            <i class="fas fa-arrow-up me-1"></i> +2 ce mois
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div>
+                                <div class="stat-value" id="statSessions">45</div>
+                                <div class="stat-label">Sessions/mois</div>
+                            </div>
+                            <div class="stat-icon sessions">
+                                <i class="fas fa-calendar-check"></i>
+                            </div>
+                        </div>
+                        <div style="color: var(--success); font-size: 0.875rem;">
+                            <i class="fas fa-arrow-up me-1"></i> +10%
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div>
+                                <div class="stat-value" id="statHours">128</div>
+                                <div class="stat-label">Heures Mentorat</div>
+                            </div>
+                            <div class="stat-icon hours">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                        </div>
+                        <div style="color: var(--warning); font-size: 0.875rem;">
+                            <i class="fas fa-chart-line me-1"></i> En progression
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div>
+                                <div class="stat-value" id="statRating">4.8</div>
+                                <div class="stat-label">Note moyenne</div>
+                            </div>
+                            <div class="stat-icon rating">
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        <div style="color: var(--success); font-size: 0.875rem;">
+                            <i class="fas fa-thumbs-up me-1"></i> Excellent
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Calendar -->
+                <div class="calendar-section">
+                    <div class="calendar-header">
+                        <h3 class="calendar-title">
+                            <i class="fas fa-calendar-alt me-2"></i>Calendrier des Sessions
+                        </h3>
+                        <button class="btn btn-primary btn-sm">
+                            <i class="fas fa-plus me-2"></i>Ajouter
+                        </button>
+                    </div>
+                    <div id="calendar"></div>
+                </div>
+                
+                <!-- Students List -->
+                <div class="students-section">
+                    <div class="students-header">
+                        <h3 class="students-title">
+                            <i class="fas fa-users me-2"></i>Mes Apprenants
+                        </h3>
+                        <div class="dropdown">
+                            <button class="btn btn-outline-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                Tous les apprenants
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Actifs</a></li>
+                                <li><a class="dropdown-item" href="#">En attente</a></li>
+                                <li><a class="dropdown-item" href="#">Terminés</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="students-table">
+                        <!-- Student 1 -->
+                        <div class="student-row">
+                            <img src="images/avatars/student1.jpg" alt="Apprenant" class="student-avatar">
+                            <div class="student-info">
+                                <div class="student-name">Marie Dubois</div>
+                                <div class="student-course">Développement Web Fullstack</div>
+                            </div>
+                            <div class="student-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 75%;"></div>
+                                </div>
+                                <div class="progress-text">75% complété</div>
+                            </div>
+                            <div class="student-actions">
+                                <button class="btn btn-primary btn-sm">
+                                    <i class="fas fa-comment"></i>
+                                </button>
+                                <button class="btn btn-outline-primary btn-sm">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Student 2 -->
+                        <div class="student-row">
+                            <img src="images/avatars/student2.jpg" alt="Apprenant" class="student-avatar">
+                            <div class="student-info">
+                                <div class="student-name">Paul Lumumba</div>
+                                <div class="student-course">Data Science</div>
+                            </div>
+                            <div class="student-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 45%;"></div>
+                                </div>
+                                <div class="progress-text">45% complété</div>
+                            </div>
+                            <div class="student-actions">
+                                <button class="btn btn-primary btn-sm">
+                                    <i class="fas fa-comment"></i>
+                                </button>
+                                <button class="btn btn-outline-primary btn-sm">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Student 3 -->
+                        <div class="student-row">
+                            <img src="images/avatars/student3.jpg" alt="Apprenant" class="student-avatar">
+                            <div class="student-info">
+                                <div class="student-name">Sophie Kanku</div>
+                                <div class="student-course">Marketing Digital</div>
+                            </div>
+                            <div class="student-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 90%;"></div>
+                                </div>
+                                <div class="progress-text">90% complété</div>
+                            </div>
+                            <div class="student-actions">
+                                <button class="btn btn-primary btn-sm">
+                                    <i class="fas fa-comment"></i>
+                                </button>
+                                <button class="btn btn-outline-primary btn-sm">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Student 4 -->
+                        <div class="student-row">
+                            <img src="images/avatars/student4.jpg" alt="Apprenant" class="student-avatar">
+                            <div class="student-info">
+                                <div class="student-name">David Mbala</div>
+                                <div class="student-course">UI/UX Design</div>
+                            </div>
+                            <div class="student-progress">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 60%;"></div>
+                                </div>
+                                <div class="progress-text">60% complété</div>
+                            </div>
+                            <div class="student-actions">
+                                <button class="btn btn-primary btn-sm">
+                                    <i class="fas fa-comment"></i>
+                                </button>
+                                <button class="btn btn-outline-primary btn-sm">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/locales/fr.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const menuToggle = document.getElementById('menuToggle');
+            const sidebar = document.querySelector('.sidebar');
+            
+            menuToggle.addEventListener('click', function() {
+                sidebar.classList.toggle('active');
+            });
+            
+            // Initialize Calendar
+            const calendarEl = document.getElementById('calendar');
+            const calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                locale: 'fr',
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                },
+                events: [
+                    {
+                        title: 'Session avec Marie',
+                        start: new Date().toISOString().split('T')[0] + 'T10:00:00',
+                        end: new Date().toISOString().split('T')[0] + 'T11:30:00',
+                        color: '#3b82f6'
+                    },
+                    {
+                        title: 'Révision Projet Paul',
+                        start: new Date().toISOString().split('T')[0] + 'T14:00:00',
+                        end: new Date().toISOString().split('T')[0] + 'T15:00:00',
+                        color: '#10b981'
+                    },
+                    {
+                        title: 'Atelier Groupe',
+                        start: new Date(Date.now() + 86400000).toISOString().split('T')[0] + 'T09:00:00',
+                        end: new Date(Date.now() + 86400000).toISOString().split('T')[0] + 'T12:00:00',
+                        color: '#f59e0b'
+                    }
+                ],
+                eventClick: function(info) {
+                    alert('Session: ' + info.event.title);
+                }
+            });
+            calendar.render();
+            
+            // Search functionality
+            const searchInput = document.querySelector('.search-box input');
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    alert(`Recherche d'apprenant: "${this.value}"`);
+                    this.value = '';
+                }
+            });
+            
+            // Notification button
+            const notificationBtn = document.querySelector('.notification-btn');
+            notificationBtn.addEventListener('click', function() {
+                alert('Vous avez 5 notifications:\n- 2 nouveaux messages\n- 1 demande de session\n- 2 rappels de réunion');
+            });
+            
+            // Animate stats counters
+            const stats = [
+                { element: 'statStudents', target: 12 },
+                { element: 'statSessions', target: 45 },
+                { element: 'statHours', target: 128 },
+                { element: 'statRating', target: 4.8, increment: 0.1 }
+            ];
+            
+            stats.forEach(stat => {
+                const element = document.getElementById(stat.element);
+                let current = 0;
+                const increment = stat.increment || stat.target / 50;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= stat.target) {
+                        element.textContent = stat.element === 'statRating' ? stat.target.toFixed(1) : stat.target;
+                        clearInterval(timer);
+                    } else {
+                        element.textContent = stat.element === 'statRating' ? current.toFixed(1) : Math.floor(current);
+                    }
+                }, 30);
+            });
+        });
+    </script>
+</body>
+</html>

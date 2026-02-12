@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APROFEEC - En cours de configuration</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+        
+        .container {
+            text-align: center;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            max-width: 800px;
+            width: 90%;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .status-card {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: left;
+        }
+        
+        .loader {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #3498db;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 30px auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .structure-info {
+            text-align: left;
+            margin-top: 30px;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 10px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 APROFEEC Platform</h1>
+        <h2>AMANI KWETU II - Structure Professionnelle</h2>
+        
+        <div class="status-card">
+            <h3>📊 Statut du système</h3>
+            <p id="status">Initialisation...</p>
+            <div class="loader"></div>
+        </div>
+        
+        <div class="structure-info">
+            <h4>📁 Structure créée :</h4>
+            <pre id="structure">Chargement...</pre>
+        </div>
+        
+        <p>🔧 Développement en cours - Interface professionnelle en préparation</p>
+    </div>
+    
+    <script>
+        // Vérifier le statut de l'API
+        async function checkStatus() {
+            try {
+                const response = await fetch('/api/status');
+                const data = await response.json();
+                document.getElementById('status').innerHTML = `
+                    <strong>${data.project}</strong><br>
+                    Version: ${data.version}<br>
+                    Statut: <span style="color: #2ecc71;">${data.status}</span><br>
+                    Heure: ${new Date(data.timestamp).toLocaleTimeString()}
+                `;
+                
+                // Charger la structure
+                const structResponse = await fetch('/api/structure');
+                const structData = await structResponse.json();
+                document.getElementById('structure').textContent = 
+                    JSON.stringify(structData, null, 2);
+                    
+                // Cacher le loader
+                document.querySelector('.loader').style.display = 'none';
+            } catch (error) {
+                document.getElementById('status').innerHTML = 
+                    `Erreur de connexion: ${error.message}<br>Redémarrage dans 3 secondes...`;
+                setTimeout(() => location.reload(), 3000);
+            }
+        }
+        
+        // Démarrer la vérification
+        checkStatus();
+        setInterval(checkStatus, 5000);
+    </script>
+</body>
+</html>

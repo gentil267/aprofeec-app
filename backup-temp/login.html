@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APROFEEC | Connexion - Plateforme Professionnelle</title>
+    
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/style.css">
+    
+    <style>
+        :root {
+            --primary-blue: #1e40af;
+            --secondary-blue: #3b82f6;
+            --accent-blue: #60a5fa;
+            --light-blue: #dbeafe;
+            --dark-blue: #1e3a8a;
+            --gradient-blue: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f8fafc;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .login-wrapper {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            background: linear-gradient(rgba(30, 58, 138, 0.9), rgba(30, 64, 175, 0.9)),
+                        url('images/backgrounds/aprb.JPG') center/cover no-repeat;
+        }
+        
+        .login-container {
+            width: 100%;
+            max-width: 420px;
+        }
+        
+        .login-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            animation: slideUp 0.6s ease;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .login-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 1rem;
+        }
+        
+        .login-logo img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary-blue);
+        }
+        
+        .login-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 2rem;
+            color: var(--dark-blue);
+            margin-bottom: 0.5rem;
+        }
+        
+        .login-subtitle {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-label {
+            font-weight: 600;
+            color: var(--dark-blue);
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .form-control {
+            padding: 0.75rem 1rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.1);
+        }
+        
+        .password-wrapper {
+            position: relative;
+        }
+        
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+        }
+        
+        .login-btn {
+            background: var(--gradient-blue);
+            color: white;
+            border: none;
+            padding: 0.75rem;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1rem;
+            width: 100%;
+            transition: all 0.3s ease;
+            margin-top: 0.5rem;
+        }
+        
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(30, 64, 175, 0.3);
+        }
+        
+        .login-footer {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e5e7eb;
+        }
+        
+        .login-footer a {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .login-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .role-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .role-btn {
+            flex: 1;
+            padding: 0.5rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .role-btn.active {
+            border-color: var(--primary-blue);
+            background: var(--light-blue);
+            color: var(--primary-blue);
+        }
+        
+        .error-message {
+            color: #dc2626;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+            display: none;
+        }
+        
+        .form-control.error {
+            border-color: #dc2626;
+        }
+        
+        @media (max-width: 576px) {
+            .login-card {
+                padding: 2rem 1.5rem;
+            }
+            
+            .login-title {
+                font-size: 1.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-wrapper">
+        <div class="login-container">
+            <div class="login-card">
+                <div class="login-header">
+                    <div class="login-logo">
+                        <img src="images/avatars/apu.jpg" alt="APROFEEC">
+                        <div>
+                            <div class="login-title">APROFEEC</div>
+                            <div class="login-subtitle">AMANI KWETU II</div>
+                        </div>
+                    </div>
+                    <p style="color: #666;">Connexion sécurisée à votre compte</p>
+                </div>
+                
+                <form id="loginForm">
+                    <!-- Sélecteur de rôle -->
+                    <div class="role-selector">
+                        <button type="button" class="role-btn active" data-role="learner">
+                            <i class="fas fa-user-graduate me-1"></i> Apprenant
+                        </button>
+                        <button type="button" class="role-btn" data-role="mentor">
+                            <i class="fas fa-chalkboard-teacher me-1"></i> Mentor
+                        </button>
+                        <button type="button" class="role-btn" data-role="admin">
+                            <i class="fas fa-user-shield me-1"></i> Admin
+                        </button>
+                    </div>
+                    
+                    <!-- Email -->
+                    <div class="form-group">
+                        <label for="email" class="form-label">Adresse Email</label>
+                        <input type="email" id="email" class="form-control" placeholder="votre.email@exemple.com" required>
+                        <div class="error-message" id="emailError">Veuillez entrer une adresse email valide</div>
+                    </div>
+                    
+                    <!-- Mot de passe -->
+                    <div class="form-group">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <label for="password" class="form-label">Mot de passe</label>
+                            <a href="#" style="font-size: 0.875rem; color: var(--primary-blue);">Mot de passe oublié ?</a>
+                        </div>
+                        <div class="password-wrapper">
+                            <input type="password" id="password" class="form-control" placeholder="Votre mot de passe" required>
+                            <button type="button" class="toggle-password" id="togglePassword">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <div class="error-message" id="passwordError">Le mot de passe doit contenir au moins 6 caractères</div>
+                    </div>
+                    
+                    <!-- Remember me -->
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" id="rememberMe">
+                        <label class="form-check-label" for="rememberMe">Se souvenir de moi</label>
+                    </div>
+                    
+                    <!-- Submit -->
+                    <button type="submit" class="login-btn" id="submitBtn">
+                        <i class="fas fa-sign-in-alt me-2"></i> Se connecter
+                    </button>
+                    
+                    <!-- Loading state -->
+                    <div class="text-center mt-3" id="loadingState" style="display: none;">
+                        <div class="spinner-border text-primary" role="status" style="width: 1rem; height: 1rem;">
+                            <span class="visually-hidden">Chargement...</span>
+                        </div>
+                        <span class="ms-2">Connexion en cours...</span>
+                    </div>
+                </form>
+                
+                <div class="login-footer">
+                    <p>Nouveau sur APROFEEC ? <a href="register.html">Créer un compte</a></p>
+                    <p class="mt-2" style="font-size: 0.875rem; color: #666;">
+                        <i class="fas fa-shield-alt me-1"></i> Connexion sécurisée avec chiffrement SSL
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/auth.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Sélecteur de rôle
+            const roleBtns = document.querySelectorAll('.role-btn');
+            roleBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    roleBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            // Toggle password visibility
+            const togglePassword = document.getElementById('togglePassword');
+            const passwordInput = document.getElementById('password');
+            
+            togglePassword.addEventListener('click', function() {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                this.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
+            });
+            
+            // Form validation
+            const loginForm = document.getElementById('loginForm');
+            const submitBtn = document.getElementById('submitBtn');
+            const loadingState = document.getElementById('loadingState');
+            
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Validation
+                const email = document.getElementById('email').value.trim();
+                const password = document.getElementById('password').value;
+                
+                let isValid = true;
+                
+                // Email validation
+                const emailError = document.getElementById('emailError');
+                if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                    emailError.style.display = 'block';
+                    document.getElementById('email').classList.add('error');
+                    isValid = false;
+                } else {
+                    emailError.style.display = 'none';
+                    document.getElementById('email').classList.remove('error');
+                }
+                
+                // Password validation
+                const passwordError = document.getElementById('passwordError');
+                if (!password || password.length < 6) {
+                    passwordError.style.display = 'block';
+                    document.getElementById('password').classList.add('error');
+                    isValid = false;
+                } else {
+                    passwordError.style.display = 'none';
+                    document.getElementById('password').classList.remove('error');
+                }
+                
+                if (!isValid) return;
+                
+                // Show loading state
+                submitBtn.style.display = 'none';
+                loadingState.style.display = 'block';
+                
+                // Simulate API call
+                setTimeout(() => {
+                    // Success - redirect to dashboard
+                    window.location.href = 'dashboard.html';
+                }, 1500);
+            });
+            
+            // Real-time validation
+            document.getElementById('email').addEventListener('input', function() {
+                if (this.value.trim()) {
+                    this.classList.remove('error');
+                    document.getElementById('emailError').style.display = 'none';
+                }
+            });
+            
+            document.getElementById('password').addEventListener('input', function() {
+                if (this.value.length >= 6) {
+                    this.classList.remove('error');
+                    document.getElementById('passwordError').style.display = 'none';
+                }
+            });
+            
+            // Keyboard shortcuts
+            document.addEventListener('keydown', function(e) {
+                if (e.ctrlKey && e.key === 'Enter') {
+                    loginForm.dispatchEvent(new Event('submit'));
+                }
+            });
+        });
+    </script>
+</body>
+</html>

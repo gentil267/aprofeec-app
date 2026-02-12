@@ -1,0 +1,1120 @@
+/* ============================================
+   APROFEEC - STYLES MOBILE FIRST
+   Version 3.0.1 - Corrigé & Optimisé
+   Problèmes overlay & boutons résolus
+============================================= */
+
+/* 1. VARIABLES MOBILE-FRIENDLY */
+:root {
+  /* Couleurs principales */
+  --bleu-ciel: #1e90ff;
+  --bleu-ciel-dark: #0066cc;
+  --bleu-ciel-light: #e6f2ff;
+  --bleu-fonce: #0a2463;
+  
+  /* Couleurs fonctionnelles */
+  --vert-success: #28a745;
+  --orange-warning: #fd7e14;
+  --rouge-danger: #dc3545;
+  
+  /* Gris scale optimisé mobile */
+  --gris-fonce: #343a40;
+  --gris-moyen: #6c757d;
+  --gris-clair: #f8f9fa;
+  --gris-bordure: #e0e0e0;
+  
+  /* Neutres */
+  --blanc: #ffffff;
+  --noir: #212529;
+  
+  /* Ombres optimisées mobile */
+  --ombres: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --ombres-hover: 0 4px 12px rgba(0, 0, 0, 0.12);
+  --ombres-btn: 0 4px 6px rgba(0, 0, 0, 0.1);
+  
+  /* Bordures arrondies */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-full: 50px;
+  
+  /* Espacements mobile */
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+}
+
+/* 2. RESET MOBILE OPTIMISÉ - CORRIGÉ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  height: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  color: var(--noir);
+  background-color: var(--gris-clair);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  padding-top: 0;
+  min-height: 100vh;
+  width: 100vw;
+  position: relative;
+  overflow-y: auto;
+}
+
+/* CORRECTION IMMÉDIATE: Supprime l'overlay bleu */
+body::before,
+body::after {
+  display: none !important;
+}
+
+/* 3. TYPOGRAPHIE MOBILE FIRST */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  color: var(--bleu-fonce);
+  margin-bottom: var(--space-md);
+  line-height: 1.2;
+}
+
+h1 { 
+  font-size: 1.75rem;
+  margin-bottom: var(--space-lg);
+}
+
+h2 { 
+  font-size: 1.5rem;
+  margin-bottom: var(--space-md);
+}
+
+h3 { 
+  font-size: 1.25rem;
+  margin-bottom: var(--space-sm);
+}
+
+h4 { 
+  font-size: 1.125rem;
+  margin-bottom: var(--space-sm);
+}
+
+p {
+  margin-bottom: var(--space-md);
+  line-height: 1.6;
+}
+
+/* 4. LAYOUT CONTAINER MOBILE */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+}
+
+.section {
+  padding: var(--space-xl) 0;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: var(--space-xl);
+  position: relative;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: var(--bleu-ciel);
+}
+
+/* 5. BOUTONS TOUCH-FRIENDLY (44px min) - CORRIGÉS */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  min-height: 44px;
+  min-width: 44px;
+  gap: var(--space-xs);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary {
+  background: var(--bleu-ciel);
+  color: var(--blanc);
+  box-shadow: var(--ombres-btn);
+}
+
+.btn-primary:hover,
+.btn-primary:active {
+  background: var(--bleu-ciel-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--ombres-hover);
+}
+
+.btn-secondary {
+  background: var(--vert-success);
+  color: var(--blanc);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--bleu-ciel);
+  border: 2px solid var(--bleu-ciel);
+}
+
+.btn-outline:hover,
+.btn-outline:active {
+  background: var(--bleu-ciel);
+  color: var(--blanc);
+}
+
+/* CORRECTION: Supprime les états bloqués des boutons */
+.btn.loading,
+.btn[disabled] {
+  opacity: 1 !important;
+  cursor: pointer !important;
+  pointer-events: auto !important;
+}
+
+.btn.loading::after,
+.btn[disabled]::after {
+  content: "" !important;
+  display: none !important;
+}
+
+.btn .loading-text,
+.btn .chargement,
+.btn .creation-compte {
+  display: none !important;
+}
+
+.btn .btn-text {
+  display: inline !important;
+  opacity: 1 !important;
+}
+
+/* 6. NAVBAR MOBILE OPTIMISÉE */
+.navbar {
+  background: var(--blanc);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: var(--space-sm) 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  border-bottom: 3px solid var(--bleu-ciel);
+}
+
+body {
+  padding-top: 70px;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-weight: 700;
+  color: var(--bleu-fonce);
+}
+
+.logo-circle, .logo-rectangle {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+}
+
+/* Menu mobile (burger) */
+.nav-toggle {
+  display: none;
+}
+
+.nav-toggle-label {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  padding: var(--space-sm);
+  z-index: 1001;
+}
+
+.nav-toggle-label span {
+  width: 25px;
+  height: 3px;
+  background: var(--bleu-fonce);
+  margin: 3px 0;
+  transition: 0.3s;
+  border-radius: 2px;
+}
+
+.nav-menu {
+  display: flex;
+  gap: var(--space-sm);
+  align-items: center;
+  list-style: none;
+}
+
+.nav-link {
+  color: var(--gris-fonce);
+  text-decoration: none;
+  font-weight: 500;
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-sm);
+  transition: all 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  min-height: 44px;
+}
+
+.nav-link:hover,
+.nav-link:active {
+  background: var(--bleu-ciel-light);
+  color: var(--bleu-ciel);
+}
+
+/* 7. HERO MOBILE OPTIMISÉ */
+.hero {
+  padding: 80px 0 60px;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+              url('/images/backgrounds/aprb.JPG') center/cover no-repeat;
+  color: var(--blanc);
+  text-align: center;
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.hero h1 {
+  color: var(--blanc);
+  font-size: 2rem;
+  margin-bottom: var(--space-md);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.hero p {
+  font-size: 1.1rem;
+  max-width: 100%;
+  margin: 0 auto var(--space-xl);
+  opacity: 0.9;
+  padding: 0 var(--space-md);
+}
+
+.hero .btn {
+  margin: var(--space-xs);
+  min-width: 200px;
+}
+
+/* 8. CARTES MOBILE */
+.card {
+  background: var(--blanc);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  box-shadow: var(--ombres);
+  transition: all 0.3s ease;
+  height: 100%;
+  border: 1px solid var(--gris-bordure);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--ombres-hover);
+}
+
+/* 9. PARTENAIRES GRID MOBILE */
+.partners-section {
+  background: var(--blanc);
+}
+
+.partners-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-md);
+  margin: var(--space-xl) 0;
+}
+
+.partner-logo {
+  background: var(--blanc);
+  padding: var(--space-lg);
+  border-radius: var(--radius-md);
+  box-shadow: var(--ombres);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 120px;
+  transition: all 0.3s;
+  border: 1px solid var(--gris-bordure);
+}
+
+.partner-logo:hover {
+  transform: scale(1.03);
+  box-shadow: var(--ombres-hover);
+}
+
+.partner-logo img {
+  max-width: 100%;
+  max-height: 60px;
+  object-fit: contain;
+  filter: grayscale(100%);
+  opacity: 0.8;
+  transition: all 0.3s;
+}
+
+.partner-logo:hover img {
+  filter: grayscale(0%);
+  opacity: 1;
+}
+
+/* 10. FOOTER MOBILE */
+.footer {
+  background: var(--bleu-ciel);
+  color: var(--blanc);
+  padding: var(--space-xl) 0 var(--space-lg);
+}
+
+.footer-logos {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-xl);
+  flex-wrap: wrap;
+}
+
+.footer-logos img {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* 11. FORMULAIRES MOBILE - CORRIGÉS */
+.form-container {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  background: var(--blanc);
+  padding: var(--space-xl);
+  border-radius: var(--radius-md);
+  box-shadow: var(--ombres-hover);
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  position: relative !important;
+  z-index: 100 !important;
+}
+
+.form-group {
+  margin-bottom: var(--space-lg);
+}
+
+.form-label {
+  display: block;
+  margin-bottom: var(--space-xs);
+  font-weight: 500;
+  color: var(--gris-fonce);
+  font-size: 0.95rem;
+}
+
+.form-control {
+  width: 100%;
+  padding: var(--space-md);
+  border: 1px solid var(--gris-bordure);
+  border-radius: var(--radius-sm);
+  font-size: 1rem;
+  transition: all 0.3s;
+  min-height: 48px;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--bleu-ciel);
+  box-shadow: 0 0 0 3px rgba(30, 144, 255, 0.1);
+}
+
+/* 12. DASHBOARD STATS MOBILE */
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-md);
+  margin: var(--space-xl) 0;
+}
+
+.stat-card {
+  background: var(--blanc);
+  padding: var(--space-lg);
+  border-radius: var(--radius-md);
+  text-align: center;
+  box-shadow: var(--ombres);
+  border-left: 4px solid var(--bleu-ciel);
+}
+
+.stat-number {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--bleu-ciel);
+  margin-bottom: var(--space-xs);
+}
+
+/* 13. CHAT MOBILE */
+.chat-container {
+  background: var(--blanc);
+  border-radius: var(--radius-md);
+  box-shadow: var(--ombres);
+  overflow: hidden;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-window {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-md);
+  background: var(--gris-clair);
+}
+
+.chat-message {
+  margin-bottom: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md);
+  max-width: 85%;
+  word-wrap: break-word;
+}
+
+.chat-message.sent {
+  background: var(--bleu-ciel);
+  color: var(--blanc);
+  margin-left: auto;
+}
+
+.chat-message.received {
+  background: var(--blanc);
+  color: var(--noir);
+  border: 1px solid var(--gris-bordure);
+  margin-right: auto;
+}
+
+/* ============================================
+   NOTIFICATIONS MOBILE & MODALS - AJOUTS
+============================================= */
+
+/* Notifications mobiles */
+.mobile-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    left: 20px;
+    background: var(--blanc);
+    border-radius: var(--radius-lg);
+    padding: var(--space-md);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transform: translateY(-100px);
+    opacity: 0;
+    transition: all 0.3s ease;
+    border-left: 5px solid var(--bleu-ciel);
+}
+
+.mobile-notification.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.notification-success { border-left-color: var(--vert-success); }
+.notification-error { border-left-color: var(--rouge-danger); }
+.notification-warning { border-left-color: var(--orange-warning); }
+.notification-info { border-left-color: var(--bleu-ciel); }
+
+.notification-icon {
+    font-size: 1.5rem;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(30, 144, 255, 0.1);
+}
+
+.notification-success .notification-icon { background: rgba(40, 167, 69, 0.1); color: var(--vert-success); }
+.notification-error .notification-icon { background: rgba(220, 53, 69, 0.1); color: var(--rouge-danger); }
+.notification-warning .notification-icon { background: rgba(253, 126, 20, 0.1); color: var(--orange-warning); }
+.notification-info .notification-icon { background: rgba(30, 144, 255, 0.1); color: var(--bleu-ciel); }
+
+.notification-content {
+    flex: 1;
+}
+
+.notification-message {
+    font-weight: 500;
+    font-size: 0.875rem;
+    line-height: 1.4;
+}
+
+.notification-close {
+    background: none;
+    border: none;
+    color: var(--gris-moyen);
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.notification-close:hover {
+    background: var(--gris-clair);
+}
+
+/* Modal de confirmation mobile */
+.mobile-confirmation-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(4px);
+}
+
+.modal-content {
+    background: var(--blanc);
+    border-radius: 20px;
+    width: 100%;
+    max-width: 400px;
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+
+.modal-header {
+    padding: 20px 20px 10px;
+    text-align: center;
+}
+
+.modal-header h5 {
+    margin: 0;
+    font-weight: 600;
+    color: var(--noir);
+}
+
+.modal-body {
+    padding: 20px;
+    text-align: center;
+}
+
+.confirmation-icon {
+    font-size: 3rem;
+    margin-bottom: var(--space-sm);
+    color: var(--orange-warning);
+}
+
+.modal-body p {
+    margin: 0;
+    color: var(--gris-moyen);
+    line-height: 1.5;
+}
+
+.modal-footer {
+    padding: 20px;
+    display: flex;
+    gap: var(--space-sm);
+    border-top: 1px solid var(--gris-bordure);
+}
+
+.modal-footer .btn {
+    flex: 1;
+    padding: var(--space-sm);
+    border-radius: var(--radius-md);
+    font-weight: 500;
+}
+
+/* Spinner pour boutons */
+.spinner-btn {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(30, 144, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: var(--bleu-ciel);
+    animation: spin 1s ease-in-out infinite;
+    vertical-align: middle;
+    margin-right: 8px;
+}
+
+.spinner-btn-sm {
+    width: 16px;
+    height: 16px;
+    border-width: 2px;
+}
+
+/* Bouton biométrique */
+.btn-biometric {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: var(--space-sm);
+}
+
+.btn-biometric i {
+    font-size: 1.125rem;
+}
+
+/* État des champs de formulaire pour validation */
+.form-group.is-valid .form-control {
+    border-color: var(--vert-success);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%2328a745' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right calc(0.375em + 0.1875rem) center;
+    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+    padding-right: 2.5rem;
+}
+
+.form-group.is-invalid .form-control {
+    border-color: var(--rouge-danger);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right calc(0.375em + 0.1875rem) center;
+    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+    padding-right: 2.5rem;
+}
+
+/* Badge de notification dans le header */
+.header-notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: var(--rouge-danger);
+    color: var(--blanc);
+    font-size: 0.7rem;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    border: 2px solid var(--blanc);
+}
+
+/* Animation spin */
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* 14. BREAKPOINTS MOBILE FIRST */
+
+/* Tablettes (≥ 768px) */
+@media (min-width: 768px) {
+  html {
+    font-size: 18px;
+  }
+  
+  h1 { font-size: 2.5rem; }
+  h2 { font-size: 2rem; }
+  h3 { font-size: 1.75rem; }
+  h4 { font-size: 1.5rem; }
+  
+  .hero {
+    padding: 120px 0 100px;
+    min-height: 80vh;
+  }
+  
+  .hero h1 {
+    font-size: 3rem;
+  }
+  
+  .hero p {
+    font-size: 1.3rem;
+    max-width: 700px;
+  }
+  
+  .partners-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .mobile-notification {
+    top: 30px;
+    right: 30px;
+    left: 30px;
+    max-width: 400px;
+    margin-left: auto;
+  }
+}
+
+/* Desktop (≥ 1024px) */
+@media (min-width: 1024px) {
+  .container {
+    padding: 0 var(--space-lg);
+  }
+  
+  .nav-menu {
+    gap: var(--space-md);
+  }
+  
+  .partners-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-lg);
+  }
+  
+  .stats-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Très petits écrans (≤ 375px) */
+@media (max-width: 375px) {
+  h1 { font-size: 1.5rem; }
+  h2 { font-size: 1.3rem; }
+  
+  .hero {
+    padding: 60px 0 40px;
+    min-height: 60vh;
+  }
+  
+  .hero h1 {
+    font-size: 1.75rem;
+  }
+  
+  .hero p {
+    font-size: 1rem;
+  }
+  
+  .btn {
+    padding: var(--space-sm) var(--space-md);
+    font-size: 0.95rem;
+    min-width: 160px;
+  }
+  
+  .partners-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+  }
+  
+  .partner-logo {
+    height: 100px;
+    padding: var(--space-md);
+  }
+  
+  .card {
+    padding: var(--space-md);
+  }
+  
+  .form-container {
+    padding: var(--space-lg);
+  }
+  
+  .mobile-notification {
+    top: 10px;
+    right: 10px;
+    left: 10px;
+    padding: 12px;
+  }
+  
+  .notification-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 1.125rem;
+  }
+  
+  .modal-content {
+    max-width: 95%;
+  }
+  
+  .modal-footer {
+    flex-direction: column;
+  }
+  
+  .modal-footer .btn {
+    width: 100%;
+  }
+}
+
+/* Orientation paysage mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+  .hero {
+    min-height: 100vh;
+    padding: 70px 0;
+  }
+  
+  .navbar {
+    padding: var(--space-xs) 0;
+  }
+  
+  body {
+    padding-top: 60px;
+  }
+  
+  .mobile-notification {
+    top: 10px;
+  }
+}
+
+/* Support Dark Mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --blanc: #121212;
+    --noir: #f8f9fa;
+    --gris-clair: #1e1e1e;
+    --gris-fonce: #e0e0e0;
+    --gris-bordure: #333;
+  }
+  
+  .card,
+  .form-container,
+  .partner-logo {
+    background: #2d2d2d;
+    border-color: #444;
+  }
+  
+  .form-control {
+    background: #2d2d2d;
+    color: #f0f0f0;
+    border-color: #444;
+  }
+  
+  .mobile-notification,
+  .modal-content {
+    background: #2d2d2d;
+    color: #f0f0f0;
+  }
+  
+  .notification-close:hover {
+    background: #3d3d3d;
+  }
+}
+
+/* 15. PERFORMANCE MOBILE */
+@media (max-width: 768px) {
+  img {
+    max-width: 100%;
+    height: auto;
+    -webkit-user-drag: none;
+    user-select: none;
+  }
+  
+  /* Optimise les animations */
+  * {
+    animation-duration: 0.3s !important;
+    transition-duration: 0.3s !important;
+  }
+}
+
+/* 16. ACCESSIBILITÉ TOUCH */
+button:active,
+a:active,
+.btn:active {
+  opacity: 0.8;
+  transform: scale(0.98);
+}
+
+/* Masquer la scrollbar sur mobile mais permettre le scroll */
+@media (max-width: 768px) {
+  body {
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .chat-window,
+  [class*="scroll"] {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  
+  .chat-window::-webkit-scrollbar,
+  [class*="scroll"]::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* 17. BOUTON PWA */
+.btn-install-pwa {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+  background: var(--vert-success);
+  color: var(--blanc);
+  border-radius: var(--radius-full);
+  padding: var(--space-md) var(--space-lg);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+/* 18. UTILITAIRES */
+.d-none {
+  display: none !important;
+}
+
+.disabled {
+  opacity: 0.6;
+  cursor: not-allowed !important;
+  pointer-events: none;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mt-1 { margin-top: var(--space-xs); }
+.mt-2 { margin-top: var(--space-sm); }
+.mt-3 { margin-top: var(--space-md); }
+.mt-4 { margin-top: var(--space-lg); }
+.mt-5 { margin-top: var(--space-xl); }
+
+.mb-1 { margin-bottom: var(--space-xs); }
+.mb-2 { margin-bottom: var(--space-sm); }
+.mb-3 { margin-bottom: var(--space-md); }
+.mb-4 { margin-bottom: var(--space-lg); }
+.mb-5 { margin-bottom: var(--space-xl); }
+
+/* ============================================
+   CORRECTIONS FINALES - PROBLEMES RESOLUS
+============================================= */
+
+/* CORRECTION 1: Suppression définitive de l'overlay bleu */
+@media (max-width: 768px) {
+  /* Supprime tout fond bleu ciel */
+  div[style*="background-color: skyblue"],
+  div[style*="background: skyblue"],
+  div[style*="opacity: 0.5"] {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    z-index: -9999 !important;
+  }
+  
+  /* Supprime les messages de chargement */
+  .loading-text,
+  .chargement,
+  .creation-compte {
+    display: none !important;
+    opacity: 0 !important;
+  }
+  
+  /* S'assure que tout le contenu est visible */
+  main, section, .container {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    position: relative !important;
+    z-index: 1 !important;
+  }
+}
+
+/* CORRECTION 2: Réinitialisation complète des boutons */
+@media (max-width: 768px) {
+  .btn-connexion,
+  .btn-inscription,
+  .btn-commercer,
+  .btn-connecter {
+    background: var(--bleu-ciel) !important;
+    color: var(--blanc) !important;
+    border: none !important;
+    padding: 16px 32px !important;
+    font-size: 1.1rem !important;
+    border-radius: 12px !important;
+    margin: 10px auto !important;
+    display: block !important;
+    width: 90% !important;
+    max-width: 300px !important;
+  }
+  
+  .btn-connecter {
+    background: transparent !important;
+    border: 2px solid var(--bleu-ciel) !important;
+    color: var(--bleu-ciel) !important;
+  }
+}
+
+/* CORRECTION 3: Formulaires toujours visibles */
+form,
+.form-container,
+.auth-form,
+.login-form,
+.signup-form {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* CORRECTION 4: Body non bloqué */
+body.modal-open {
+  overflow: visible !important;
+  position: static !important;
+}
+
+/* CORRECTION 5: Tout est fonctionnel */
+@media (max-width: 768px) {
+  * {
+    pointer-events: auto !important;
+  }
+  
+  /* Exception pour les éléments cachés */
+  .d-none,
+  [hidden] {
+    pointer-events: none !important;
+  }
+}

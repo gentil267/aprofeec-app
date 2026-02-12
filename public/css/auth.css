@@ -1,0 +1,373 @@
+/* ============================================
+   APROFEEC - PAGES D'AUTHENTIFICATION
+   Login, Register, Password Reset
+============================================= */
+
+/* 1. AUTH LAYOUT */
+.auth-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: linear-gradient(135deg, var(--bleu-ciel-light) 0%, #f8f9fa 100%);
+}
+
+.auth-card {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 450px;
+  padding: 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.auth-logo {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bleu-ciel-light);
+  border-radius: 50%;
+  border: 3px solid white;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.auth-logo img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+}
+
+.auth-title {
+  font-size: 1.8rem;
+  color: var(--bleu-fonce);
+  margin-bottom: 10px;
+}
+
+.auth-subtitle {
+  color: var(--gris-moyen);
+  font-size: 1rem;
+}
+
+/* 2. AUTH FORMS */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  position: relative;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: var(--gris-fonce);
+  font-size: 0.95rem;
+}
+
+.input-with-icon {
+  position: relative;
+}
+
+.input-with-icon input {
+  width: 100%;
+  padding: 12px 15px 12px 45px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: all 0.3s;
+}
+
+.input-with-icon i {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gris-moyen);
+}
+
+.input-with-icon input:focus {
+  outline: none;
+  border-color: var(--bleu-ciel);
+  box-shadow: 0 0 0 3px rgba(30, 144, 255, 0.1);
+}
+
+/* 3. PASSWORD TOGGLE */
+.password-toggle {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--gris-moyen);
+  cursor: pointer;
+  padding: 5px;
+}
+
+/* 4. REMEMBER ME & FORGOT PASSWORD */
+.form-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: var(--gris-moyen);
+}
+
+.forgot-password {
+  color: var(--bleu-ciel);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.forgot-password:hover {
+  text-decoration: underline;
+}
+
+/* 5. AUTH BUTTONS */
+.auth-btn {
+  width: 100%;
+  padding: 15px;
+  background: var(--bleu-ciel);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 10px;
+}
+
+.auth-btn:hover {
+  background: var(--bleu-ciel-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(30, 144, 255, 0.3);
+}
+
+.auth-btn:active {
+  transform: translateY(0);
+}
+
+/* 6. SOCIAL LOGIN */
+.auth-divider {
+  text-align: center;
+  margin: 25px 0;
+  position: relative;
+}
+
+.auth-divider::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  height: 1px;
+  background: #eee;
+}
+
+.auth-divider span {
+  background: white;
+  padding: 0 15px;
+  color: var(--gris-moyen);
+  font-size: 0.9rem;
+  position: relative;
+}
+
+.social-login {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background: white;
+  color: var(--gris-fonce);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.social-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.social-btn.google:hover {
+  border-color: #DB4437;
+  color: #DB4437;
+}
+
+.social-btn.facebook:hover {
+  border-color: #4267B2;
+  color: #4267B2;
+}
+
+/* 7. AUTH FOOTER */
+.auth-footer {
+  text-align: center;
+  margin-top: 25px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+  color: var(--gris-moyen);
+  font-size: 0.9rem;
+}
+
+.auth-link {
+  color: var(--bleu-ciel);
+  text-decoration: none;
+  font-weight: 500;
+  margin-left: 5px;
+}
+
+.auth-link:hover {
+  text-decoration: underline;
+}
+
+/* 8. ERROR STATES */
+.input-error {
+  border-color: var(--rouge-danger) !important;
+}
+
+.error-message {
+  color: var(--rouge-danger);
+  font-size: 0.85rem;
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* 9. SUCCESS STATES */
+.input-success {
+  border-color: var(--vert-success) !important;
+}
+
+.success-message {
+  color: var(--vert-success);
+  font-size: 0.85rem;
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* 10. LOADING STATE */
+.auth-btn.loading {
+  position: relative;
+  color: transparent;
+}
+
+.auth-btn.loading::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* 11. MOBILE OPTIMIZATIONS */
+@media (max-width: 768px) {
+  .auth-card {
+    padding: 30px 25px;
+    border-radius: 16px;
+    margin: 20px;
+  }
+  
+  .auth-title {
+    font-size: 1.5rem;
+  }
+  
+  .social-login {
+    grid-template-columns: 1fr;
+  }
+  
+  .form-options {
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-card {
+    padding: 25px 20px;
+  }
+  
+  .auth-title {
+    font-size: 1.3rem;
+  }
+  
+  .auth-subtitle {
+    font-size: 0.9rem;
+  }
+  
+  .input-with-icon input {
+    padding: 12px 15px 12px 40px;
+  }
+}
+
+/* 12. DARK MODE SUPPORT */
+@media (prefers-color-scheme: dark) {
+  .auth-container {
+    background: #121212;
+  }
+  
+  .auth-card {
+    background: #1e1e1e;
+    color: #e0e0e0;
+  }
+  
+  .auth-title {
+    color: #ffffff;
+  }
+  
+  .input-with-icon input {
+    background: #2d2d2d;
+    border-color: #444;
+    color: #e0e0e0;
+  }
+  
+  .social-btn {
+    background: #2d2d2d;
+    border-color: #444;
+    color: #e0e0e0;
+  }
+  
+  .auth-footer {
+    border-color: #444;
+    color: #a0a0a0;
+  }
+}

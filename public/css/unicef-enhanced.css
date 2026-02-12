@@ -1,0 +1,97 @@
+/* UNICEF Enhanced Theme - Professional */
+:root {
+    --unicef-blue: #0099D8;
+    --unicef-dark-blue: #0056A4;
+    --unicef-light-blue: #67C8FF;
+    --unicef-yellow: #0099D8;
+    --unicef-white: #FFFFFF;
+}
+
+/* Navbar UNICEF */
+.navbar-unicef-premium {
+    background: linear-gradient(135deg, var(--unicef-blue), var(--unicef-dark-blue)) !important;
+    border-bottom: 4px solid var(--unicef-yellow) !important;
+    box-shadow: 0 4px 20px rgba(0, 153, 216, 0.3) !important;
+    padding: 15px 0 !important;
+    transition: all 0.3s ease !important;
+}
+
+.navbar-unicef-premium .navbar-brand {
+    font-weight: 700 !important;
+    font-size: 1.5rem !important;
+    color: white !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+}
+
+.navbar-unicef-premium .nav-link {
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-weight: 500 !important;
+    padding: 10px 20px !important;
+    border-radius: 5px !important;
+    margin: 0 5px !important;
+    transition: all 0.3s ease !important;
+}
+
+.navbar-unicef-premium .nav-link:hover {
+    background: rgba(255, 255, 255, 0.15) !important;
+    color: white !important;
+    transform: translateY(-2px) !important;
+}
+
+/* Footer UNICEF */
+.footer-unicef-premium {
+    background: linear-gradient(135deg, var(--unicef-dark-blue), var(--unicef-blue)) !important;
+    border-top: 4px solid var(--unicef-yellow) !important;
+    padding: 40px 0 20px !important;
+    color: white !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+.footer-unicef-premium::before {
+    content: "" !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: 3px !important;
+    background: linear-gradient(90deg, transparent, var(--unicef-yellow), transparent) !important;
+}
+
+/* Buttons UNICEF */
+.btn-unicef {
+    background: linear-gradient(135deg, var(--unicef-blue), var(--unicef-light-blue)) !important;
+    border: none !important;
+    color: white !important;
+    font-weight: 600 !important;
+    padding: 12px 30px !important;
+    border-radius: 50px !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 15px rgba(0, 153, 216, 0.3) !important;
+}
+
+.btn-unicef:hover {
+    background: linear-gradient(135deg, var(--unicef-dark-blue), var(--unicef-blue)) !important;
+    transform: translateY(-3px) !important;
+    box-shadow: 0 8px 25px rgba(0, 153, 216, 0.4) !important;
+    color: white !important;
+}
+
+.btn-unicef:active {
+    transform: translateY(-1px) !important;
+}
+
+/* Cards with UNICEF accent */
+.card-unicef {
+    border-top: 4px solid var(--unicef-blue) !important;
+    border-radius: 15px !important;
+    overflow: hidden !important;
+    transition: all 0.3s ease !important;
+}
+
+.card-unicef:hover {
+    transform: translateY(-10px) !important;
+    box-shadow: 0 15px 35px rgba(0, 153, 216, 0.2) !important;
+}

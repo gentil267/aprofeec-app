@@ -1,0 +1,36 @@
+{
+  "name": "aprofeec-app",
+  "version": "1.0.0",
+  "description": "Application de Coaching & Mentorat pour Jeunes Filles - Programme AMANI KWETU II",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "build": "echo 'Build complete'"
+  },
+  "dependencies": {
+    "express": "^4.22.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  },
+  "keywords": [
+    "mentorat",
+    "coaching",
+    "jeunes-filles",
+    "aprofeec",
+    "amani-kwetu",
+    "rdc"
+  ],
+  "author": "APROFEEC",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gentil267/aprofeec-app.git"
+  },
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/gentil267/aprofeec-app/issues"
+  },
+  "homepage": "https://github.com/gentil267/aprofeec-app#readme"
+}

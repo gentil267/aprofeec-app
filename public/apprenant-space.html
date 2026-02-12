@@ -1,0 +1,1654 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <!-- META VIEWPORT OPTIMISÉE POUR MOBILE -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="theme-color" content="#1e40af">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <title>APROFEEC | Espace Apprenant Mobile</title>
+    
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/style.css">
+    
+    <style>
+        /* ============================================
+           ESPACE APPRENANT - MOBILE FIRST DESIGN
+        ============================================ */
+        
+        :root {
+            --primary-blue: #1e40af;
+            --secondary-blue: #3b82f6;
+            --accent-blue: #60a5fa;
+            --light-blue: #dbeafe;
+            --dark-blue: #1e3a8a;
+            --gradient-blue: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        
+        /* 1. MOBILE RESET */
+        * {
+            -webkit-tap-highlight-color: transparent;
+            box-sizing: border-box;
+        }
+        
+        html {
+            font-size: 16px;
+            -webkit-text-size-adjust: 100%;
+            height: 100%;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8fafc;
+            color: #333;
+            min-height: 100vh;
+            overflow-x: hidden;
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+        
+        /* 2. MOBILE HEADER */
+        .learner-mobile-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 15px;
+            border-bottom: 1px solid #e5e7eb;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .menu-toggle {
+            background: var(--light-blue);
+            border: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-blue);
+            font-size: 1.2rem;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-img {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            object-fit: cover;
+            border: 2px solid var(--primary-blue);
+        }
+        
+        .logo-text {
+            font-weight: 700;
+            color: var(--dark-blue);
+            font-size: 1.1rem;
+        }
+        
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .notification-btn {
+            position: relative;
+            background: var(--light-blue);
+            border: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            color: var(--primary-blue);
+            font-size: 1.2rem;
+        }
+        
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--danger);
+            color: white;
+            font-size: 0.7rem;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            border: 2px solid white;
+        }
+        
+        /* 3. MOBILE SIDEBAR */
+        .mobile-sidebar {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .sidebar-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 280px;
+            background: white;
+            overflow-y: auto;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            padding-top: 20px;
+        }
+        
+        .mobile-sidebar.active .sidebar-content {
+            transform: translateX(0);
+        }
+        
+        .mobile-sidebar.active {
+            display: block;
+        }
+        
+        .learner-info {
+            padding: 20px;
+            border-bottom: 1px solid #e5e7eb;
+            text-align: center;
+        }
+        
+        .learner-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--light-blue);
+            margin: 0 auto 15px;
+        }
+        
+        .learner-name {
+            font-weight: 600;
+            color: var(--dark-blue);
+            margin-bottom: 5px;
+        }
+        
+        .learner-role {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .learner-badge-mobile {
+            display: inline-block;
+            background: var(--gradient-blue);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .progress-container {
+            margin-top: 20px;
+        }
+        
+        .progress-circle-mobile {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 10px;
+        }
+        
+        .progress-text-mobile {
+            text-align: center;
+            font-weight: 600;
+            color: var(--primary-blue);
+            font-size: 0.9rem;
+        }
+        
+        .nav-mobile {
+            padding: 20px;
+        }
+        
+        .nav-item-mobile {
+            margin-bottom: 10px;
+        }
+        
+        .nav-link-mobile {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            border-radius: 12px;
+            color: #666;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link-mobile.active,
+        .nav-link-mobile:hover {
+            background: var(--light-blue);
+            color: var(--primary-blue);
+        }
+        
+        .nav-link-mobile i {
+            font-size: 1.2rem;
+            width: 24px;
+        }
+        
+        .nav-badge {
+            margin-left: auto;
+            background: var(--danger);
+            color: white;
+            font-size: 0.7rem;
+            min-width: 22px;
+            height: 22px;
+            border-radius: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .sidebar-footer-mobile {
+            padding: 20px;
+            border-top: 1px solid #e5e7eb;
+            margin-top: auto;
+        }
+        
+        /* 4. MAIN CONTENT */
+        .learner-content {
+            padding: 90px 15px 90px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* 5. WELCOME BANNER MOBILE */
+        .welcome-banner-mobile {
+            background: var(--gradient-blue);
+            color: white;
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .welcome-icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+        
+        .welcome-title {
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        
+        .welcome-subtitle {
+            opacity: 0.9;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+        
+        .welcome-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+        
+        .welcome-btn {
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .welcome-btn.primary {
+            background: white;
+            color: var(--primary-blue);
+            border: none;
+        }
+        
+        .welcome-btn.secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        /* 6. PROGRESS OVERVIEW MOBILE */
+        .progress-overview-mobile {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid #e5e7eb;
+            margin-bottom: 20px;
+        }
+        
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .progress-title {
+            font-weight: 600;
+            color: var(--dark-blue);
+            font-size: 1.1rem;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .progress-select {
+            padding: 8px 12px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            background: #f9fafb;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .progress-grid-mobile {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        
+        .progress-item-mobile {
+            text-align: center;
+            padding: 15px;
+            border-radius: 12px;
+            background: #f9fafb;
+            transition: all 0.3s ease;
+        }
+        
+        .progress-item-mobile:active {
+            transform: scale(0.98);
+            background: var(--light-blue);
+        }
+        
+        .progress-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 5px;
+        }
+        
+        .progress-label {
+            color: #666;
+            font-size: 0.85rem;
+        }
+        
+        /* 7. COURSES SECTION MOBILE */
+        .courses-section-mobile {
+            margin-bottom: 20px;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 0 5px;
+        }
+        
+        .section-title {
+            font-weight: 600;
+            color: var(--dark-blue);
+            font-size: 1.1rem;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-action {
+            background: var(--light-blue);
+            color: var(--primary-blue);
+            border: none;
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .courses-slider {
+            overflow-x: auto;
+            display: flex;
+            gap: 15px;
+            padding: 5px 0 20px;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        
+        .courses-slider::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .course-card-mobile {
+            min-width: 280px;
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            border: 1px solid #e5e7eb;
+            transition: all 0.3s ease;
+        }
+        
+        .course-card-mobile:active {
+            transform: scale(0.98);
+        }
+        
+        .course-header {
+            height: 120px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            position: relative;
+        }
+        
+        .course-category {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--primary-blue);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .course-content-mobile {
+            padding: 20px;
+        }
+        
+        .course-title {
+            font-weight: 600;
+            color: var(--dark-blue);
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+        
+        .course-description {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+        
+        .course-progress-mobile {
+            margin-bottom: 15px;
+        }
+        
+        .progress-bar-mobile {
+            height: 6px;
+            background: #e5e7eb;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--primary-blue);
+            border-radius: 3px;
+            transition: width 0.5s ease;
+        }
+        
+        .course-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: #666;
+        }
+        
+        .course-actions-mobile {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn-course-primary {
+            flex: 1;
+            padding: 12px;
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .btn-course-secondary {
+            width: 44px;
+            height: 44px;
+            background: var(--light-blue);
+            color: var(--primary-blue);
+            border: none;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* 8. MENTORS SECTION MOBILE */
+        .mentors-section-mobile {
+            background: white;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid #e5e7eb;
+            margin-bottom: 20px;
+        }
+        
+        .mentors-grid-mobile {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+        }
+        
+        .mentor-card-mobile {
+            text-align: center;
+            padding: 15px;
+            border-radius: 12px;
+            background: #f9fafb;
+            transition: all 0.3s ease;
+        }
+        
+        .mentor-card-mobile:active {
+            transform: scale(0.98);
+            background: var(--light-blue);
+        }
+        
+        .mentor-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 10px;
+            border: 3px solid var(--light-blue);
+        }
+        
+        .mentor-name {
+            font-weight: 600;
+            color: var(--dark-blue);
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+        
+        .mentor-specialty {
+            color: var(--primary-blue);
+            font-size: 0.8rem;
+            margin-bottom: 8px;
+        }
+        
+        .mentor-rating {
+            color: var(--warning);
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .btn-mentor {
+            width: 100%;
+            padding: 8px;
+            background: white;
+            color: var(--primary-blue);
+            border: 1px solid var(--light-blue);
+            border-radius: 8px;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+        
+        /* 9. LOADING OVERLAY */
+        .loading-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(30, 41, 59, 0.95);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255,255,255,0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        /* 10. MOBILE BOTTOM NAV */
+        .mobile-bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-top: 3px solid var(--primary-blue);
+            z-index: 1000;
+            padding: 10px 5px;
+            display: flex;
+            justify-content: space-around;
+            height: 80px;
+            box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        .bottom-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 12px;
+            color: #666;
+            text-decoration: none;
+            border-radius: 12px;
+            min-width: 60px;
+            min-height: 60px;
+            transition: all 0.3s ease;
+            font-size: 0.75rem;
+            font-weight: 500;
+            gap: 5px;
+        }
+        
+        .bottom-nav-item i {
+            font-size: 1.2rem;
+        }
+        
+        .bottom-nav-item.active,
+        .bottom-nav-item:active {
+            background: var(--light-blue);
+            color: var(--primary-blue);
+            transform: translateY(-5px);
+        }
+        
+        /* 11. ANIMATIONS */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        /* 12. MEDIA QUERIES */
+        
+        /* Tablettes (≥ 768px) */
+        @media (min-width: 768px) {
+            .learner-content {
+                padding: 90px 30px 30px;
+            }
+            
+            .learner-mobile-header {
+                padding: 15px 30px;
+            }
+            
+            .progress-grid-mobile {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 20px;
+            }
+            
+            .progress-item-mobile {
+                padding: 20px;
+            }
+            
+            .courses-slider {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                overflow-x: visible;
+                padding-bottom: 0;
+            }
+            
+            .course-card-mobile {
+                min-width: auto;
+            }
+            
+            .mentors-grid-mobile {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .mobile-bottom-nav {
+                display: none;
+            }
+        }
+        
+        /* Desktop (≥ 1024px) */
+        @media (min-width: 1024px) {
+            .learner-mobile-header {
+                display: none;
+            }
+            
+            .mobile-sidebar {
+                display: block;
+                position: fixed;
+                top: 0;
+                width: 260px;
+                background: white;
+                border-right: 1px solid #e5e7eb;
+                padding: 0;
+                z-index: 100;
+                box-shadow: none;
+            }
+            
+            .sidebar-content {
+                position: relative;
+                width: 100%;
+                transform: none;
+                padding-top: 0;
+            }
+            
+            .learner-content {
+                margin-left: 260px;
+                padding: 30px;
+                padding-bottom: 30px;
+            }
+            
+            .courses-slider {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .mobile-bottom-nav {
+                display: none;
+            }
+        }
+        
+        /* Très petits écrans (≤ 375px) */
+        @media (max-width: 375px) {
+            .learner-content {
+                padding: 80px 12px 90px;
+            }
+            
+            .learner-mobile-header {
+                padding: 15px 12px;
+            }
+            
+            .progress-grid-mobile {
+                grid-template-columns: 1fr;
+            }
+            
+            .course-card-mobile {
+                min-width: 260px;
+            }
+            
+            .mentors-grid-mobile {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .welcome-actions {
+                flex-direction: column;
+            }
+            
+            .welcome-btn {
+                justify-content: center;
+            }
+        }
+        
+        /* Orientation paysage */
+        @media (max-width: 768px) and (orientation: landscape) {
+            .mobile-bottom-nav {
+                height: 70px;
+            }
+            
+            .learner-content {
+                padding-bottom: 80px;
+            }
+            
+            .courses-slider {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        /* 13. DARK MODE */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: #121212;
+                color: #e0e0e0;
+            }
+            
+            .learner-mobile-header,
+            .mobile-sidebar .sidebar-content,
+            .progress-overview-mobile,
+            .course-card-mobile,
+            .mentors-section-mobile,
+            .mobile-bottom-nav {
+                background: #1e1e1e;
+                border-color: #333;
+            }
+            
+            .progress-title,
+            .section-title,
+            .learner-name,
+            .course-title,
+            .mentor-name,
+            .logo-text {
+                color: #e0e0e0;
+            }
+            
+            .progress-item-mobile,
+            .mentor-card-mobile {
+                background: #2d2d2d;
+            }
+            
+            .progress-label,
+            .course-description,
+            .learner-role,
+            .mentor-specialty {
+                color: #b0b0b0;
+            }
+            
+            .nav-link-mobile,
+            .bottom-nav-item {
+                color: #b0b0b0;
+            }
+            
+            .nav-link-mobile.active,
+            .nav-link-mobile:hover,
+            .bottom-nav-item.active {
+                background: #2d2d2d;
+                color: var(--accent-blue);
+            }
+            
+            .progress-select {
+                background: #2d2d2d;
+                border-color: #444;
+                color: #e0e0e0;
+            }
+            
+            .btn-mentor {
+                background: #2d2d2d;
+                border-color: #444;
+                color: #e0e0e0;
+            }
+        }
+        
+        /* 14. TOUCH OPTIMIZATIONS */
+        @media (hover: none) and (pointer: coarse) {
+            button,
+            .menu-toggle,
+            .notification-btn,
+            .bottom-nav-item,
+            .welcome-btn,
+            .btn-course-primary,
+            .btn-course-secondary,
+            .btn-mentor {
+                min-height: 44px;
+                min-width: 44px;
+            }
+            
+            .course-card-mobile,
+            .progress-item-mobile,
+            .mentor-card-mobile {
+                -webkit-user-select: none;
+                user-select: none;
+            }
+            
+            .course-card-mobile:active,
+            .progress-item-mobile:active,
+            .mentor-card-mobile:active,
+            .welcome-btn:active,
+            .btn-course-primary:active {
+                opacity: 0.8;
+            }
+            
+            .courses-slider,
+            .learner-content {
+                -webkit-overflow-scrolling: touch;
+            }
+        }
+        
+        /* 15. ACCESSIBILITY */
+        .menu-toggle:focus-visible,
+        .notification-btn:focus-visible,
+        .bottom-nav-item:focus-visible,
+        .welcome-btn:focus-visible,
+        .btn-course-primary:focus-visible {
+            outline: 2px solid var(--accent-blue);
+            outline-offset: 2px;
+        }
+        
+        /* 16. SAFE AREA INSETS */
+        @supports (padding: max(0px)) {
+            .learner-mobile-header {
+                padding-top: max(15px, env(safe-area-inset-top));
+                padding-left: max(15px, env(safe-area-inset-left));
+                padding-right: max(15px, env(safe-area-inset-right));
+            }
+            
+            .learner-content {
+                padding-top: max(90px, calc(70px + env(safe-area-inset-top)));
+                padding-bottom: max(90px, calc(80px + env(safe-area-inset-bottom)));
+            }
+            
+            .mobile-bottom-nav {
+                padding-bottom: max(10px, env(safe-area-inset-bottom));
+                height: calc(80px + env(safe-area-inset-bottom));
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+        <div>Chargement de votre espace...</div>
+    </div>
+    
+    <!-- Mobile Header -->
+    <header class="learner-mobile-header">
+        <div class="header-left">
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="logo-container">
+                <img src="/images/avatars/apu.jpg" alt="APROFEEC" class="logo-img">
+                <div class="logo-text">APROFEEC</div>
+            </div>
+        </div>
+        
+        <div class="header-actions">
+            <button class="notification-btn" id="notificationBtn">
+                <i class="fas fa-bell"></i>
+                <span class="notification-badge">3</span>
+            </button>
+        </div>
+    </header>
+    
+    <!-- Mobile Sidebar -->
+    <div class="mobile-sidebar" id="mobileSidebar">
+        <div class="sidebar-content">
+            <!-- Learner Info -->
+            <div class="learner-info">
+                <img src="/images/avatars/default.png" alt="Apprenant" class="learner-avatar">
+                <div class="learner-name">Marie Dubois</div>
+                <div class="learner-role">Développement Web</div>
+                <div class="learner-badge-mobile">
+                    <i class="fas fa-graduation-cap me-1"></i>Apprenant Actif
+                </div>
+                
+                <div class="progress-container">
+                    <div class="progress-circle-mobile">
+                        <svg viewBox="0 0 36 36" style="width: 60px; height: 60px;">
+                            <path class="circle-bg"
+                                d="M18 2.0845
+                                a 15.9155 15.9155 0 0 1 0 31.831
+                                a 15.9155 15.9155 0 0 1 0 -31.831"
+                                fill="none"
+                                stroke="#e5e7eb"
+                                stroke-width="3"/>
+                            <path class="circle"
+                                stroke-dasharray="75, 100"
+                                d="M18 2.0845
+                                a 15.9155 15.9155 0 0 1 0 31.831
+                                a 15.9155 15.9155 0 0 1 0 -31.831"
+                                fill="none"
+                                stroke="#3b82f6"
+                                stroke-width="3"
+                                stroke-linecap="round"/>
+                            <text x="18" y="20.35" fill="#3b82f6" font-size="6" text-anchor="middle" font-weight="bold">75%</text>
+                        </svg>
+                    </div>
+                    <div class="progress-text-mobile">Progression Globale</div>
+                </div>
+            </div>
+            
+            <!-- Navigation -->
+            <nav class="nav-mobile">
+                <div class="nav-item-mobile">
+                    <a href="dashboard.html" class="nav-link-mobile">
+                        <i class="fas fa-home"></i>
+                        <span>Tableau de bord</span>
+                    </a>
+                </div>
+                <div class="nav-item-mobile">
+                    <a href="apprenant-space.html" class="nav-link-mobile active">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>Mes Cours</span>
+                    </a>
+                </div>
+                <div class="nav-item-mobile">
+                    <a href="mentor-space.html" class="nav-link-mobile">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                        <span>Mes Mentors</span>
+                    </a>
+                </div>
+                <div class="nav-item-mobile">
+                    <a href="chat.html" class="nav-link-mobile">
+                        <i class="fas fa-comments"></i>
+                        <span>Messagerie</span>
+                        <span class="nav-badge">3</span>
+                    </a>
+                </div>
+                <div class="nav-item-mobile">
+                    <a href="#" class="nav-link-mobile">
+                        <i class="fas fa-project-diagram"></i>
+                        <span>Mes Projets</span>
+                    </a>
+                </div>
+                <div class="nav-item-mobile">
+                    <a href="#" class="nav-link-mobile">
+                        <i class="fas fa-certificate"></i>
+                        <span>Certifications</span>
+                    </a>
+                </div>
+                <div class="nav-item-mobile">
+                    <a href="setting.html" class="nav-link-mobile">
+                        <i class="fas fa-cog"></i>
+                        <span>Paramètres</span>
+                    </a>
+                </div>
+            </nav>
+            
+            <div class="sidebar-footer-mobile">
+                <button class="btn btn-outline-danger w-100" id="logoutBtn">
+                    <i class="fas fa-sign-out-alt me-2"></i> Déconnexion
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <main class="learner-content">
+        <!-- Welcome Banner -->
+        <div class="welcome-banner-mobile">
+            <div class="welcome-icon">
+                <i class="fas fa-graduation-cap"></i>
+            </div>
+            <div class="welcome-title">Bon retour, Marie !</div>
+            <div class="welcome-subtitle">
+                Continuez votre apprentissage. Vous avez 2 cours en attente et 1 session de mentorat aujourd'hui.
+            </div>
+            <div class="welcome-actions">
+                <button class="welcome-btn primary" id="continueBtn">
+                    <i class="fas fa-play"></i>
+                    Continuer
+                </button>
+                <button class="welcome-btn secondary" id="exploreBtn">
+                    <i class="fas fa-search"></i>
+                    Explorer
+                </button>
+            </div>
+        </div>
+        
+        <!-- Progress Overview -->
+        <div class="progress-overview-mobile">
+            <div class="progress-header">
+                <h3 class="progress-title">
+                    <i class="fas fa-chart-line"></i>
+                    Votre Progression
+                </h3>
+                <select class="progress-select" id="progressFilter">
+                    <option>Ce mois</option>
+                    <option>Le mois dernier</option>
+                    <option>6 derniers mois</option>
+                </select>
+            </div>
+            
+            <div class="progress-grid-mobile">
+                <div class="progress-item-mobile">
+                    <div class="progress-value" id="progressGlobal">0%</div>
+                    <div class="progress-label">Progression Globale</div>
+                </div>
+                <div class="progress-item-mobile">
+                    <div class="progress-value" id="studyTime">0h</div>
+                    <div class="progress-label">Temps d'étude</div>
+                </div>
+                <div class="progress-item-mobile">
+                    <div class="progress-value" id="coursesCount">0</div>
+                    <div class="progress-label">Cours Suivis</div>
+                </div>
+                <div class="progress-item-mobile">
+                    <div class="progress-value" id="certificationsCount">0</div>
+                    <div class="progress-label">Certifications</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Courses Section -->
+        <div class="courses-section-mobile">
+            <div class="section-header">
+                <h3 class="section-title">
+                    <i class="fas fa-book-open"></i>
+                    Mes Cours
+                </h3>
+                <button class="section-action" id="allCoursesBtn">
+                    <i class="fas fa-list"></i>
+                    Tout voir
+                </button>
+            </div>
+            
+            <div class="courses-slider" id="coursesSlider">
+                <!-- Course 1 -->
+                <div class="course-card-mobile" data-course="html-css">
+                    <div class="course-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                        <div class="course-category">Développement Web</div>
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="course-content-mobile">
+                        <h4 class="course-title">HTML5 & CSS3 Avancé</h4>
+                        <p class="course-description">
+                            Maîtrisez les dernières techniques de développement front-end.
+                        </p>
+                        <div class="course-progress-mobile">
+                            <div class="progress-bar-mobile">
+                                <div class="progress-fill" style="width: 85%;"></div>
+                            </div>
+                            <div class="course-meta">
+                                <span>85% complété</span>
+                                <span>12/15 leçons</span>
+                            </div>
+                        </div>
+                        <div class="course-actions-mobile">
+                            <button class="btn-course-primary" data-action="continue">
+                                <i class="fas fa-play"></i>
+                                Continuer
+                            </button>
+                            <button class="btn-course-secondary" data-action="info">
+                                <i class="fas fa-info"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Course 2 -->
+                <div class="course-card-mobile" data-course="nodejs">
+                    <div class="course-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                        <div class="course-category">Backend</div>
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <div class="course-content-mobile">
+                        <h4 class="course-title">Node.js & Express</h4>
+                        <p class="course-description">
+                            Développez des API robustes avec Node.js et Express.
+                        </p>
+                        <div class="course-progress-mobile">
+                            <div class="progress-bar-mobile">
+                                <div class="progress-fill" style="width: 60%;"></div>
+                            </div>
+                            <div class="course-meta">
+                                <span>60% complété</span>
+                                <span>9/15 leçons</span>
+                            </div>
+                        </div>
+                        <div class="course-actions-mobile">
+                            <button class="btn-course-primary" data-action="continue">
+                                <i class="fas fa-play"></i>
+                                Continuer
+                            </button>
+                            <button class="btn-course-secondary" data-action="info">
+                                <i class="fas fa-info"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Course 3 -->
+                <div class="course-card-mobile" data-course="react-native">
+                    <div class="course-header" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                        <div class="course-category">Mobile</div>
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="course-content-mobile">
+                        <h4 class="course-title">React Native</h4>
+                        <p class="course-description">
+                            Créez des applications mobiles cross-platform.
+                        </p>
+                        <div class="course-progress-mobile">
+                            <div class="progress-bar-mobile">
+                                <div class="progress-fill" style="width: 40%;"></div>
+                            </div>
+                            <div class="course-meta">
+                                <span>40% complété</span>
+                                <span>6/15 leçons</span>
+                            </div>
+                        </div>
+                        <div class="course-actions-mobile">
+                            <button class="btn-course-primary" data-action="continue">
+                                <i class="fas fa-play"></i>
+                                Continuer
+                            </button>
+                            <button class="btn-course-secondary" data-action="info">
+                                <i class="fas fa-info"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mentors Section -->
+        <div class="mentors-section-mobile">
+            <div class="section-header">
+                <h3 class="section-title">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    Vos Mentors
+                </h3>
+                <button class="section-action" id="requestMentorBtn">
+                    <i class="fas fa-plus"></i>
+                    Demander
+                </button>
+            </div>
+            
+            <div class="mentors-grid-mobile">
+                <!-- Mentor 1 -->
+                <div class="mentor-card-mobile" data-mentor="jean">
+                    <img src="/images/avatars/mentor1.jpg" alt="Mentor" class="mentor-avatar">
+                    <div class="mentor-name">Dr. Jean Kabasele</div>
+                    <div class="mentor-specialty">Développement Web</div>
+                    <div class="mentor-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <button class="btn-mentor" data-action="contact">
+                        <i class="fas fa-comment me-1"></i>
+                        Contacter
+                    </button>
+                </div>
+                
+                <!-- Mentor 2 -->
+                <div class="mentor-card-mobile" data-mentor="sarah">
+                    <img src="/images/avatars/mentor2.jpg" alt="Mentor" class="mentor-avatar">
+                    <div class="mentor-name">Sarah Mukendi</div>
+                    <div class="mentor-specialty">Data Science</div>
+                    <div class="mentor-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <button class="btn-mentor" data-action="contact">
+                        <i class="fas fa-comment me-1"></i>
+                        Contacter
+                    </button>
+                </div>
+                
+                <!-- Mentor 3 -->
+                <div class="mentor-card-mobile" data-mentor="marc">
+                    <img src="/images/avatars/mentor3.jpg" alt="Mentor" class="mentor-avatar">
+                    <div class="mentor-name">Marc Kalonji</div>
+                    <div class="mentor-specialty">Marketing Digital</div>
+                    <div class="mentor-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <button class="btn-mentor" data-action="contact">
+                        <i class="fas fa-comment me-1"></i>
+                        Contacter
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav">
+        <a href="dashboard.html" class="bottom-nav-item">
+            <i class="fas fa-home"></i>
+            <span>Accueil</span>
+        </a>
+        <a href="apprenant-space.html" class="bottom-nav-item active">
+            <i class="fas fa-graduation-cap"></i>
+            <span>Cours</span>
+        </a>
+        <a href="mentor-space.html" class="bottom-nav-item">
+            <i class="fas fa-chalkboard-teacher"></i>
+            <span>Mentors</span>
+        </a>
+        <a href="chat.html" class="bottom-nav-item">
+            <i class="fas fa-comments"></i>
+            <span>Messages</span>
+        </a>
+        <a href="setting.html" class="bottom-nav-item">
+            <i class="fas fa-cog"></i>
+            <span>Réglages</span>
+        </a>
+    </nav>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Mobile Learner Space Initialization
+        document.addEventListener('DOMContentLoaded', function() {
+            // Détection mobile et initialisation
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            
+            // Fix iOS 100vh et safe areas
+            function setVH() {
+                let vh = window.innerHeight * 0.01;
+                document.documentElement.style.setProperty('--vh', `${vh}px`);
+            }
+            setVH();
+            window.addEventListener('resize', setVH);
+            window.addEventListener('orientationchange', setVH);
+            
+            // Gestion du menu mobile
+            const menuToggle = document.getElementById('menuToggle');
+            const mobileSidebar = document.getElementById('mobileSidebar');
+            
+            menuToggle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                mobileSidebar.classList.toggle('active');
+                
+                // Vibration tactile
+                if (navigator.vibrate) navigator.vibrate(50);
+            });
+            
+            // Fermer le menu en cliquant à l'extérieur
+            document.addEventListener('click', function(e) {
+                if (mobileSidebar.classList.contains('active') && 
+                    !mobileSidebar.contains(e.target) && 
+                    !menuToggle.contains(e.target)) {
+                    mobileSidebar.classList.remove('active');
+                }
+            });
+            
+            // Animation des statistiques
+            const stats = [
+                { element: 'progressGlobal', target: 75, suffix: '%', duration: 1500 },
+                { element: 'studyTime', target: 45, suffix: 'h', duration: 1800 },
+                { element: 'coursesCount', target: 12, suffix: '', duration: 1200 },
+                { element: 'certificationsCount', target: 3, suffix: '', duration: 1000 }
+            ];
+            
+            stats.forEach(stat => {
+                const element = document.getElementById(stat.element);
+                if (element) {
+                    let current = 0;
+                    const increment = stat.target / (stat.duration / 30);
+                    
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= stat.target) {
+                            element.textContent = stat.target + stat.suffix;
+                            clearInterval(timer);
+                        } else {
+                            element.textContent = Math.floor(current) + stat.suffix;
+                        }
+                    }, 30);
+                }
+            });
+            
+            // Gestion tactile pour mobile
+            const touchElements = document.querySelectorAll('.course-card-mobile, .progress-item-mobile, .mentor-card-mobile, .bottom-nav-item');
+            touchElements.forEach(el => {
+                el.addEventListener('touchstart', function() {
+                    this.style.transform = 'scale(0.98)';
+                    this.style.opacity = '0.9';
+                }, { passive: true });
+                
+                el.addEventListener('touchend', function() {
+                    this.style.transform = '';
+                    this.style.opacity = '';
+                }, { passive: true });
+            });
+            
+            // Gestion des boutons de cours
+            const courseButtons = document.querySelectorAll('[data-action="continue"], [data-action="info"]');
+            courseButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Vibration tactile
+                    if (navigator.vibrate) navigator.vibrate(100);
+                    
+                    const courseCard = this.closest('.course-card-mobile');
+                    const courseName = courseCard.querySelector('.course-title').textContent;
+                    const action = this.getAttribute('data-action');
+                    
+                    if (action === 'continue') {
+                        showMobileNotification('Lancement du cours', `Démarrage de "${courseName}"`, 'success');
+                    } else {
+                        showMobileNotification('Informations', `Détails du cours "${courseName}"`, 'info');
+                    }
+                });
+            });
+            
+            // Gestion des boutons de mentors
+            const mentorButtons = document.querySelectorAll('[data-action="contact"]');
+            mentorButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Vibration tactile
+                    if (navigator.vibrate) navigator.vibrate(100);
+                    
+                    const mentorCard = this.closest('.mentor-card-mobile');
+                    const mentorName = mentorCard.querySelector('.mentor-name').textContent;
+                    
+                    showMobileNotification('Contact mentor', `Ouverture de la messagerie avec ${mentorName}`, 'success');
+                });
+            });
+            
+            // Swipe pour les cours (mobile)
+            let startX = 0;
+            const coursesSlider = document.getElementById('coursesSlider');
+            
+            if (coursesSlider) {
+                coursesSlider.addEventListener('touchstart', function(e) {
+                    startX = e.touches[0].clientX;
+                }, { passive: true });
+                
+                coursesSlider.addEventListener('touchmove', function(e) {
+                    if (!startX) return;
+                    
+                    const currentX = e.touches[0].clientX;
+                    const diff = startX - currentX;
+                    
+                    if (Math.abs(diff) > 50) {
+                        this.scrollLeft += diff * 2;
+                        startX = currentX;
+                    }
+                }, { passive: true });
+            }
+            
+            // Actions des boutons d'en-tête
+            const actionButtons = ['continueBtn', 'exploreBtn', 'allCoursesBtn', 'requestMentorBtn', 'notificationBtn'];
+            actionButtons.forEach(btnId => {
+                const button = document.getElementById(btnId);
+                if (button) {
+                    button.addEventListener('click', function() {
+                        // Vibration tactile
+                        if (navigator.vibrate) navigator.vibrate(50);
+                        
+                        switch(btnId) {
+                            case 'continueBtn':
+                                showMobileNotification('Continuer', 'Reprise de votre dernier cours', 'info');
+                                break;
+                            case 'exploreBtn':
+                                showMobileNotification('Explorer', 'Ouverture du catalogue des cours', 'info');
+                                break;
+                            case 'allCoursesBtn':
+                                showMobileNotification('Tous les cours', 'Affichage de tous vos cours', 'info');
+                                break;
+                            case 'requestMentorBtn':
+                                showMobileNotification('Demander un mentor', 'Formulaire de demande de mentorat', 'info');
+                                break;
+                            case 'notificationBtn':
+                                showMobileNotification('Notifications', 'Vous avez 3 notifications', 'info');
+                                break;
+                        }
+                    });
+                }
+            });
+            
+            // Filtre de progression
+            const progressFilter = document.getElementById('progressFilter');
+            progressFilter.addEventListener('change', function() {
+                // Vibration tactile
+                if (navigator.vibrate) navigator.vibrate(50);
+                
+                showMobileNotification('Filtre', `Progression affichée: ${this.value}`, 'success');
+            });
+            
+            // Déconnexion
+            const logoutBtn = document.getElementById('logoutBtn');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', function() {
+                    // Vibration
+                    if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
+                    
+                    if (confirm('Êtes-vous sûr de vouloir vous déconnecter ?')) {
+                        setTimeout(() => {
+                            window.location.href = 'login.html';
+                        }, 500);
+                    }
+                });
+            }
+            
+            // Détection réseau
+            window.addEventListener('offline', function() {
+                showMobileNotification('Hors ligne', 'Certaines fonctionnalités peuvent être limitées', 'warning');
+            });
+            
+            window.addEventListener('online', function() {
+                showMobileNotification('En ligne', 'Connexion rétablie', 'success');
+            });
+            
+            // Mise à jour automatique de la progression
+            setInterval(() => {
+                // Simuler une mise à jour de progression
+                const progressElements = document.querySelectorAll('.progress-fill');
+                progressElements.forEach(progress => {
+                    const currentWidth = parseInt(progress.style.width);
+                    if (currentWidth < 100 && Math.random() > 0.7) {
+                        const newWidth = Math.min(currentWidth + 1, 100);
+                        progress.style.width = newWidth + '%';
+                        
+                        // Mettre à jour le texte de progression
+                        const metaElement = progress.closest('.course-progress-mobile').querySelector('.course-meta span:first-child');
+                        if (metaElement) {
+                            metaElement.textContent = newWidth + '% complété';
+                        }
+                    }
+                });
+            }, 30000);
+            
+            // Fonction pour afficher les notifications mobiles
+            function showMobileNotification(title, message, type = 'info') {
+                const notification = document.createElement('div');
+                const colors = {
+                    info: { bg: '#3b82f6', icon: 'info-circle' },
+                    success: { bg: '#10b981', icon: 'check-circle' },
+                    warning: { bg: '#f59e0b', icon: 'exclamation-triangle' },
+                    error: { bg: '#ef4444', icon: 'exclamation-circle' }
+                };
+                
+                const color = colors[type] || colors.info;
+                
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 80px;
+                    right: 15px;
+                    left: 15px;
+                    background: ${color.bg};
+                    color: white;
+                    padding: 15px;
+                    border-radius: 12px;
+                    z-index: 9999;
+                    display: flex;
+                    align-items: center;
+                    gap: 12px;
+                    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+                    animation: fadeIn 0.3s ease;
+                `;
+                
+                notification.innerHTML = `
+                    <i class="fas fa-${color.icon}" style="font-size: 1.2rem;"></i>
+                    <div>
+                        <div style="font-weight: 600; font-size: 0.95rem;">${title}</div>
+                        <div style="font-size: 0.85rem; opacity: 0.9;">${message}</div>
+                    </div>
+                `;
+                
+                document.body.appendChild(notification);
+                
+                // Retirer la notification après 3 secondes
+                setTimeout(() => {
+                    notification.style.animation = 'fadeOut 0.3s ease';
+                    setTimeout(() => notification.remove(), 300);
+                }, 3000);
+            }
+            
+            // Cacher le loading après 2 secondes
+            setTimeout(() => {
+                loadingOverlay.style.display = 'none';
+                
+                // Notification de bienvenue
+                if (isMobile && navigator.vibrate) {
+                    navigator.vibrate([100, 50, 100]);
+                }
+            }, 2000);
+        });
+    </script>
+</body>
+</html>

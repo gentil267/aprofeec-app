@@ -1,0 +1,861 @@
+ <!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>APROFEEC - Plateforme Professionnelle Mobile</title>
+    <meta name="theme-color" content="#0066cc">
+    
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Mobile Optimized CSS -->
+    <link rel="stylesheet" href="css/mobile-optimized.css">
+    
+    <style>
+        /* ============================================
+           STYLES OPTIMISÉS POUR MOBILE
+           Design professionnel pour petits écrans
+        ============================================ */
+        
+        /* 1. BASE STYLES - Optimisé pour mobile */
+        :root {
+            --primary-blue: #0066cc;
+            --secondary-blue: #3399ff;
+            --dark-blue: #004d99;
+            --light-blue: #e6f2ff;
+            --accent-color: #66b3ff;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --white: #ffffff;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.12);
+            --shadow-lg: 0 8px 24px rgba(0,0,0,0.15);
+            --border-radius: 12px;
+        }
+        
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.5;
+            color: var(--text-dark);
+            background: #f8fafc;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+            padding-top: 0;
+        }
+        
+        /* 2. TYPOGRAPHY MOBILE OPTIMIZED */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        /* 3. NAVBAR - Ultra responsive pour mobile */
+        .navbar-mobile-optimized {
+            background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue)) !important;
+            padding: 12px 0 !important;
+            position: fixed !important;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-md);
+            border-bottom: 3px solid var(--accent-color);
+            backdrop-filter: blur(10px);
+        }
+        
+        .navbar-mobile-optimized .navbar-brand {
+            font-size: 1.1rem !important;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white !important;
+        }
+        
+        .navbar-mobile-optimized .logo-small {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+        
+        .navbar-mobile-optimized .navbar-toggler {
+            border: 2px solid rgba(255,255,255,0.5);
+            padding: 6px 10px;
+            border-radius: 8px;
+            width: 44px;
+            height: 44px;
+        }
+        
+        .navbar-mobile-optimized .navbar-collapse {
+            background: rgba(0, 51, 102, 0.95);
+            border-radius: 16px;
+            padding: 20px;
+            margin-top: 15px;
+            box-shadow: var(--shadow-lg);
+            backdrop-filter: blur(20px);
+        }
+        
+        .navbar-mobile-optimized .nav-link {
+            color: rgba(255,255,255,0.9) !important;
+            font-weight: 500;
+            padding: 12px 16px !important;
+            border-radius: 10px;
+            margin: 4px 0;
+            text-align: center;
+            font-size: 1rem;
+        }
+        
+        .navbar-mobile-optimized .nav-link:hover,
+        .navbar-mobile-optimized .nav-link.active {
+            background: rgba(255,255,255,0.15);
+            color: white !important;
+        }
+        
+        /* 4. HERO SECTION - Optimisé pour mobile */
+        .hero-mobile-optimized {
+            color: white;
+            padding: 80px 20px 60px !important;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+                        url('images/backgrounds/aprb.JPG') center/cover no-repeat;
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin-top: 60px;
+        }
+        
+        .hero-mobile-optimized h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .hero-mobile-optimized .lead {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            line-height: 1.6;
+        }
+        
+        /* 5. BUTTONS - Touch friendly */
+        .btn-mobile-primary {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 16px 32px;
+            border-radius: 50px;
+            font-size: 1.05rem;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-md);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            min-height: 54px;
+            min-width: 140px;
+            width: 100%;
+            max-width: 280px;
+            margin: 8px auto;
+        }
+        
+        .btn-mobile-primary:hover {
+            background: linear-gradient(135deg, var(--dark-blue), var(--primary-blue));
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+            color: white;
+        }
+        
+        .btn-mobile-outline {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+            font-weight: 600;
+            padding: 16px 32px;
+            border-radius: 50px;
+            font-size: 1.05rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            min-height: 54px;
+            min-width: 140px;
+            width: 100%;
+            max-width: 280px;
+            margin: 8px auto;
+        }
+        
+        .btn-mobile-outline:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-3px);
+            color: white;
+        }
+        
+        /* 6. FEATURE CARDS - Mobile optimized */
+        .feature-card-mobile {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            padding: 25px 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border-top: 4px solid var(--primary-blue);
+            height: 100%;
+            margin-bottom: 20px;
+        }
+        
+        .feature-card-mobile:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .feature-card-mobile .icon-container {
+            width: 70px;
+            height: 70px;
+            background: var(--light-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 2rem;
+            color: var(--primary-blue);
+        }
+        
+        .feature-card-mobile h4 {
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+            color: var(--text-dark);
+        }
+        
+        .feature-card-mobile p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        /* 7. PARTNERS SECTION - Mobile grid */
+        .partners-section-mobile {
+            background: #f8fafc;
+        }
+        
+        .partner-card-mobile {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            padding: 20px 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100px;
+            transition: all 0.3s ease;
+            border: 1px solid #e5e7eb;
+        }
+        
+        .partner-card-mobile:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .partner-card-mobile img {
+            max-height: 60px;
+            max-width: 100%;
+            object-fit: contain;
+            width: auto;
+            height: auto;
+        }
+        
+        /* 8. FOOTER - Mobile optimized */
+        .footer-mobile-optimized {
+            background: linear-gradient(135deg, var(--dark-blue), var(--primary-blue));
+            color: white;
+            padding: 40px 0 30px;
+            margin-top: 40px;
+        }
+        
+        .footer-mobile-optimized a {
+            color: rgba(255,255,255,0.9);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-mobile-optimized a:hover {
+            color: white;
+        }
+        
+        /* 9. RESPONSIVE UTILITIES */
+        .mobile-only {
+            display: block;
+        }
+        
+        .desktop-only {
+            display: none;
+        }
+        
+        /* 10. MEDIA QUERIES POUR DIFFÉRENTS ÉCRANS */
+        
+        /* Très petits écrans (iPhone SE, etc.) */
+        @media (max-width: 375px) {
+            .hero-mobile-optimized h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero-mobile-optimized .lead {
+                font-size: 1rem;
+            }
+            
+            .btn-mobile-primary,
+            .btn-mobile-outline {
+                padding: 14px 24px;
+                font-size: 1rem;
+                min-height: 48px;
+            }
+            
+            .feature-card-mobile {
+                padding: 20px 15px;
+            }
+            
+            .feature-card-mobile h4 {
+                font-size: 1.2rem;
+            }
+            
+            .partner-card-mobile img {
+                max-height: 40px;
+            }
+        }
+        
+        /* Tablettes et plus grands */
+        @media (min-width: 768px) {
+            .mobile-only {
+                display: none;
+            }
+            
+            .desktop-only {
+                display: block;
+            }
+            
+            .hero-mobile-optimized {
+                padding: 120px 0 80px !important;
+                min-height: 70vh;
+            }
+            
+            .hero-mobile-optimized h1 {
+                font-size: 2.8rem;
+            }
+            
+            .hero-mobile-optimized .lead {
+                font-size: 1.3rem;
+            }
+            
+            .btn-mobile-primary,
+            .btn-mobile-outline {
+                width: auto;
+                margin: 0 8px;
+            }
+            
+            .partner-card-mobile img {
+                max-height: 70px;
+            }
+        }
+        
+        /* Orientation paysage mobile */
+        @media (max-width: 768px) and (orientation: landscape) {
+            .hero-mobile-optimized {
+                min-height: 100vh;
+                padding: 70px 20px !important;
+            }
+            
+            .navbar-mobile-optimized .navbar-collapse {
+                max-height: 70vh;
+                overflow-y: auto;
+            }
+        }
+        
+        /* Dark mode support */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: #121212;
+                color: #e0e0e0;
+            }
+            
+            .feature-card-mobile {
+                background: #1e1e1e;
+                color: #e0e0e0;
+            }
+            
+            .partner-card-mobile {
+                background: #1e1e1e;
+                border-color: #333;
+            }
+        }
+        
+        /* 11. ANIMATIONS DOUCES */
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* 12. SCROLL BEHAVIOR */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* 13. LOADING STATES */
+        .loading-skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+            border-radius: 8px;
+        }
+        
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        
+        /* 14. ACCESSIBILITY */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+        
+        /* 15. PERFECT TOUCH TARGETS */
+        button,
+        a.btn,
+        .nav-link,
+        input[type="submit"] {
+            min-height: 44px;
+            min-width: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAVBAR PROFESSIONNELLE MOBILE -->
+<nav class="navbar navbar-expand-lg navbar-dark navbar-mobile-optimized">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <img src="images/avatars/apu.jpg" class="logo-small" alt="APROFEEC">
+            <span>APROFEEC</span>
+            <small class="mobile-only">Mobile</small>
+        </a>
+        
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMobile">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarMobile">
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="login.html">
+                    <i class="fas fa-sign-in-alt me-2"></i>Connexion
+                </a>
+                <a class="nav-link" href="register.html">
+                    <i class="fas fa-user-plus me-2"></i>Inscription
+                </a>
+                <a class="nav-link" href="dashboard.html">
+                    <i class="fas fa-tachometer-alt me-2"></i>Dashboard
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- HERO SECTION OPTIMISÉ MOBILE -->
+<section class="hero-mobile-optimized fade-in">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-10">
+                <h1 class="mb-4">APROFEEC Platform</h1>
+                <p class="lead mb-5">
+                    AMANI KWETU II<br>
+                    Structure Professionnelle d'Apprentissage & Développement
+                </p>
+                
+                <div class="d-flex flex-column flex-md-row justify-content-center gap-3">
+                    <a href="register.html" class="btn-mobile-primary">
+                        <i class="fas fa-rocket me-2"></i>Commencer Maintenant
+                    </a>
+                    <a href="login.html" class="btn-mobile-outline">
+                        <i class="fas fa-sign-in-alt me-2"></i>Se Connecter
+                    </a>
+                </div>
+                
+                <div class="mt-5">
+                    <p class="small opacity-75">
+                        <i class="fas fa-mobile-alt me-2"></i>
+                        Optimisé pour mobile • Interface tactile • Chargement rapide
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FEATURES SECTION -->
+<section class="py-5 bg-white">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="mb-3" style="color: var(--dark-blue);">🎯 Notre Approche Unique</h2>
+            <p class="text-muted">Conçu spécifiquement pour les utilisateurs mobiles</p>
+        </div>
+        
+        <div class="row g-4">
+            <!-- Feature 1 -->
+            <div class="col-12 col-md-4">
+                <div class="feature-card-mobile">
+                    <div class="icon-container">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <h4>Mentorat Expert</h4>
+                    <p>Accédez à des mentors professionnels directement depuis votre mobile. Sessions en temps réel et support personnalisé.</p>
+                </div>
+            </div>
+            
+            <!-- Feature 2 -->
+            <div class="col-12 col-md-4">
+                <div class="feature-card-mobile">
+                    <div class="icon-container">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h4>Cours Structurés</h4>
+                    <p>Contenu optimisé pour l'apprentissage mobile. Formats courts, interactifs et accessibles partout.</p>
+                </div>
+            </div>
+            
+            <!-- Feature 3 -->
+            <div class="col-12 col-md-4">
+                <div class="feature-card-mobile">
+                    <div class="icon-container">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h4>Certification</h4>
+                    <p>Obtenez des certifications reconnues directement sur votre appareil mobile. Simple, rapide et efficace.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PARTNERS SECTION - Grid mobile optimisé -->
+<section class="py-5 partners-section-mobile">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="mb-3" style="color: var(--dark-blue);">🤝 Nos Partenaires</h2>
+            <p class="text-muted">Collaboration avec les leaders de l'industrie numérique</p>
+        </div>
+        
+        <div class="row g-3">
+            <!-- Grid 3x3 optimisé pour mobile -->
+            <div class="col-4 col-md-3 col-lg-2">
+                <div class="partner-card-mobile">
+                    <img src="images/partners/log1.jpg" alt="Partenaire 1" loading="lazy">
+                </div>
+            </div>
+            <div class="col-4 col-md-3 col-lg-2">
+                <div class="partner-card-mobile">
+                    <img src="images/partners/log2.jpg" alt="Partenaire 2" loading="lazy">
+                </div>
+            </div>
+            <div class="col-4 col-md-3 col-lg-2">
+                <div class="partner-card-mobile">
+                    <img src="images/partners/log3.jpg" alt="Partenaire 3" loading="lazy">
+                </div>
+            </div>
+            <div class="col-4 col-md-3 col-lg-2">
+                <div class="partner-card-mobile">
+                    <img src="images/partners/log4.jpg" alt="Partenaire 4" loading="lazy">
+                </div>
+            </div>
+            <div class="col-4 col-md-3 col-lg-2">
+                <div class="partner-card-mobile">
+                    <img src="images/partners/log5.jpg" alt="Partenaire 5" loading="lazy">
+                </div>
+            </div>
+            <div class="col-4 col-md-3 col-lg-2">
+                <div class="partner-card-mobile">
+                    <img src="images/partners/log6.jpg" alt="Partenaire 6" loading="lazy">
+                </div>
+            </div>
+            <div class="col-4 col-md-3 col-lg-2">
+                <div class="partner-card-mobile">
+                    <img src="images/partners/log7.jpg" alt="Partenaire 7" loading="lazy">
+                </div>
+            </div>
+            <div class="col-4 col-md-3 col-lg-2">
+                <div class="partner-card-mobile">
+                    <img src="images/partners/log8.jpg" alt="Partenaire 8" loading="lazy">
+                </div>
+            </div>
+            <div class="col-4 col-md-3 col-lg-2 mx-auto">
+                <div class="partner-card-mobile">
+                    <img src="images/partners/log9.jpg" alt="Partenaire 9" loading="lazy">
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center mt-5">
+            <div class="alert alert-info border-0" style="background: var(--light-blue);">
+                <h5 class="mb-2">🚀 Prêt pour la transformation numérique ?</h5>
+                <p class="mb-0">Rejoignez une communauté de professionnels qui apprennent et grandissent ensemble.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CALL TO ACTION MOBILE -->
+<section class="py-5" style="background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));">
+    <div class="container text-center text-white">
+        <h2 class="mb-4">Commencez Votre Voyage Aujourd'hui</h2>
+        <p class="mb-4 opacity-90">Téléchargez l'application ou accédez directement depuis votre navigateur mobile</p>
+        
+        <div class="d-flex flex-column flex-md-row justify-content-center gap-3">
+            <a href="register.html" class="btn btn-light btn-lg px-4">
+                <i class="fas fa-user-plus me-2"></i>S'inscrire Gratuitement
+            </a>
+            <a href="login.html" class="btn btn-outline-light btn-lg px-4">
+                <i class="fas fa-play-circle me-2"></i>Voir la Démo
+            </a>
+        </div>
+        
+        <div class="mt-4">
+            <small class="opacity-75">
+                <i class="fas fa-check-circle me-1"></i>
+                Compatible avec tous les smartphones
+            </small>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER MOBILE OPTIMIZED -->
+<footer class="footer-mobile-optimized">
+    <div class="container">
+        <div class="text-center mb-4">
+            <h4 class="mb-3">APROFEEC Platform</h4>
+            <p class="opacity-75 mb-4">AMANI KWETU II • Excellence Professionnelle & Innovation Mobile</p>
+            
+            <div class="d-flex justify-content-center gap-4 mb-4">
+                <a href="#">
+                    <i class="fab fa-facebook-f fa-lg"></i>
+                </a>
+                <a href="#">
+                    <i class="fab fa-twitter fa-lg"></i>
+                </a>
+                <a href="#">
+                    <i class="fab fa-linkedin-in fa-lg"></i>
+                </a>
+                <a href="#">
+                    <i class="fab fa-instagram fa-lg"></i>
+                </a>
+            </div>
+        </div>
+        
+        <div class="row text-center">
+            <div class="col-6 col-md-3 mb-3">
+                <h6>Plateforme</h6>
+                <div class="d-flex flex-column gap-2">
+                    <a href="login.html">Connexion</a>
+                    <a href="register.html">Inscription</a>
+                    <a href="dashboard.html">Tableau de bord</a>
+                </div>
+            </div>
+            <div class="col-6 col-md-3 mb-3">
+                <h6>Ressources</h6>
+                <div class="d-flex flex-column gap-2">
+                    <a href="#">Cours</a>
+                    <a href="#">Mentors</a>
+                    <a href="#">Certifications</a>
+                </div>
+            </div>
+            <div class="col-6 col-md-3 mb-3">
+                <h6>Support</h6>
+                <div class="d-flex flex-column gap-2">
+                    <a href="#">FAQ</a>
+                    <a href="#">Contact</a>
+                    <a href="#">Aide</a>
+                </div>
+            </div>
+            <div class="col-6 col-md-3 mb-3">
+                <h6>Légal</h6>
+                <div class="d-flex flex-column gap-2">
+                    <a href="#">Confidentialité</a>
+                    <a href="#">Conditions</a>
+                    <a href="#">Cookies</a>
+                </div>
+            </div>
+        </div>
+        
+        <hr class="my-4 opacity-25">
+        
+        <div class="text-center">
+            <p class="mb-0 small opacity-75">
+                © 2026 APROFEEC Platform • Version Mobile 2.0<br>
+                Optimisé pour iOS & Android • Chargement rapide • Interface tactile
+            </p>
+        </div>
+    </div>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Mobile Optimization Script -->
+<script>
+    // Mobile optimization script
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('✅ Page APROFEEC chargée');
+        
+        // 1. Detect touch device
+        const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+        if (isTouchDevice) {
+            document.body.classList.add('touch-device');
+            console.log('📱 Appareil tactile détecté');
+        }
+        
+        // 2. Prevent zoom on input focus (iOS)
+        document.querySelectorAll('input, select, textarea').forEach(el => {
+            el.addEventListener('focus', function() {
+                this.style.fontSize = '16px';
+            });
+        });
+        
+        // 3. Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+        
+        // 4. Mobile menu optimization
+        const navbarToggler = document.querySelector('.navbar-toggler');
+        const navbarCollapse = document.querySelector('.navbar-collapse');
+        
+        if (navbarToggler && navbarCollapse) {
+            navbarToggler.addEventListener('click', function() {
+                this.classList.toggle('active');
+            });
+            
+            // Close menu when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!navbarToggler.contains(e.target) && !navbarCollapse.contains(e.target)) {
+                    if (navbarCollapse.classList.contains('show')) {
+                        navbarToggler.click();
+                    }
+                }
+            });
+        }
+        
+        // 5. Vérifier le chargement des images des partenaires
+        const partnerImages = document.querySelectorAll('.partner-card-mobile img');
+        console.log(`📸 ${partnerImages.length} images de partenaires détectées`);
+        
+        let loadedImages = 0;
+        partnerImages.forEach((img, index) => {
+            img.onload = function() {
+                loadedImages++;
+                console.log(`✅ Image ${index + 1} chargée: ${img.src}`);
+                
+                if (loadedImages === partnerImages.length) {
+                    console.log('🎉 TOUTES les images des partenaires sont chargées !');
+                }
+            };
+            
+            img.onerror = function() {
+                console.error(`❌ Erreur image ${index + 1}: ${img.src}`);
+                this.style.border = '2px solid red';
+            };
+        });
+        
+        // 6. Performance monitoring
+        window.addEventListener('load', function() {
+            const loadTime = window.performance.timing.domContentLoadedEventEnd - window.performance.timing.navigationStart;
+            console.log(`⏱️  Page chargée en ${loadTime}ms`);
+            
+            // Afficher un message si certaines images n'ont pas chargé
+            setTimeout(() => {
+                if (loadedImages < partnerImages.length) {
+                    console.warn(`⚠️  ${partnerImages.length - loadedImages} images de partenaires non chargées`);
+                }
+            }, 2000);
+        });
+        
+        // 7. Handle orientation changes
+        window.addEventListener('orientationchange', function() {
+            console.log('🔄 Orientation changée');
+            if (window.innerWidth <= 768) {
+                setTimeout(() => {
+                    window.scrollTo(0, window.pageYOffset);
+                }, 100);
+            }
+        });
+        
+        // 8. Add active class to current page link
+        const currentPath = window.location.pathname;
+        document.querySelectorAll('.nav-link').forEach(link => {
+            if (link.getAttribute('href') === currentPath || 
+                (currentPath === '/' && link.getAttribute('href') === 'index.html')) {
+                link.classList.add('active');
+            }
+        });
+    });
+    
+    // Handle iOS specific issues
+    if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
+        document.body.classList.add('ios-device');
+        console.log('🍎 Appareil iOS détecté');
+        
+        // Fix for iOS 100vh issue
+        function setVH() {
+            let vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+        }
+        setVH();
+        window.addEventListener('resize', setVH);
+        window.addEventListener('orientationchange', setVH);
+    }
+</script>
+
+</body>
+</html> 
