@@ -6,10 +6,10 @@
     <title>APROFEEC - Plateforme Professionnelle Mobile</title>
     <meta name="theme-color" content="#0066cc">
     
-    <!-- Bootstrap 5 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap 5 (Cloudflare - compatible CSP) -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     
-    <!-- Font Awesome -->
+    <!-- Font Awesome (Cloudflare) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- Mobile Optimized CSS -->
@@ -126,24 +126,24 @@
         }
         
         /* ---------- HERO ---------- */
-.hero-mobile-optimized {
-    color: white;
-    padding: 80px 20px 60px !important;
-    background: url("images/backgrounds/aprb.JPG") 50% 20% / cover no-repeat;
-    text-shadow: 0 2px 12px rgba(0,0,0,0.7);
-    min-height: 85vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    margin-top: 60px;
-}
+        .hero-mobile-optimized {
+            color: white;
+            padding: 80px 20px 60px !important;
+            background: url('images/backgrounds/aprb.JPG') center/cover no-repeat;
+            text-shadow: 0 2px 12px rgba(0,0,0,0.7);
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin-top: 60px;
+        }
         
         .hero-mobile-optimized h1 {
             font-size: 2.2rem;
             font-weight: 800;
             margin-bottom: 1rem;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            text-shadow: 0 2px 12px rgba(0,0,0,0.8);
         }
         
         .hero-mobile-optimized .lead {
@@ -374,18 +374,10 @@
             .desktop-only {
                 display: block;
             }
-.hero-mobile-optimized {
-    color: white;
-    padding: 80px 20px 60px !important;
-    background: url("images/backgrounds/aprb.JPG") 50% 20% / cover no-repeat;
-    text-shadow: 0 2px 12px rgba(0,0,0,0.7);
-    min-height: 85vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    margin-top: 60px;
-}
+            .hero-mobile-optimized {
+                padding: 120px 0 80px !important;
+                min-height: 70vh;
+            }
             .hero-mobile-optimized h1 {
                 font-size: 2.8rem;
             }
@@ -405,18 +397,10 @@
         }
         
         @media (max-width: 768px) and (orientation: landscape) {
-.hero-mobile-optimized {
-    color: white;
-    padding: 80px 20px 60px !important;
-    background: url("images/backgrounds/aprb.JPG") 50% 20% / cover no-repeat;
-    text-shadow: 0 2px 12px rgba(0,0,0,0.7);
-    min-height: 85vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    margin-top: 60px;
-}
+            .hero-mobile-optimized {
+                min-height: 100vh;
+                padding: 70px 20px !important;
+            }
             .navbar-mobile-optimized .navbar-collapse {
                 max-height: 70vh;
                 overflow-y: auto;
@@ -747,11 +731,12 @@
     </div>
 </footer>
 
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Bootstrap JS (Cloudflare) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 
-<!-- Mobile Optimization Script (identique, fonctionnel) -->
+<!-- Mobile Optimization Script -->
 <script>
+    // Mobile optimization script
     document.addEventListener('DOMContentLoaded', function() {
         console.log('✅ Page APROFEEC chargée');
         
