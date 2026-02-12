@@ -12,14 +12,8 @@
     <!-- Font Awesome (Cloudflare) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Mobile Optimized CSS -->
-    
     <style>
-        /* ============================================
-           STYLES OPTIMISÉS POUR MOBILE
-           Design professionnel pour petits écrans
-        ============================================ */
-        
+        /* ===== STYLES COMPLETS – DESIGN PROFESSIONNEL ===== */
         :root {
             --primary-blue: #0066cc;
             --secondary-blue: #3399ff;
@@ -35,34 +29,17 @@
             --border-radius: 12px;
         }
         
-        * {
-            box-sizing: border-box;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.5;
-            color: var(--text-dark);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: #f8fafc;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
             overflow-x: hidden;
-            padding-top: 0;
         }
         
-        h1, h2, h3, h4, h5, h6 {
-            font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 1rem;
-        }
-        
-        p {
-            margin-bottom: 1rem;
-        }
-        
-        /* ---------- NAVBAR ---------- */
+        /* Navbar */
         .navbar-mobile-optimized {
-            background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue)) !important;
+            background: linear-gradient(135deg, #0066cc, #004d99) !important;
             padding: 12px 0 !important;
             position: fixed !important;
             top: 0;
@@ -70,8 +47,7 @@
             right: 0;
             z-index: 1000;
             box-shadow: var(--shadow-md);
-            border-bottom: 3px solid var(--accent-color);
-            backdrop-filter: blur(10px);
+            border-bottom: 3px solid #66b3ff;
         }
         
         .navbar-mobile-optimized .navbar-brand {
@@ -104,18 +80,15 @@
             border-radius: 16px;
             padding: 20px;
             margin-top: 15px;
-            box-shadow: var(--shadow-lg);
             backdrop-filter: blur(20px);
         }
         
         .navbar-mobile-optimized .nav-link {
             color: rgba(255,255,255,0.9) !important;
-            font-weight: 500;
             padding: 12px 16px !important;
             border-radius: 10px;
             margin: 4px 0;
             text-align: center;
-            font-size: 1rem;
         }
         
         .navbar-mobile-optimized .nav-link:hover,
@@ -124,7 +97,7 @@
             color: white !important;
         }
         
-        /* ---------- HERO ---------- */
+        /* Hero */
         .hero-mobile-optimized {
             color: white;
             padding: 80px 20px 60px !important;
@@ -152,9 +125,8 @@
             line-height: 1.6;
         }
         
-        /* ---------- BOUTONS HERO ---------- */
-        .btn-mobile-primary,
-        .btn-mobile-outline {
+        /* Boutons */
+        .btn-mobile-primary, .btn-mobile-outline {
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -173,15 +145,14 @@
         }
         
         .btn-mobile-primary {
-            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            background: linear-gradient(135deg, #0066cc, #3399ff);
             color: white;
         }
         
         .btn-mobile-primary:hover {
-            background: linear-gradient(135deg, var(--dark-blue), var(--primary-blue));
+            background: linear-gradient(135deg, #004d99, #0066cc);
             transform: translateY(-3px);
             box-shadow: var(--shadow-lg);
-            color: white;
         }
         
         .btn-mobile-outline {
@@ -193,18 +164,17 @@
         .btn-mobile-outline:hover {
             background: rgba(255,255,255,0.1);
             transform: translateY(-3px);
-            color: white;
         }
         
-        /* ---------- FEATURE CARDS ---------- */
+        /* Features */
         .feature-card-mobile {
             background: white;
-            border-radius: var(--border-radius);
+            border-radius: 12px;
             box-shadow: var(--shadow-sm);
             padding: 25px 20px;
             text-align: center;
-            transition: all 0.3s ease;
-            border-top: 4px solid var(--primary-blue);
+            transition: all 0.3s;
+            border-top: 4px solid #0066cc;
             height: 100%;
             margin-bottom: 20px;
         }
@@ -217,44 +187,42 @@
         .feature-card-mobile .icon-container {
             width: 70px;
             height: 70px;
-            background: var(--light-blue);
+            background: #e6f2ff;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 20px;
             font-size: 2rem;
-            color: var(--primary-blue);
+            color: #0066cc;
         }
         
         .feature-card-mobile h4 {
             font-size: 1.3rem;
             margin-bottom: 12px;
-            color: var(--text-dark);
+            color: #333;
         }
         
         .feature-card-mobile p {
-            color: var(--text-light);
+            color: #666;
             font-size: 0.95rem;
             line-height: 1.5;
         }
         
-        /* ---------- PARTENAIRES – GRILLE 3/3/3/2 = 11 LOGOS ---------- */
-        .partners-section-mobile {
-            background: #f8fafc;
-        }
+        /* Partenaires – 11 LOGOS */
+        .partners-section-mobile { background: #f8fafc; }
         
         .partner-card-mobile {
             background: white;
-            border-radius: var(--border-radius);
+            border-radius: 12px;
             box-shadow: var(--shadow-sm);
             padding: 20px 15px;
             display: flex;
             align-items: center;
             justify-content: center;
             min-height: 100px;
-            transition: all 0.3s ease;
             border: 1px solid #e5e7eb;
+            transition: all 0.3s;
         }
         
         .partner-card-mobile:hover {
@@ -266,13 +234,11 @@
             max-height: 60px;
             max-width: 100%;
             object-fit: contain;
-            width: auto;
-            height: auto;
         }
         
-        /* ---------- FOOTER ---------- */
+        /* Footer */
         .footer-mobile-optimized {
-            background: linear-gradient(135deg, var(--dark-blue), var(--primary-blue));
+            background: linear-gradient(135deg, #004d99, #0066cc);
             color: white;
             padding: 40px 0 30px;
             margin-top: 40px;
@@ -281,16 +247,12 @@
         .footer-mobile-optimized a {
             color: rgba(255,255,255,0.9);
             text-decoration: none;
-            transition: color 0.3s ease;
+            transition: color 0.3s;
         }
         
-        .footer-mobile-optimized a:hover {
-            color: white;
-        }
+        .footer-mobile-optimized a:hover { color: white; }
         
-        /* ---------- BOUTONS CTA (SECTION BLEUE) ---------- */
-        .btn-cta-light,
-        .btn-cta-outline-light {
+        .btn-cta-light, .btn-cta-outline-light {
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -299,7 +261,7 @@
             border-radius: 50px;
             font-weight: 600;
             font-size: 1rem;
-            transition: all 0.3s ease;
+            transition: all 0.3s;
             width: 100%;
             max-width: 280px;
             margin: 8px auto;
@@ -308,7 +270,7 @@
         
         .btn-cta-light {
             background: white;
-            color: var(--primary-blue) !important;
+            color: #0066cc !important;
             border: none;
             box-shadow: var(--shadow-md);
         }
@@ -316,8 +278,7 @@
         .btn-cta-light:hover {
             background: #f8f9fa;
             transform: translateY(-3px);
-            box-shadow: var(--shadow-lg);
-            color: var(--dark-blue) !important;
+            color: #004d99 !important;
         }
         
         .btn-cta-outline-light {
@@ -329,147 +290,28 @@
         .btn-cta-outline-light:hover {
             background: rgba(255,255,255,0.1);
             transform: translateY(-3px);
-            color: white !important;
-        }
-        
-        /* ---------- RESPONSIVE ---------- */
-        .mobile-only {
-            display: block;
-        }
-        .desktop-only {
-            display: none;
         }
         
         @media (max-width: 375px) {
-            .hero-mobile-optimized h1 {
-                font-size: 1.8rem;
-            }
-            .hero-mobile-optimized .lead {
-                font-size: 1rem;
-            }
-            .btn-mobile-primary,
-            .btn-mobile-outline,
-            .btn-cta-light,
-            .btn-cta-outline-light {
-                padding: 14px 24px;
-                font-size: 1rem;
-                min-height: 48px;
-            }
-            .feature-card-mobile {
-                padding: 20px 15px;
-            }
-            .feature-card-mobile h4 {
-                font-size: 1.2rem;
-            }
-            .partner-card-mobile img {
-                max-height: 40px;
-            }
+            .hero-mobile-optimized h1 { font-size: 1.8rem; }
+            .hero-mobile-optimized .lead { font-size: 1rem; }
+            .partner-card-mobile img { max-height: 40px; }
         }
         
         @media (min-width: 768px) {
-            .mobile-only {
-                display: none;
-            }
-            .desktop-only {
-                display: block;
-            }
-            .hero-mobile-optimized {
-                padding: 120px 0 80px !important;
-                min-height: 70vh;
-            }
-            .hero-mobile-optimized h1 {
-                font-size: 2.8rem;
-            }
-            .hero-mobile-optimized .lead {
-                font-size: 1.3rem;
-            }
-            .btn-mobile-primary,
-            .btn-mobile-outline,
-            .btn-cta-light,
-            .btn-cta-outline-light {
-                width: auto;
-                margin: 0 8px;
-            }
-            .partner-card-mobile img {
-                max-height: 70px;
-            }
+            .hero-mobile-optimized { padding: 120px 0 80px !important; min-height: 70vh; }
+            .hero-mobile-optimized h1 { font-size: 2.8rem; }
+            .hero-mobile-optimized .lead { font-size: 1.3rem; }
+            .btn-mobile-primary, .btn-mobile-outline { width: auto; margin: 0 8px; }
+            .partner-card-mobile img { max-height: 70px; }
         }
         
-        @media (max-width: 768px) and (orientation: landscape) {
-            .hero-mobile-optimized {
-                min-height: 100vh;
-                padding: 70px 20px !important;
-            }
-            .navbar-mobile-optimized .navbar-collapse {
-                max-height: 70vh;
-                overflow-y: auto;
-            }
-        }
-        
-        /* Dark mode support */
-        @media (prefers-color-scheme: dark) {
-            body {
-                background: #121212;
-                color: #e0e0e0;
-            }
-            .feature-card-mobile {
-                background: #1e1e1e;
-                color: #e0e0e0;
-            }
-            .partner-card-mobile {
-                background: #1e1e1e;
-                border-color: #333;
-            }
-        }
-        
-        /* Animations */
-        .fade-in {
-            animation: fadeIn 0.5s ease-in-out;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        html {
-            scroll-behavior: smooth;
-        }
-        
-        .loading-skeleton {
-            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-            background-size: 200% 100%;
-            animation: loading 1.5s infinite;
-            border-radius: 8px;
-        }
-        @keyframes loading {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
-        }
-        
-        .sr-only {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0,0,0,0);
-            white-space: nowrap;
-            border: 0;
-        }
-        
-        button, a.btn, .nav-link, input[type="submit"] {
-            min-height: 44px;
-            min-width: 44px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
+        .fade-in { animation: fadeIn 0.5s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
-<!-- NAVBAR PROFESSIONNELLE MOBILE -->
 <nav class="navbar navbar-expand-lg navbar-dark navbar-mobile-optimized">
     <div class="container">
         <a class="navbar-brand" href="/">
@@ -477,167 +319,91 @@
             <span>APROFEEC</span>
             <small class="mobile-only">Mobile</small>
         </a>
-        
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMobile">
             <span class="navbar-toggler-icon"></span>
         </button>
-        
         <div class="collapse navbar-collapse" id="navbarMobile">
             <div class="navbar-nav ms-auto">
-                <a class="nav-link" href="login.html">
-                    <i class="fas fa-sign-in-alt me-2"></i>Connexion
-                </a>
-                <a class="nav-link" href="register.html">
-                    <i class="fas fa-user-plus me-2"></i>Inscription
-                </a>
-                <a class="nav-link" href="dashboard.html">
-                    <i class="fas fa-tachometer-alt me-2"></i>Dashboard
-                </a>
+                <a class="nav-link" href="login.html"><i class="fas fa-sign-in-alt me-2"></i>Connexion</a>
+                <a class="nav-link" href="register.html"><i class="fas fa-user-plus me-2"></i>Inscription</a>
+                <a class="nav-link" href="dashboard.html"><i class="fas fa-tachometer-alt me-2"></i>Dashboard</a>
             </div>
         </div>
     </div>
 </nav>
 
-<!-- HERO SECTION OPTIMISÉ MOBILE -->
 <section class="hero-mobile-optimized fade-in">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-12 col-lg-10">
                 <h1 class="mb-4">APROFEEC Platform</h1>
-                <p class="lead mb-5">
-                    AMANI KWETU II<br>
-                    Structure Professionnelle d'Apprentissage & Développement
-                </p>
-                
+                <p class="lead mb-5">AMANI KWETU II<br>Structure Professionnelle d'Apprentissage & Développement</p>
                 <div class="d-flex flex-column flex-md-row justify-content-center gap-3">
-                    <a href="register.html" class="btn-mobile-primary">
-                        <i class="fas fa-rocket me-2"></i>Commencer Maintenant
-                    </a>
-                    <a href="login.html" class="btn-mobile-outline">
-                        <i class="fas fa-sign-in-alt me-2"></i>Se Connecter
-                    </a>
+                    <a href="register.html" class="btn-mobile-primary"><i class="fas fa-rocket me-2"></i>Commencer Maintenant</a>
+                    <a href="login.html" class="btn-mobile-outline"><i class="fas fa-sign-in-alt me-2"></i>Se Connecter</a>
                 </div>
-                
                 <div class="mt-5">
-                    <p class="small opacity-75">
-                        <i class="fas fa-mobile-alt me-2"></i>
-                        Optimisé pour mobile • Interface tactile • Chargement rapide
-                    </p>
+                    <p class="small opacity-75"><i class="fas fa-mobile-alt me-2"></i>Optimisé pour mobile • Interface tactile • Chargement rapide</p>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- FEATURES SECTION -->
 <section class="py-5 bg-white">
     <div class="container">
         <div class="text-center mb-5">
-            <h2 class="mb-3" style="color: var(--dark-blue);">🎯 Notre Approche Unique</h2>
+            <h2 class="mb-3" style="color: #004d99;">🎯 Notre Approche Unique</h2>
             <p class="text-muted">Conçu spécifiquement pour les utilisateurs mobiles</p>
         </div>
-        
         <div class="row g-4">
             <div class="col-12 col-md-4">
                 <div class="feature-card-mobile">
-                    <div class="icon-container">
-                        <i class="fas fa-chalkboard-teacher"></i>
-                    </div>
+                    <div class="icon-container"><i class="fas fa-chalkboard-teacher"></i></div>
                     <h4>Mentorat Expert</h4>
-                    <p>Accédez à des mentors professionnels directement depuis votre mobile. Sessions en temps réel et support personnalisé.</p>
+                    <p>Accédez à des mentors professionnels directement depuis votre mobile.</p>
                 </div>
             </div>
             <div class="col-12 col-md-4">
                 <div class="feature-card-mobile">
-                    <div class="icon-container">
-                        <i class="fas fa-book-open"></i>
-                    </div>
+                    <div class="icon-container"><i class="fas fa-book-open"></i></div>
                     <h4>Cours Structurés</h4>
-                    <p>Contenu optimisé pour l'apprentissage mobile. Formats courts, interactifs et accessibles partout.</p>
+                    <p>Contenu optimisé pour l'apprentissage mobile.</p>
                 </div>
             </div>
             <div class="col-12 col-md-4">
                 <div class="feature-card-mobile">
-                    <div class="icon-container">
-                        <i class="fas fa-graduation-cap"></i>
-                    </div>
+                    <div class="icon-container"><i class="fas fa-graduation-cap"></i></div>
                     <h4>Certification</h4>
-                    <p>Obtenez des certifications reconnues directement sur votre appareil mobile. Simple, rapide et efficace.</p>
+                    <p>Obtenez des certifications reconnues directement sur mobile.</p>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- PARTNERS SECTION - 11 LOGOS, STRUCTURE PROPRE -->
 <section class="py-5 partners-section-mobile">
     <div class="container">
         <div class="text-center mb-5">
-            <h2 class="mb-3" style="color: var(--dark-blue);">🤝 Nos Partenaires</h2>
+            <h2 class="mb-3" style="color: #004d99;">🤝 Nos Partenaires</h2>
             <p class="text-muted">Collaboration avec les leaders de l'industrie numérique</p>
         </div>
-        
         <div class="row g-3">
-            <!-- 11 LOGOS (log1 à log11) -->
-            <div class="col-4 col-md-3 col-lg-2">
-                <div class="partner-card-mobile">
-                    <img src="images/partners/log1.jpg" alt="Partenaire 1" loading="lazy">
-                </div>
-            </div>
-            <div class="col-4 col-md-3 col-lg-2">
-                <div class="partner-card-mobile">
-                    <img src="images/partners/log2.jpg" alt="Partenaire 2" loading="lazy">
-                </div>
-            </div>
-            <div class="col-4 col-md-3 col-lg-2">
-                <div class="partner-card-mobile">
-                    <img src="images/partners/log3.jpg" alt="Partenaire 3" loading="lazy">
-                </div>
-            </div>
-            <div class="col-4 col-md-3 col-lg-2">
-                <div class="partner-card-mobile">
-                    <img src="images/partners/log4.jpg" alt="Partenaire 4" loading="lazy">
-                </div>
-            </div>
-            <div class="col-4 col-md-3 col-lg-2">
-                <div class="partner-card-mobile">
-                    <img src="images/partners/log5.jpg" alt="Partenaire 5" loading="lazy">
-                </div>
-            </div>
-            <div class="col-4 col-md-3 col-lg-2">
-                <div class="partner-card-mobile">
-                    <img src="images/partners/log6.jpg" alt="Partenaire 6" loading="lazy">
-                </div>
-            </div>
-            <div class="col-4 col-md-3 col-lg-2">
-                <div class="partner-card-mobile">
-                    <img src="images/partners/log7.jpg" alt="Partenaire 7" loading="lazy">
-                </div>
-            </div>
-            <div class="col-4 col-md-3 col-lg-2">
-                <div class="partner-card-mobile">
-                    <img src="images/partners/log8.jpg" alt="Partenaire 8" loading="lazy">
-                </div>
-            </div>
-            <div class="col-4 col-md-3 col-lg-2">
-                <div class="partner-card-mobile">
-                    <img src="images/partners/log9.jpg" alt="Partenaire 9" loading="lazy">
-                </div>
-            </div>
-            <div class="col-4 col-md-3 col-lg-2">
-                <div class="partner-card-mobile">
-                    <img src="images/partners/log10.jpg" alt="Partenaire 10" loading="lazy">
-                </div>
-            </div>
-            <div class="col-4 col-md-3 col-lg-2">
-                <div class="partner-card-mobile">
-                    <img src="images/partners/log11.jpg" alt="Partenaire 11" loading="lazy">
-                </div>
-            </div>
+            <!-- 11 LOGOS -->
+            <div class="col-4 col-md-3 col-lg-2"><div class="partner-card-mobile"><img src="images/partners/log1.jpg" alt="Partenaire 1" loading="lazy"></div></div>
+            <div class="col-4 col-md-3 col-lg-2"><div class="partner-card-mobile"><img src="images/partners/log2.jpg" alt="Partenaire 2" loading="lazy"></div></div>
+            <div class="col-4 col-md-3 col-lg-2"><div class="partner-card-mobile"><img src="images/partners/log3.jpg" alt="Partenaire 3" loading="lazy"></div></div>
+            <div class="col-4 col-md-3 col-lg-2"><div class="partner-card-mobile"><img src="images/partners/log4.jpg" alt="Partenaire 4" loading="lazy"></div></div>
+            <div class="col-4 col-md-3 col-lg-2"><div class="partner-card-mobile"><img src="images/partners/log5.jpg" alt="Partenaire 5" loading="lazy"></div></div>
+            <div class="col-4 col-md-3 col-lg-2"><div class="partner-card-mobile"><img src="images/partners/log6.jpg" alt="Partenaire 6" loading="lazy"></div></div>
+            <div class="col-4 col-md-3 col-lg-2"><div class="partner-card-mobile"><img src="images/partners/log7.jpg" alt="Partenaire 7" loading="lazy"></div></div>
+            <div class="col-4 col-md-3 col-lg-2"><div class="partner-card-mobile"><img src="images/partners/log8.jpg" alt="Partenaire 8" loading="lazy"></div></div>
+            <div class="col-4 col-md-3 col-lg-2"><div class="partner-card-mobile"><img src="images/partners/log9.jpg" alt="Partenaire 9" loading="lazy"></div></div>
+            <div class="col-4 col-md-3 col-lg-2"><div class="partner-card-mobile"><img src="images/partners/log10.jpg" alt="Partenaire 10" loading="lazy"></div></div>
+            <div class="col-4 col-md-3 col-lg-2"><div class="partner-card-mobile"><img src="images/partners/log11.jpg" alt="Partenaire 11" loading="lazy"></div></div>
         </div>
-        
         <div class="text-center mt-5">
-            <div class="alert alert-info border-0" style="background: var(--light-blue);">
+            <div class="alert alert-info border-0" style="background: #e6f2ff;">
                 <h5 class="mb-2">🚀 Prêt pour la transformation numérique ?</h5>
                 <p class="mb-0">Rejoignez une communauté de professionnels qui apprennent et grandissent ensemble.</p>
             </div>
@@ -645,37 +411,23 @@
     </div>
 </section>
 
-<!-- CALL TO ACTION MOBILE – BOUTONS PROFESSIONNELS -->
-<section class="py-5" style="background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));">
+<section class="py-5" style="background: linear-gradient(135deg, #0066cc, #004d99);">
     <div class="container text-center text-white">
         <h2 class="mb-4">Commencez Votre Voyage Aujourd'hui</h2>
         <p class="mb-4 opacity-90">Téléchargez l'application ou accédez directement depuis votre navigateur mobile</p>
-        
         <div class="d-flex flex-column flex-md-row justify-content-center align-items-center gap-3">
-            <a href="register.html" class="btn-cta-light">
-                <i class="fas fa-user-plus me-2"></i>S'inscrire Gratuitement
-            </a>
-            <a href="login.html" class="btn-cta-outline-light">
-                <i class="fas fa-play-circle me-2"></i>Voir la Démo
-            </a>
+            <a href="register.html" class="btn-cta-light"><i class="fas fa-user-plus me-2"></i>S'inscrire Gratuitement</a>
+            <a href="login.html" class="btn-cta-outline-light"><i class="fas fa-play-circle me-2"></i>Voir la Démo</a>
         </div>
-        
-        <div class="mt-4">
-            <small class="opacity-75">
-                <i class="fas fa-check-circle me-1"></i>
-                Compatible avec tous les smartphones
-            </small>
-        </div>
+        <div class="mt-4"><small class="opacity-75"><i class="fas fa-check-circle me-1"></i>Compatible avec tous les smartphones</small></div>
     </div>
 </section>
 
-<!-- FOOTER MOBILE OPTIMIZED -->
 <footer class="footer-mobile-optimized">
     <div class="container">
         <div class="text-center mb-4">
             <h4 class="mb-3">APROFEEC Platform</h4>
             <p class="opacity-75 mb-4">AMANI KWETU II • Excellence Professionnelle & Innovation Mobile</p>
-            
             <div class="d-flex justify-content-center gap-4 mb-4">
                 <a href="#"><i class="fab fa-facebook-f fa-lg"></i></a>
                 <a href="#"><i class="fab fa-twitter fa-lg"></i></a>
@@ -683,7 +435,6 @@
                 <a href="#"><i class="fab fa-instagram fa-lg"></i></a>
             </div>
         </div>
-        
         <div class="row text-center">
             <div class="col-6 col-md-3 mb-3">
                 <h6>Plateforme</h6>
@@ -718,9 +469,7 @@
                 </div>
             </div>
         </div>
-        
         <hr class="my-4 opacity-25">
-        
         <div class="text-center">
             <p class="mb-0 small opacity-75">
                 © 2026 APROFEEC Platform • Version Mobile 2.0<br>
@@ -730,94 +479,6 @@
     </div>
 </footer>
 
-<!-- Bootstrap JS (Cloudflare) -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-
-<!-- Mobile Optimization Script -->
-<script>
-    // Mobile optimization script
-    document.addEventListener('DOMContentLoaded', function() {
-        console.log('✅ Page APROFEEC chargée');
-        
-        const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-        if (isTouchDevice) document.body.classList.add('touch-device');
-        
-        document.querySelectorAll('input, select, textarea').forEach(el => {
-            el.addEventListener('focus', function() { this.style.fontSize = '16px'; });
-        });
-        
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                const href = this.getAttribute('href');
-                if (href !== '#') {
-                    e.preventDefault();
-                    const target = document.querySelector(href);
-                    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
-        
-        const navbarToggler = document.querySelector('.navbar-toggler');
-        const navbarCollapse = document.querySelector('.navbar-collapse');
-        if (navbarToggler && navbarCollapse) {
-            navbarToggler.addEventListener('click', function() { this.classList.toggle('active'); });
-            document.addEventListener('click', function(e) {
-                if (!navbarToggler.contains(e.target) && !navbarCollapse.contains(e.target) && navbarCollapse.classList.contains('show')) {
-                    navbarToggler.click();
-                }
-            });
-        }
-        
-        const partnerImages = document.querySelectorAll('.partner-card-mobile img');
-        console.log(`📸 ${partnerImages.length} images de partenaires détectées`);
-        let loadedImages = 0;
-        partnerImages.forEach((img, index) => {
-            img.onload = function() {
-                loadedImages++;
-                console.log(`✅ Image ${index + 1} chargée: ${img.src.split('/').pop()}`);
-                if (loadedImages === partnerImages.length) console.log('🎉 TOUTES les images des partenaires sont chargées !');
-            };
-            img.onerror = function() {
-                console.error(`❌ Erreur image ${index + 1}: ${img.src}`);
-                this.style.border = '2px solid red';
-            };
-        });
-        
-        window.addEventListener('load', function() {
-            const loadTime = window.performance.timing.domContentLoadedEventEnd - window.performance.timing.navigationStart;
-            console.log(`⏱️ Page chargée en ${loadTime}ms`);
-            setTimeout(() => {
-                if (loadedImages < partnerImages.length) {
-                    console.warn(`⚠️ ${partnerImages.length - loadedImages} images de partenaires non chargées`);
-                }
-            }, 2000);
-        });
-        
-        window.addEventListener('orientationchange', function() {
-            console.log('🔄 Orientation changée');
-            if (window.innerWidth <= 768) setTimeout(() => window.scrollTo(0, window.pageYOffset), 100);
-        });
-        
-        const currentPath = window.location.pathname;
-        document.querySelectorAll('.nav-link').forEach(link => {
-            if (link.getAttribute('href') === currentPath || (currentPath === '/' && link.getAttribute('href') === 'index.html')) {
-                link.classList.add('active');
-            }
-        });
-    });
-    
-    if (navigator.userAgent.match(/iPhone|iPad|iPod/i)) {
-        document.body.classList.add('ios-device');
-        console.log('🍎 Appareil iOS détecté');
-        function setVH() {
-            let vh = window.innerHeight * 0.01;
-            document.documentElement.style.setProperty('--vh', `${vh}px`);
-        }
-        setVH();
-        window.addEventListener('resize', setVH);
-        window.addEventListener('orientationchange', setVH);
-    }
-</script>
-
 </body>
 </html>
